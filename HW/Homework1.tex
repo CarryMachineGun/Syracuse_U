@@ -1,0 +1,88 @@
+
+\documentclass[12pt]{article}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\begin{document}
+\noindent
+\large Homework 1:\\
+ \normalsize 
+ \noindent
+Due February 23 at midnight Eastern time.  Submit your solutions typed and in a pdf document.  To receive full credit, explain your answers.\\
+
+\noindent
+If you collaborate with another student or use outside sources, please list those students' names and the URL/title/etc. of the sources that you referred to.  Collaboration is permitted, but you must write up your own solutions.  Be sure to fill out the cover sheet.\\
+
+\noindent
+Treat arithmetic operations (addition, subtraction, multiplication, and division) as constant time operations.\\
+
+\noindent
+1.  For all pairs of functions below, prove whether $f(n)$ is $O(g(n))$ or $g(n)$ is $O(f(n))$ (or both). \\\\
+\begin{tabular}{ l l l }
+       & $f(n)$ & $g(n)$ \\
+  (a) & $n^3$ & $n^3 - n^2$ \\
+  (b) & log$_5n$ & log $_2n$\\
+  (c) & 4 log $n$ & log($n^4$)\\
+  (d) & 100$n$ + (log $n)^2$ & 100$n$ + log $n$\\
+  (e) & $n$! & $2^n$\\ \\
+\end{tabular} 
+
+\noindent
+2.  Consider the following algorithm: 
+\begin{algorithm}
+\begin{algorithmic}[1]
+\Function{HomeworkFunction}{array $A$}
+    \State \textbf{if} $length(A) == 1$:
+    \State \hspace{0.8cm}  \textbf{return} $A[0]$
+    \State \textbf{else}:
+    \State \hspace{0.8cm} \textbf{for} $i = 0:length(A)$
+    \State \hspace{1.6cm} \textbf{print} `hi!'
+    \State \hspace{0.8cm} $A1\gets A[0:length(A)/4]$
+    \State \hspace{0.8cm} $A2\gets A[length(A)/4:2*length(A)/4]$
+    \State \hspace{0.8cm} $A3\gets A[2*length(A)/4:3*length(A/4)]$
+    \State \hspace{0.8cm} \textbf{return HomeworkFunction}(A1) $\times$ \textbf{HomeworkFunction}(A2) $\times$ \textbf{HomeworkFunction}(A3)
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\noindent
+\begin{enumerate}
+\item Write the running time of this function as a recurrence relation.  Assume that the array initializations on lines 5-7 can all be done in constant time using pointers.
+\item Describe the running time of this function using big-O notation.\\
+\end{enumerate}
+ 
+\noindent
+3.  Suppose there are $n$ slots for scientific instruments, arranged in a row.  We have to place $n - 2$ instruments into these slots, subject to the constraint that the two empty slots cannot be next to each other.  For both parts to this problem, you must \textit{explain why} your answer is correct: giving a few examples is not enough.  (a) Write a \textit{recurrence relation} describing the number of ways to put the instruments into slots so that the empty slots are not next to each other.  (b) Write a \textit{recurrence relation} for the case where the slots are in a circle (hint: it might help if you label the slots 1, ... $n$, where 1 and $n$ are adjacent).\\
+
+\noindent
+4.  Suppose $f(n)$ is a positive-valued function defined for integers $n > 0$.  Obviously, $f(n)$ must be $O(f(n))$. Define $g(n) = f(2n)$.  Is it true that $g(n)$ must be $O(f(n))$?  If so, prove it.  If not, give an example of $f(n)$ where this does not hold.\\ 
+
+\noindent
+5.  Consider the following algorithm: 
+\begin{algorithm}
+\begin{algorithmic}[1]
+\Function{HomeworkFunction2}{array $A$}
+    \State \textbf{if} $length(A) == 1$:
+    \State \hspace{0.8cm}  \textbf{return} $A[0]$
+    \State \textbf{else}:
+    \State \hspace{0.8cm} $A1\gets A[0:length(A)-2]$
+    \State \hspace{0.8cm} $A2\gets A[1:length(A)-1]$
+    \State \hspace{0.8cm} $A3\gets A[2:length(A)]$
+    \State \hspace{0.8cm} \textbf{return HomeworkFunction2}(A1) $\times$ \textbf{HomeworkFunction2}(A2) $\times$ \textbf{HomeworkFunction2}(A3)
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\noindent
+\begin{enumerate}
+\item Write the running time of this function as a recurrence relation.  Assume that the array initializations on lines 5-7 can all be done in constant time using pointers.
+\item Determine the running time of this function using big-O notation, and prove your answer.\\
+\end{enumerate}
+
+
+\noindent
+\textbf{Extra Credit}:  Suppose $f(n) = O(n^3)$ describes the running time of an algorithm, and you know that for input of size 10, the running time was 10 seconds; and for input of size 100, the running time was 10,000 seconds.  What can you say about the running time on input of size 500?\\
+
+ \end{document} 
+
