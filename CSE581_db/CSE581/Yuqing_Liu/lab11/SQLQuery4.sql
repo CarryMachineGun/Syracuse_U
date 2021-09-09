@@ -1,0 +1,16 @@
+
+CREATE SCHEMA YuqingLiu
+GO
+
+USE AP
+GO
+
+ALTER SCHEMA YuqingLiu TRANSFER dbo.ContactUpdates;
+
+ALTER USER Robert WITH DEFAULT_SCHEMA = YuqingLiu;
+
+GRANT ALL PRIVILEGES
+ON YuqingLiu TO Robert
+
+DENY REFERENCES, ALTER
+ON YuqingLiu TO Robert;
