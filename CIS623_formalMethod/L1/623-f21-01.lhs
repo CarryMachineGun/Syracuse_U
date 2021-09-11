@@ -51,3 +51,14 @@ Example 6: quadruple
 
 > average :: [Int] -> Int
 > average (ns) = div (sum ns) (length ns) 
+
+> {- n = (double a) 'div' (length xs)
+>  where 
+>    a = 10
+>    xs = [1,2,3,4,5] -}
+
+> n = div (double a) (length xs) where {a = 10; xs = [1,2,3,4,5]}; d = n * 2
+
+> k = div (sum ns) (length ns) where ns = [3,7] 
+> last1 :: [Int] -> Int
+> last1 ns = head (reverse ns)
