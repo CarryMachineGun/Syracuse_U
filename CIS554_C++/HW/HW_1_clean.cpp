@@ -26,8 +26,6 @@ public:
     void print_F();
     void print_B();
 
-    void swapNode(Node *n1, Node *n2);
-
     void bubbleSort();
     //2 3 1 6 8 5 9 6 2 5 7 7 4 2 becomes
     //1 2 2 2 3 4 5 5 6 6 7 7 8 9
@@ -46,10 +44,6 @@ public:
 
     //You are not allowed to create additional functions.
     //You can use while loop, but not for loop.
-
-    void popUpMin();
-
-    void pushDownMax();
 
     void minMax(); //swap the node of min value with the first node;
                    //swap the node of max value with the last node
@@ -77,8 +71,6 @@ public:
 void DoublyLinkedList::minMax()
 {
     //Your code
-    // popUpMin();
-    // pushDownMax();
 
     //popUpMin
     Node *dummy = head->next, *min = head;
@@ -105,8 +97,6 @@ void DoublyLinkedList::minMax()
     min->next = dummy;
     min->previous = nullptr;
 
-    // swapNode(min, head);
-
     head = min;
     
     
@@ -124,7 +114,6 @@ void DoublyLinkedList::minMax()
         dummy = dummy->previous;
     }
 
-    //swap max with tail
     max->previous->next = tail;
     max->next->previous = tail;
 
@@ -137,75 +126,9 @@ void DoublyLinkedList::minMax()
     max->next = nullptr;
     max->previous = dummy;
 
-    // swapNode(max, tail);
-
     tail = max;
 }
 
-void DoublyLinkedList::popUpMin()
-{
-    //find the index of first min node 'min'
-    Node *dummy = head->next, *min = head;
-
-    while (dummy)
-    {
-        if (min->value > dummy->value)
-        {
-            min = dummy;
-        }
-        dummy = dummy->next;
-    }
-
-    //swap min with head
-    min->previous->next = head;
-    min->next->previous = head;
-
-    head->next->previous = min;
-
-    dummy = head->next;
-    head->next = min->next;
-    head->previous = min->previous;
-
-    min->next = dummy;
-    min->previous = nullptr;
-
-    // swapNode(min, head);
-
-    head = min;
-}
-
-void DoublyLinkedList::pushDownMax()
-{
-
-    //find the index of last max node 'max'
-    Node *dummy = tail->previous, *max = tail;
-
-    while (dummy)
-    {
-        if (max->value < dummy->value)
-        {
-            max = dummy;
-        }
-        dummy = dummy->previous;
-    }
-
-    //swap max with tail
-    max->previous->next = tail;
-    max->next->previous = tail;
-
-    tail->previous->next = max;
-
-    dummy = tail->previous;
-    tail->previous = max->previous;
-    tail->next = max->next;
-
-    max->next = nullptr;
-    max->previous = dummy;
-
-    // swapNode(max, tail);
-
-    tail = max;
-}
 
 void DoublyLinkedList::bubbleSort()
 {
@@ -248,29 +171,6 @@ void DoublyLinkedList::bubbleSort()
             n2 = n2->next;
         }
     }
-
-    return;
-}
-
-void DoublyLinkedList::swapNode(Node *n1, Node *n2)
-{
-
-    //swap max with tail
-    n1->previous->next = n2;
-    n1->next->previous = n2;
-
-    n2->previous->next = n1;
-    n2->next->previous = n1;
-
-    Node *dummy;
-
-    dummy = n2->previous;
-    n2->previous = n1->previous;
-    n1->previous = dummy;
-
-    dummy = n2->next;
-    n2->next = n1->next;
-    n1->next = dummy;
 
     return;
 }
