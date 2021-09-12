@@ -1,3 +1,6 @@
+//HW1 by Yuchen Wang
+//SU Net ID: ywang249  SUID: 905508464
+
 //Due:  11:59pm, Tuesday, Sept. 14
 #include <iostream>
 using namespace std;
