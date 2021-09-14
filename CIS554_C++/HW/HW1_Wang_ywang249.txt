@@ -1,6 +1,8 @@
 //HW1 by Yuchen Wang
 //SU Net ID: ywang249  SUID: 905508464
 
+//test case: minMax: tail and max are adjacemt; bubble: two digit linkedlist
+
 //Due:  11:59pm, Tuesday, Sept. 14
 #include <iostream>
 using namespace std;
@@ -87,23 +89,38 @@ void DoublyLinkedList::minMax()
         dummy = dummy->next;
     }
 
-    //swap min with head
-    min->previous->next = head;
-    min->next->previous = head;
+    if (min != head)
+    {
+        //swap min with head
+        if (head->next == min)
+        {
+            min->next->previous = head;
 
-    head->next->previous = min;
+            head->next = min->next;
+            head->previous = min;
 
-    dummy = head->next;
-    head->next = min->next;
-    head->previous = min->previous;
+            min->next = head;
+            min->previous = nullptr;
+        }
+        else
+        {
+            min->previous->next = head;
+            min->next->previous = head;
 
-    min->next = dummy;
-    min->previous = nullptr;
+            head->next->previous = min;
 
-    head = min;
-    
-    
-    //pushDownMax    
+            dummy = head->next;
+            head->next = min->next;
+            head->previous = min->previous;
+
+            min->next = dummy;
+            min->previous = nullptr;
+        }
+
+        head = min;
+    }
+
+    //pushDownMax
     //find the index of last max node 'max'
     dummy = tail->previous;
     Node *max = tail;
@@ -117,21 +134,36 @@ void DoublyLinkedList::minMax()
         dummy = dummy->previous;
     }
 
-    max->previous->next = tail;
-    max->next->previous = tail;
+    if (max != tail)
+    {
+        if (tail->previous == max)
+        {
+            max->previous->next = tail;
 
-    tail->previous->next = max;
+            tail->previous = max->previous;
+            tail->next = max;
 
-    dummy = tail->previous;
-    tail->previous = max->previous;
-    tail->next = max->next;
+            max->next = nullptr;
+            max->previous = tail;
+        }
+        else
+        {
+            max->previous->next = tail;
+            max->next->previous = tail;
 
-    max->next = nullptr;
-    max->previous = dummy;
+            tail->previous->next = max;
 
-    tail = max;
+            dummy = tail->previous;
+            tail->previous = max->previous;
+            tail->next = max->next;
+
+            max->next = nullptr;
+            max->previous = dummy;
+        }
+
+        tail = max;
+    }
 }
-
 
 void DoublyLinkedList::bubbleSort()
 {
@@ -143,35 +175,56 @@ void DoublyLinkedList::bubbleSort()
     }
 
     bool swapFlag = true;
-    Node *dummy;
 
-    while (!swapFlag)
+    while (swapFlag)
     {
         swapFlag = false;
+        n1 = head, n2 = head->next;
 
         while (n2)
         {
             if (n1->value > n2->value)
             {
-                n1->previous->next = n2;
-                n1->next->previous = n2;
+                //handle attribue of n1.pre and n2.next
+                if (n1->previous != nullptr)
+                {
+                    n1->previous->next = n2;
+                }
+                if (n2->next != nullptr)
+                {
+                    n2->next->previous = n1;
+                }
 
-                n2->previous->next = n1;
-                n2->next->previous = n1;
-
-                dummy = n2->previous;
+                //Handle attribute of n1 and n1
                 n2->previous = n1->previous;
-                n1->previous = dummy;
+                n1->next = n2->next;
 
-                dummy = n2->next;
-                n2->next = n1->next;
-                n1->next = dummy;
+                n2->next = n1;
+                n1->previous = n2;
+
+                // if head or tail is swapped
+                if (n1 == head)
+                {
+                    head = n2;
+                }
+                if (n2 == tail)
+                {
+                    tail = n1;
+                }
 
                 swapFlag = true;
             }
 
-            n1 = n2;
-            n2 = n2->next;
+            // move one node right
+            if (n2->next == n1)
+            {
+                n2 = n1->next;
+            }
+            else
+            {
+                n1 = n2;
+                n2 = n2->next;
+            }
         }
     }
 
@@ -182,6 +235,7 @@ void DoublyLinkedList::makeList(int n, int m)
 {
     for (int i = 0; i < n; ++i)
     {
+        // srand ( time(NULL) );
         Node *p1{new Node{rand() % m}};
         if (!head)
         {
