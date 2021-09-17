@@ -57,7 +57,13 @@ Example 6: quadruple
 >    a = 10
 >    xs = [1,2,3,4,5] -}
 
-> n = div (double a) (length xs) where {a = 10; xs = [1,2,3,4,5]}; d = n * 2
+> n = div (double a) (length xs) where {a = 5; xs = [1,2,3,4,5]}; b = 3
+
+> n2 = div (double a) (length xs) 
+>  where 
+>   a = 5
+>   xs = [1,2,3,4,5] 
+> b2 = 3
 
 > k = div (sum ns) (length ns) where ns = [3,7] 
 > last1 :: [Int] -> Int

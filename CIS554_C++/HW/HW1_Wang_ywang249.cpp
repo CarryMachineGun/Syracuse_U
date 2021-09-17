@@ -281,7 +281,7 @@ int main()
     L1.print_B();
 
     DoublyLinkedList L2;
-    L2.makeList(25, 30);
+    L2.makeList(0, 30);
     L2.bubbleSort();
     L2.print_F();
     L2.print_B();
