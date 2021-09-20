@@ -57,6 +57,7 @@ Example 6: quadruple
 >    a = 10
 >    xs = [1,2,3,4,5] -}
 
+> -- n = div (double a) (length xs) where a = 5; xs = [1,2,3,4,5]; b = 3
 > n = div (double a) (length xs) where {a = 5; xs = [1,2,3,4,5]}; b = 3
 
 > n2 = div (double a) (length xs) 

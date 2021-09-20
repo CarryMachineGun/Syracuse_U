@@ -60,3 +60,8 @@ Example 4:
 > f   :: Int -> Int -> Int -> Int
 > f x y z = x + y + z
 
+
+> n = div a (length ns)
+>  where
+>   a = 5
+>   ns = [a]
