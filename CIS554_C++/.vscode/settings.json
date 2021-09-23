@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "new": "cpp",
-        "algorithm": "cpp"
-    }
+        "algorithm": "cpp",
+        "utility": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Enabled"
 }
