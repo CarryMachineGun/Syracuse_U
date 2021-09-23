@@ -2,5 +2,6 @@
     "files.associations": {
         "new": "cpp",
         "algorithm": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Enabled"
 }

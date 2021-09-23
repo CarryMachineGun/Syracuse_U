@@ -1,15 +1,25 @@
 #include <iostream>
 
+using namespace std;
 
 
-void foo1(int *val){
+
+// *int foo1(){
+//     //@Yuchen_Qst: Why this one is not able to run ?
+//     return new int(3);
+// }
+void foo1(int* &p){
     //@Yuchen_Qst: Why this one is not able to run ?
-    val = new int(3);
+    p = new int(3);
+    cout << "addr1: " << p << endl;
+    return;
 }
 
-void foo2(int *val){
-    int temp = 3;
+void foo2(int* &val){
+    int temp = 5;
+    cout << "addr2: " << &temp << endl;
     val = &temp;
+    return;
 }
 
 
@@ -22,16 +32,15 @@ int main()
     std::cout << k << " " << six << std::endl;
 
     int *p;
-
     foo1(p);
     
-    std::cout << *p << std::endl;
+    std::cout << *p << " "<< p <<  std::endl;
 
-    // foo2(p);
+    foo2(p);
 
-    std::cout << *p << std::endl;
+    std::cout << *p << " " << p << std::endl;
 
-    delete p;
+    // delete p;
     
     return 0;
 }

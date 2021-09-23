@@ -21,7 +21,7 @@ Example 2: the function sum1
 
 Example 3: the function qsort
     
-> qsort    :: [Int] -> [Int]
+> -- qsort    :: [Int] -> [Int]
 > qsort []     = []
 > qsort (x:xs) = qsort smaller ++ [x] ++ qsort larger
 >     where 
@@ -52,13 +52,13 @@ Example 6: quadruple
 > average :: [Int] -> Int
 > average (ns) = div (sum ns) (length ns) 
 
-> {- n = (double a) 'div' (length xs)
+> n = a `div` (length xs)
 >  where 
 >    a = 10
->    xs = [1,2,3,4,5] -}
+>    xs = [1,2,3,4,5]
 
 > -- n = div (double a) (length xs) where a = 5; xs = [1,2,3,4,5]; b = 3
-> n = div (double a) (length xs) where {a = 5; xs = [1,2,3,4,5]}; b = 3
+> -- n = div (double a) (length xs) where {a = 5; xs = [1,2,3,4,5]}; b = 3
 
 > n2 = div (double a) (length xs) 
 >  where 
