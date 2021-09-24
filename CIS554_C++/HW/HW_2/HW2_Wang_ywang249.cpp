@@ -37,7 +37,7 @@ public:
 	//You might need to implement some overloaded operators here.
 	float num_grade() const
 	{
-		map<string, float> gpa{{"A", 4.000}, {"A-", 3.6667}};
+		map<string, float> gpa{{"A", 4.000}, {"A-", 3.667}, {"B+", 3.333}, {"B", 3.000}, {"B-", 2.667}, {"C+", 2.333}, {"C", 2.000}, {"C-", 1.667}, {"D", 1.000}, {"D-", 0.667}, {"F", 0.000}};
 		return gpa[grade];
 	}
 
@@ -89,7 +89,7 @@ int main()
 	add_course(DB, 20171, 11111, C2);
 	print_student_semester_courses(DB, 20171, 11111); // print in ascending order of grade
 
-	drop_course(DB, 20171, 11111, C1);
+	// drop_course(DB, 20171, 11111, C1);
 	print_student_semester_courses(DB, 20171, 11111); //sorted according to course name
 
 	course C5("CIS351", 2, 3, "A-"), C6("PSY205", 5, 3, "B+"), C7("MAT331", 2, 3, "A"), C8("ECN203", 4, 3, "A");
@@ -115,9 +115,9 @@ int main()
 
 	print_student_all_courses(DB, 11112);
 
-	cout << DB << endl;
-	remove_student(DB, 11111);
-	cout << DB << endl;
+	// cout << DB << endl;
+	// remove_student(DB, 11111);
+	// cout << DB << endl;
 	return 0;
 }
 
@@ -144,10 +144,13 @@ void remove_student(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, 
 void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, float, list<course *> *> *> *> *>> &DB, int semester, int id, course c)
 {
 	//Your code
+	if(DB.find(id) == DB.end()){
+		return;
+	}
+
 	//1 add course to DB =============================
-	//
-	pair<int, float> *&overallGpaAndCredit = DB[id].first;
-	list<pair<int, tuple<int, float, list<course *> *> *> *> *&outerList = DB[id].second;
+	pair<int, float>* &overallGpaAndCredit = DB.at(id).first;
+	list<pair<int, tuple<int, float, list<course *> *> *> *> *&outerList = DB.at(id).second;
 
 	// check whether the course already exist in any semester. if yes, return;
 	for (pair<int, tuple<int, float, list<course *> *> *> *eachSemester : *outerList)
@@ -167,6 +170,8 @@ void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, floa
 
 	//Main function starts
 	pair<int, tuple<int, float, list<course *> *> *> *semesterAndGrade = nullptr;
+	int &overallCredit = overallGpaAndCredit->first;
+	float &overallGpa = overallGpaAndCredit->second;
 
 	//1.1 - check whether the semesterExist in outerList, if exist set semsetrAndGrade to the pair,
 	// If not add the correct one
@@ -226,10 +231,7 @@ void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, floa
 	//@Yuchen_Qst: int value may be indertinmate !!!!!!!!!!!!
 	int &semesterCredit = get<0>(*(semesterAndGrade->second));
 	float &semesterGpa = get<1>(*(semesterAndGrade->second));
-	list<course *> *&semesterCourses = get<2>(*(semesterAndGrade->second));
-
-	semesterCredit += c.credits;
-	//semesterGpa : need GPA calculation!!!!!!!!!!!!!!!!!!!!!!!!!
+	list<course *>* &semesterCourses = get<2>(*(semesterAndGrade->second));
 
 	//Insert course
 	if (semesterCourses == nullptr)
@@ -249,11 +251,13 @@ void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, floa
 		while (j != semesterCourses->end())
 		{
 			// if the course already in List, the toppest check fails 
-			if ((*j)->num_grade() == c.num_grade()){
+			if ((*j)->name == c.name){
 				cout << "LOGIC ERROR_2!!!!!!!"  << endl;
+				courseInserted = true;
+				break;
 			}
 			// if find the insert pos, insert in into pos
-			if ((*j)->num_grade() < c.num_grade())
+			if ((*j)->num_grade() > c.num_grade())
 			{
 				semesterCourses->insert(j, &c);
 				courseInserted = true;
@@ -263,13 +267,21 @@ void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, floa
 			j++;
 		}
 
+		// if c is the high grade course, need to be added at end of list
 		if (!courseInserted)
 		{
 			semesterCourses->push_back(&c);
 		}
 	}
 
-	//2. Update overall GPA and over all Credit ======================
+	// update the seemsetr and overall GPA and credit ===============
+	semesterGpa = ((semesterGpa * semesterCredit) + (c.num_grade() * c.credits))/ (semesterCredit + c.credits);
+	overallGpa = ((overallGpa * overallCredit) + (c.num_grade() * c.credits))/ (overallCredit + c.credits);
+
+	semesterCredit += c.credits;
+	overallCredit += c.credits;
+
+	return;
 }
 
 void drop_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, float, list<course *> *> *> *> *>> &DB, int semester, int id, course c)
@@ -280,8 +292,38 @@ void drop_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, flo
 void print_student_semester_courses(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, float, list<course *> *> *> *> *>> &DB, int semester, int id)
 {
 	//Your code
+	if(DB.find(id) == DB.end()){
+		return;
+	}
+
+
+	pair<int, float>* &overallGpaAndCredit = DB.at(id).first;
+	list<pair<int, tuple<int, float, list<course *> *> *> *> *&outerList = DB.at(id).second;
+
+	pair<int, tuple<int, float, list<course *> *> *> *currSemester = nullptr;
+	// check whether the course already exist in any semester. if yes, return;
+	for (pair<int, tuple<int, float, list<course *> *> *> *eachSemester : *outerList)
+	{
+		if(eachSemester->first == semester){
+			currSemester = eachSemester;
+		}
+	}
+
+	if(currSemester == nullptr){
+		return;
+	}
+
+	cout<< "Student ID: " << id;
+	cout<< "Semester: " << semester;
+	cout<< "GPA: " << get<1>(*(currSemester->second));
+	//main ==========
+
+
 }
 void print_student_all_courses(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, float, list<course *> *> *> *> *>> &DB, int id)
 {
 	//Your code
+	if(DB.find(id) == DB.end()){
+		return;
+	}
 }
