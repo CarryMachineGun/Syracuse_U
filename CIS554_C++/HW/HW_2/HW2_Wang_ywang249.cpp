@@ -74,6 +74,7 @@ void print_student_all_courses(map<int, pair<pair<int, float> *, list<pair<int, 
 //cout << DB << endl;
 
 //You might need to implement some overloaded operators in the course class.
+ostream &operator<<(ostream &str, const course &c);
 
 int main()
 {
@@ -88,7 +89,7 @@ int main()
 	add_course(DB, 20171, 11111, C2);
 	print_student_semester_courses(DB, 20171, 11111); // print in ascending order of grade
 
-	// drop_course(DB, 20171, 11111, C1);
+	drop_course(DB, 20171, 11111, C1);
 	print_student_semester_courses(DB, 20171, 11111); //sorted according to course name
 
 	course C5("CIS351", 2, 3, "A-"), C6("PSY205", 5, 3, "B+"), C7("MAT331", 2, 3, "A"), C8("ECN203", 4, 3, "A");
@@ -97,7 +98,7 @@ int main()
 	add_course(DB, 20172, 11111, C7);
 	add_course(DB, 20172, 11111, C8);
 	add_course(DB, 20172, 11111, C3);
-	// print_student_all_courses(DB, 11111); //ID GPA
+	print_student_all_courses(DB, 11111); //ID GPA
 
 	add_student(DB, 11112);
 	add_course(DB, 20171, 11112, C2);
@@ -112,10 +113,10 @@ int main()
 	add_course(DB, 20172, 11112, C1);
 	print_student_semester_courses(DB, 20172, 11112);
 
-	// print_student_all_courses(DB, 11112);
+	print_student_all_courses(DB, 11112);
 
 	// cout << DB << endl;
-	// remove_student(DB, 11111);
+	remove_student(DB, 11111);
 	// cout << DB << endl;
 	return 0;
 }
@@ -138,6 +139,38 @@ void remove_student(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, 
 	{
 		return;
 	}
+
+	pair<int, float> *&overallGpaAndCredit = DB.at(id).first;
+	list<pair<int, tuple<int, float, list<course *> *> *> *> *&outerList = DB.at(id).second;
+
+	// erase data from inner to outer
+	for (pair<int, tuple<int, float, list<course *> *> *> *eachSemester : *outerList)
+	{
+		// earease tuple list
+		list<course *> *l = get<2>(*(eachSemester->second));
+		delete l;
+		// cout << "Is list nullptr: " << (l == nullptr) << "\n";
+
+		//earse tuple
+		tuple<int, float, list<course *> *> *t = eachSemester->second;
+		delete t;
+		// cout << "Is tuple nullptr: " << (t == nullptr) << "\n";
+
+		//earse pair
+		delete eachSemester;
+		// cout << "Is pair nullptr: " << (eachSemester == nullptr) << "\n";
+	}
+
+	delete outerList;
+	// cout << "Is outerList nullptr: " << (outerList == nullptr) << "\n";
+
+	delete overallGpaAndCredit;
+
+	// cout << "Is overallGPA nullptr: " << (overallGpaAndCredit == nullptr) << "\n";
+
+	DB.erase(id);
+
+	return;
 }
 
 void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, float, list<course *> *> *> *> *>> &DB, int semester, int id, course c)
@@ -157,15 +190,12 @@ void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, floa
 	{
 		for (course *i : *(get<2>(*(eachSemester->second))))
 		{
-			if (i->name == c.name)
+			if (*i == c)
 			{
-				cout << "Course already enrolled" << endl;
 				return;
 			}
 		}
 	}
-
-
 
 	//Get correct semester============================================================
 	pair<int, tuple<int, float, list<course *> *> *> *semesterAndGrade = nullptr;
@@ -180,13 +210,6 @@ void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, floa
 		outerList = new list<pair<int, tuple<int, float, list<course *> *> *> *>;
 	}
 
-	// if (outerList->size() == 0)
-	// {
-	// 	semesterAndGrade = new pair<int, tuple<int, float, list<course *> *> *>;
-	// 	semesterAndGrade->first = semester;
-	// 	semesterAndGrade->second = new tuple<int, float, list<course *> *>;
-	// 	outerList->push_back(semesterAndGrade);
-	// }
 	auto i = outerList->begin();
 	bool semesterInserted = false;
 
@@ -225,7 +248,6 @@ void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, floa
 		outerList->push_back(semesterAndGrade);
 	}
 
-
 	//1.2 manipulate semesterAndGrade ===================================================================
 	int &semesterCredit = get<0>(*(semesterAndGrade->second));
 	float &semesterGpa = get<1>(*(semesterAndGrade->second));
@@ -242,7 +264,7 @@ void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, floa
 	while (j != semesterCourses->end())
 	{
 		// if the course already in List, the toppest check fails
-		if ((*j)->name == c.name)
+		if (*(*j) == c)
 		{
 			cout << "LOGIC ERROR_2!!!!!!!" << endl;
 			courseInserted = true;
@@ -265,8 +287,6 @@ void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, floa
 		semesterCourses->push_back(&c);
 	}
 
-
-
 	// update the seemsetr and overall GPA and credit ===================================================
 	semesterGpa = ((semesterGpa * semesterCredit) + (c.num_grade() * c.credits)) / (semesterCredit + c.credits);
 	overallGpa = ((overallGpa * overallCredit) + (c.num_grade() * c.credits)) / (overallCredit + c.credits);
@@ -280,6 +300,58 @@ void add_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, floa
 void drop_course(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, float, list<course *> *> *> *> *>> &DB, int semester, int id, course c)
 {
 	//Your code
+	if (DB.find(id) == DB.end())
+	{
+		return;
+	}
+
+	pair<int, float> *&overallGpaAndCredit = DB.at(id).first;
+	list<pair<int, tuple<int, float, list<course *> *> *> *> *&outerList = DB.at(id).second;
+
+	pair<int, tuple<int, float, list<course *> *> *> *semesterAndGrade = nullptr;
+	// check whether the course already exist in any semester. if yes, return;
+	for (pair<int, tuple<int, float, list<course *> *> *> *eachSemester : *outerList)
+	{
+		if (eachSemester->first == semester)
+		{
+			semesterAndGrade = eachSemester;
+		}
+	}
+
+	if (semesterAndGrade == nullptr)
+	{
+		return;
+	}
+
+	//drop course
+	int &overallCredit = overallGpaAndCredit->first;
+	float &overallGpa = overallGpaAndCredit->second;
+	int &semesterCredit = get<0>(*(semesterAndGrade->second));
+	float &semesterGpa = get<1>(*(semesterAndGrade->second));
+	list<course *> *&semesterCourses = get<2>(*(semesterAndGrade->second));
+	bool isCourseRemoved = false;
+
+	for (auto i = semesterCourses->begin(); i != semesterCourses->end(); i++)
+	{
+		if (*(*i) == c)
+		{
+			semesterCourses->erase(i);
+			isCourseRemoved = true;
+		}
+	}
+
+	if (isCourseRemoved)
+	{
+		semesterGpa = ((semesterGpa * semesterCredit) - (c.num_grade() * c.credits)) / (semesterCredit - c.credits);
+		overallGpa = ((overallGpa * overallCredit) - (c.num_grade() * c.credits)) / (overallCredit - c.credits);
+
+		semesterCredit -= c.credits;
+		overallCredit -= c.credits;
+	}
+
+	return;
+
+	// change GPA and credits
 }
 
 void print_student_semester_courses(map<int, pair<pair<int, float> *, list<pair<int, tuple<int, float, list<course *> *> *> *> *>> &DB, int semester, int id)
@@ -313,13 +385,14 @@ void print_student_semester_courses(map<int, pair<pair<int, float> *, list<pair<
 
 	cout << "Student ID: " << id << "\n";
 	cout << "Semester: " << semester << "\n";
-	cout << "GPA: " << setprecision(2)<< fixed << get<1>(*(currSemester->second)) << "\n";
-	cout << "Credits: "  << get<0>(*(currSemester->second)) << "\n";
+	cout << "GPA: " << setprecision(2) << fixed << get<1>(*(currSemester->second)) << "\n";
+	cout << "Credits: " << get<0>(*(currSemester->second)) << "\n";
 	for (course *c : *semesterCourses)
 	{
-		cout << "(" << c->name << " " << c->section << " " << c->credits << " " << c->grade << ") ";
+		cout << *c;
 	}
-	cout << endl;
+	cout << "\n"
+		 << endl;
 
 	return;
 }
@@ -330,4 +403,38 @@ void print_student_all_courses(map<int, pair<pair<int, float> *, list<pair<int, 
 	{
 		return;
 	}
+
+	pair<int, float> *&overallGpaAndCredit = DB.at(id).first;
+	list<pair<int, tuple<int, float, list<course *> *> *> *> *&outerList = DB.at(id).second;
+
+	cout << "Student ID: " << id << "\n";
+	cout << "Overall GPA: " << setprecision(2) << fixed << overallGpaAndCredit->second << "\n";
+	cout << "Overall Credits: " << overallGpaAndCredit->first << "\n";
+
+
+	// check whether the course already exist in any semester. if yes, return;
+	for (pair<int, tuple<int, float, list<course *> *> *> *eachSemester : *outerList)
+	{
+		//main ==========
+		list<course *> *&semesterCourses = get<2>(*(eachSemester->second));
+
+		cout << "Semester: " << eachSemester->first << "\n";
+		cout << "GPA: " << setprecision(2) << fixed << get<1>(*(eachSemester->second)) << "\n";
+		cout << "Credits: " << get<0>(*(eachSemester->second)) << "\n";
+		for (course *c : *semesterCourses)
+		{
+			cout << *c;
+		}
+		cout << "\n";
+	}
+
+	cout << "\n"
+		 << endl;
+	return;
+}
+
+ostream &operator<<(ostream &str, const course &c)
+{
+	str << "(" << c.name << " " << c.section << " " << c.credits << " " << c.grade << ") ";
+	return str;
 }
