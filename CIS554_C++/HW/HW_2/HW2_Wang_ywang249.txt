@@ -117,25 +117,6 @@ int main()
 
 	print_student_all_courses(DB, 11112);
 
-
-	// ===================
-	add_student(DB, 11113);
-	add_course(DB, 20171, 11113, C2);
-	add_course(DB, 20171, 11113, C5);
-	add_course(DB, 20171, 11113, C7);
-	add_course(DB, 20171, 11113, C4);
-	print_student_semester_courses(DB, 20171, 11112);
-
-	remove_student(DB, 11111);
-
-	add_course(DB, 20172, 11113, C8);
-	add_course(DB, 20172, 11113, C3);
-	add_course(DB, 20172, 11113, C5);
-	add_course(DB, 20172, 11113, C1);
-	print_student_semester_courses(DB, 20172, 11112);
-
-	print_student_all_courses(DB, 11112);
-
 	cout << DB << endl;
 	remove_student(DB, 11111);
 	cout << DB << endl;
