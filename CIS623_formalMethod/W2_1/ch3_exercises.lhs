@@ -20,9 +20,9 @@
 
 > mutiply x y = x*y
 
-> pal xs = reverse xs == xs
+> pal xs = (reverse xs) == xs
 
-> twice f x = f (f x)
+> twice tail x = tail (tail x)
 
 
 
