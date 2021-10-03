@@ -23,8 +23,6 @@
 > merge1 (n:ns) (x:xs) | n <= x = [n] ++ (merge1 ns (x:xs))
 >                      | otherwise = [x] ++ (merge1 xs (n:ns))
 
-> -- msort :: Ord a => [a] -> [a]
-> -- msort ns 
 
 > reverse1 :: [a] -> [a]
 > reverse1 [] = []
@@ -32,9 +30,11 @@
 
 > insert :: (Ord a) => a-> [a] -> [a]
 > insert x []=[x] --insert 1.1
-> insert x (y:ys)
->     | x<=y      = (x:y:ys) -- insert 2.1
->     | otherwise = y:(insert x ys) -- insert 2.2
+> insert x (y:ys) | x <= y = (x:y:ys)
+>                 | otherwise = [y] ++ (insert x ys)
+
+> -- msort :: Ord a => [a] -> [a]
+> -- msort ns 
 
 > first3 :: [a] -> [a] 
-> first3 (a1:a2:a3:an) = [a1,a2,a3]
+> first3 (a1:a2:as) = [a1,a2] 

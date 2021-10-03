@@ -84,3 +84,10 @@ b. msort [53,9,2,6,19]={msort 3}
 =2:6:merge [9,53] [19]={merge 3.1}
 =...
 =[2,6,9,19,53]
+
+
+> insert2 :: Ord a => a -> [a] -> [a]
+> insert2 x [] = [x]
+> insert2 x (n:ns) 
+>  | n >= x = x:n:ns
+>  | otherwise = n : (insert x ns)

@@ -145,7 +145,7 @@ first1([2,3],[])
 
 > -- Put your code there
 > reverse2 :: [a] -> [a]
-> reverse2 ns = first1 (transfer ([],ns))
+> reverse2 ns = (first1 . transfer) ([],ns)
 
 
 ---------------------------------------------------------------------------
