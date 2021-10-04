@@ -30,18 +30,19 @@ public:
 	void operator=(const LinkedList& L);//operator=
 	LinkedList ThreeTimes();
 	~LinkedList();//destructor
-
 };
 
 LinkedList::~LinkedList() {//Destructor
 	while (head) {
-		node* p{ head->next };
-		delete head;
-		head = p;
+		node* p{ head };
+		head = head->next;
+		delete p;
 	}
 	cout << "Destructor" << endl;
 }
 
+
+//@Yuchen_Qst: Why temp is static allocated but can also be returned to outside of the function?  even after destructing?
 LinkedList LinkedList::ThreeTimes() {
 	LinkedList temp{ *this };
 	node* p{ temp.head };
@@ -80,9 +81,13 @@ void LinkedList::operator=(const LinkedList& L) {//operator=; copy assignment
 	cout << "Copy Assignment" << endl;
 }
 
+//Deep copy
+LinkedList::LinkedList(const LinkedList& L) {//copy constructor
+	head=nullptr;
+	cout << "In CC " << (head == nullptr) << endl;
 
-LinkedList::LinkedList(const LinkedList& L):LinkedList() {//copy constructor
 	node* p1{ L.head };
+	//@Yuchen: make the current LinkedList as same length as L
 	while (p1) {
 		node* p2{ new node() };
 		p2->next = head;
@@ -100,8 +105,9 @@ LinkedList::LinkedList(const LinkedList& L):LinkedList() {//copy constructor
 }
 
 
-
+//@Yuchen_Qst: Why the constructor below dones't need to set head(at the end of the function will be the tail) to nullptr?
 LinkedList::LinkedList(const initializer_list<int>& I) {//initializer_list
+	cout << "In IC " << (head == nullptr) << endl;
 	auto it{ I.end() - 1 };
 	while (it != I.begin() - 1) {
 		node* p{ new node(*it) };
@@ -109,6 +115,7 @@ LinkedList::LinkedList(const initializer_list<int>& I) {//initializer_list
 		head = p;
 		--it;
 	}
+
 	cout << "Initializer List" << endl;
 }
 
@@ -136,6 +143,8 @@ int main() {
 
 	LinkedList L3;//deault operator assignment if no operator= defined
 	L3 = L1;
+
+	cout << L3 << " " << &L1 << endl;
 	cout << L1 << endl;
 	cout << L2 << endl;
 	cout << L3 << endl;

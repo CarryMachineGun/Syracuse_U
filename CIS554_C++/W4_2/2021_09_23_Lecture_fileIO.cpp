@@ -11,7 +11,8 @@ int main() {
 	cout << i << "  " << s << endl;
 	cout <<  j << endl;
 
-	ofstream out("data.txt");
+	ofstream out;
+	out.open("data.txt");
 	out << i << "  " << s << endl;
 	out << j << endl;
 	out.close();

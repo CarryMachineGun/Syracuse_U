@@ -1,4 +1,4 @@
 #ignoire all logs
 *.log
 *.out
-data.txt
+*.txt

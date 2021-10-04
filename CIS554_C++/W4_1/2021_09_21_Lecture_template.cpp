@@ -128,6 +128,8 @@ template <class T> ostream& operator<<(ostream& str, const list<T*>& L) {
 template <class T> ostream& operator<<(ostream& str, const list<T>& L) {
 	str << "< ";
 	for (auto& i : L) { str << i << " "; }
+	str << "List overload operator is called";
+
 	str << ">";
 	return str;
 }
@@ -151,5 +153,6 @@ template <class T> ostream& operator<<(ostream& str, const vector<T>& V) {
 
 template <class T> ostream& operator<<(ostream& str, const ThreeD<T>& t) {
 	str << "[" << t.ht << ", " << t.wid << ", " << t.dep << "]";
+	str << "ThreeD overload operator is called";
 	return str;
 }
