@@ -19,5 +19,10 @@
 > pyths :: Int -> [(Int, Int, Int)]
 > pyths n = [ (x,y,z) | x <- [0..n], y<-[0..n],z<-[0..n], x^2 + y^2 == z^2]
 
+
+
 > concat1 :: [[a]] -> [a]
 > concat1 nss = [x | ns<- nss, x <- ns]
+
+> perfects :: Int -> [Int]
+> perfects n = [x | x <- [1..n], x == sum [s | s <- [1..x-1], x `mod` s == 0]]

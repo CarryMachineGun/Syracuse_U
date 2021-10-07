@@ -37,6 +37,9 @@ public:
 	ThreeD() { ht = wid = dep = (T)0; }
 };
 
+template <typename T> class ThreeD2{
+
+};
 
 template <class T> ostream& operator<<(ostream& str, const ThreeD<T>& t);
 

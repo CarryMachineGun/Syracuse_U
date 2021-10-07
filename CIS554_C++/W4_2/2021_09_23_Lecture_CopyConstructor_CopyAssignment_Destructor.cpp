@@ -27,10 +27,12 @@ public:
 	//1. When an object is declared and initialized in the same statement
 	//2. call by value;  3. return by value
 
-	void operator=(const LinkedList& L);//operator=
+	LinkedList operator=(const LinkedList& L);//operator=
 	LinkedList ThreeTimes();
 	~LinkedList();//destructor
 };
+	
+// ostream& operator<<(ostream& str, const LinkedList& L);
 
 LinkedList::~LinkedList() {//Destructor
 	while (head) {
@@ -56,7 +58,7 @@ LinkedList LinkedList::ThreeTimes() {
 }
 
 
-void LinkedList::operator=(const LinkedList& L) {//operator=; copy assignment
+LinkedList LinkedList::operator=(const LinkedList& L) {//operator=; copy assignment
 	while (head) {
 		node* p1{ head->next };
 		delete head;
@@ -79,6 +81,7 @@ void LinkedList::operator=(const LinkedList& L) {//operator=; copy assignment
 	}
 
 	cout << "Copy Assignment" << endl;
+	return L;
 }
 
 //Deep copy
@@ -142,6 +145,7 @@ int main() {
 	//LinkedList L2 = L1;
 
 	LinkedList L3;//deault operator assignment if no operator= defined
+	L3.operator=(L1);
 	L3 = L1;
 
 	cout << L3 << " " << &L1 << endl;
@@ -156,3 +160,7 @@ int main() {
 
 	return 0;
 }
+
+// ostream& operator<<(ostream str, const LinkedList& list){
+
+// }
