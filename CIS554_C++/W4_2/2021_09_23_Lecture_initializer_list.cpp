@@ -12,7 +12,10 @@ public:
 	int ht;
 	int wid;
 	int dep;
-	ThreeD(int i, int j, int k): ht(2*i), wid(2*j), dep(2*k){}
+	ThreeD(int i, int j, int k) {
+		ht = (i), wid = (j), dep = (k);
+		cout<< "This is the default constructor" << endl;
+	}
 	ThreeD(){}
 	ThreeD(const initializer_list<int>& I);
 };
@@ -23,6 +26,8 @@ ThreeD::ThreeD(const initializer_list<int>& I) {
 	wid = *it * 3;
 	++it;
 	dep = *it * 3;
+	cout<< "This is the initializer_list constructor" << endl;
+
 }
 
 class node {
@@ -41,13 +46,18 @@ public:
 };
 
 LinkedList::LinkedList(const initializer_list<int>& I) {
+	head = nullptr;
 	auto it{ I.end() - 1 };
 	while (it != I.begin() - 1) {
+
 		node* p{ new node(*it) };
 		p->next = head;
 		head = p;
 		--it;
 	}
+
+
+	cout << " LinkedList init constructor" << endl;
 }
 
 
@@ -55,6 +65,9 @@ ostream& operator<<(ostream& str, const LinkedList& L) {
 	str << "{ ";
 	node* p{ L.head };
 	while (p) {
+		// if(p == L.head){
+		// 	cout << "ERROR" << endl;
+		// }
 		str << p->value << " ";
 		p = p->next;
 	}
@@ -80,6 +93,7 @@ int main() {
 	cout << t2 << endl;
 
 	LinkedList L1{ 1,2,3,4,5 };
+	// LinkedList L1{ 1,2, 3 };
 	cout << L1 << endl;
 
 

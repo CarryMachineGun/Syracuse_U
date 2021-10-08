@@ -5,7 +5,8 @@
         "utility": "cpp",
         "tuple": "cpp",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "initializer_list": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }

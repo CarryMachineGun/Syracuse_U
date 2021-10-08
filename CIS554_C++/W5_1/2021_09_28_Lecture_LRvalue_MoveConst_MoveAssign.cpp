@@ -7,9 +7,6 @@
 
 using namespace std;
 
-
-
-
 class node {
 public:
 	int value;
@@ -26,37 +23,26 @@ public:
 	//Will be invoked by sysmtem in three cases:
 	//1. When an object is declared and initialized in the same statement
 	//2. call by value;  3. return by value
-
-	LinkedList operator=(const LinkedList& L);//operator=
+	
+	LinkedList operator=(const LinkedList& L);//operator=; copy assignment
 	LinkedList ThreeTimes();
 	~LinkedList();//destructor
+	LinkedList(LinkedList&& L);//move constructor; Notice that const is removed.
+	LinkedList operator=(LinkedList&& L);//move assignment
+
 };
-	
-// ostream& operator<<(ostream& str, const LinkedList& L);
 
-LinkedList::~LinkedList() {//Destructor
-	cout << "Destructor and address is" << this << endl;
+LinkedList LinkedList::operator=(LinkedList&& L) {
 	while (head) {
-		node* p{ head };
-		head = head->next;
-		delete p;
+		node* p1{ head->next };
+		delete head;
+		head = p1;
 	}
+	head = L.head;
+	L.head = nullptr;
+	cout << "Move Assignment" << endl;
+	return *this;
 }
-
-
-//@Yuchen_Qst: Why temp is static allocated but can also be returned to outside of the function?  even after destructing?
-LinkedList LinkedList::ThreeTimes() {
-	LinkedList temp{ *this };
-	node* p{ temp.head };
-	while (p) {
-		p->value *= 3;
-		p = p->next;
-	}
-
-	cout << "ThreeTimes" << endl;
-	return temp;
-}
-
 
 LinkedList LinkedList::operator=(const LinkedList& L) {//operator=; copy assignment
 	while (head) {
@@ -79,18 +65,45 @@ LinkedList LinkedList::operator=(const LinkedList& L) {//operator=; copy assignm
 		p1 = p1->next;
 		p2 = p2->next;
 	}
-
+	
 	cout << "Copy Assignment" << endl;
-	return L;
+	return *this;
+}
+LinkedList::LinkedList(LinkedList&& L) {//Will be invoked in the same three condition, when Rvalue is used.
+	head = L.head;
+	L.head = nullptr;
+
+	cout << "Move Constructor" << endl;
+
 }
 
-//Deep copy
-LinkedList::LinkedList(const LinkedList& L) {//copy constructor
-	head=nullptr;
-	// cout << "In CC " << (head == nullptr) << endl;
+LinkedList::~LinkedList() {//Destructor
+	while (head) {
+		node* p{ head->next };
+		delete head;
+		head = p;
+	}
+	cout << "Destructor" << endl;
+}
 
+LinkedList LinkedList::ThreeTimes() {
+	//QS: Why here is copy constructor?
+	LinkedList temp{ *this };
+	node* p{ temp.head };
+	while (p) {
+		p->value *= 3;
+		p = p->next;
+	}
+
+	cout << "ThreeTimes" << endl;
+	return move(temp);//visual studio compiler will change it to return move(temp); 
+}
+
+
+
+
+LinkedList::LinkedList(const LinkedList& L):LinkedList() {//copy constructor
 	node* p1{ L.head };
-	//@Yuchen: make the current LinkedList as same length as L
 	while (p1) {
 		node* p2{ new node() };
 		p2->next = head;
@@ -104,16 +117,12 @@ LinkedList::LinkedList(const LinkedList& L) {//copy constructor
 		p1 = p1->next;
 		p2 = p2->next;
 	}
-
-
-
-	cout << "Copy Constructor, and address is " << this << endl;
+	cout << "Copy Constructor" << endl;
 }
 
 
-//@Yuchen_Qst: Why the constructor below dones't need to set head(at the end of the function will be the tail) to nullptr?
+
 LinkedList::LinkedList(const initializer_list<int>& I) {//initializer_list
-	// cout << "In IC " << (head == nullptr) << endl;
 	auto it{ I.end() - 1 };
 	while (it != I.begin() - 1) {
 		node* p{ new node(*it) };
@@ -121,7 +130,6 @@ LinkedList::LinkedList(const initializer_list<int>& I) {//initializer_list
 		head = p;
 		--it;
 	}
-
 	cout << "Initializer List" << endl;
 }
 
@@ -137,34 +145,77 @@ ostream& operator<<(ostream& str, const LinkedList& L) {
 	return str;
 }
 
+void f1(int& i) {
+	cout << "Lvalue f1" << endl;
+	++i;
+}
+void f1(int&& i) {
+	cout << "Rvalue f1" << endl;
+	++i;
+}
 
 
+int& f2() {
+	int k{ 200 };
+	return k;
 
+}
 
 int main() {
 	LinkedList L1{ 1,2,3, 4, 5 };//initialilizer_list
 
 	LinkedList L2{ L1 }; //will use default copy constructor if copy constructor is not defined
-	//LinkedList L2 = L1;
+	// //LinkedList L2 = L1;
 
 	LinkedList L3;//deault operator assignment if no operator= defined
-	// L3.operator=(L1);
-	// // L3 = L1;
-
-	// cout << L3 << " " << &L1 << endl;
+	// L3 = L1;
 	// cout << L1 << endl;
 	// cout << L2 << endl;
 	// cout << L3 << endl;
 	// cout << L1.head << "  " << L2.head << "   " << L3.head << endl;
 
 	cout << " --------------------------------- " << endl;
-	L3 = L1.ThreeTimes();
+
+	L3 = L1.ThreeTimes();//L3.operator=(L1.ThreeTimes());//L1.ThrreTimes() is Rvalue
 	cout << L3 << endl;
 
 
+
+	// L1 = L2 = L3;//L1.operator=(L2.operator=(L3));
+
+
+	//int i{ 25 };
+	//f1(i);//i Lvalue
+	//cout << i << endl;
+	//f1(25);//25 Rvalue
+	//f1(i - 1);//i-1 Rvalue
+	//f1(move(i)); //change i to Rvalue
+
+
+
+	// int& i{ f2() };//Used to be error, but now the C++ does not complain anymore.
+	// cout << i << endl;
 	return 0;
 }
 
-// ostream& operator<<(ostream str, const LinkedList& list){
+/*
+Lvalue:  "Anything" that can be placed on the left hand side of an assignment is an Lvalue.
+Rvalue: "Anything" that can only be placed on the right hand side of an assignment is an Rvalue.
 
-// }
+i = 10;  //i is Lvalue; 10 is Rvalue
+int k {25};
+i = sqrt(k); //sqrt(k) is Rvalue
+A[2] = k; //A[2] if Lvalue
+
+//if your class contains any deep structure (thrught pointers), you need to do deep processing
+class myClass{
+public:
+
+vector<list<ThreeD>>> V1;
+int * p;//need deep processing
+vector<int *> V2;//need deep processing
+
+}
+
+
+*/
