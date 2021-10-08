@@ -61,7 +61,7 @@ template <class T> LinkedList<T>::LinkedList(LinkedList<T>&& L) {//Will be invok
 	head = L.head;
 	L.head = nullptr;
 
-	cout << "Move Constructor" << endl;
+	cout << "Move Constructor LL" << endl;
 
 }
 
@@ -80,7 +80,7 @@ template <class T>LinkedList<T>::LinkedList(const LinkedList<T>& L) :LinkedList(
 		p1 = p1->next;
 		p2 = p2->next;
 	}
-	cout << "Copy Constructor" << endl;
+	cout << "Copy Constructor LL" << endl;
 }
 
 template <class T> LinkedList<T>::LinkedList(const initializer_list<T>& I) {//initializer_list
@@ -92,7 +92,7 @@ template <class T> LinkedList<T>::LinkedList(const initializer_list<T>& I) {//in
 		head = p;
 		--it;
 	}
-	cout << "Initializer List" << endl;
+	cout << "Initializer List LL" << endl;
 }
 
 // Destructor--------------------------------
@@ -103,7 +103,7 @@ template <class T> LinkedList<T>::~LinkedList() {//Destructor
 		delete head;
 		head = p;
 	}
-	cout << "Destructor" << endl;
+	cout << "Destructor LL" << endl;
 }
 
 // threeTimne--------------------------------
@@ -115,7 +115,7 @@ template <class T> LinkedList<T> LinkedList<T>::ThreeTimes() {
 		p = p->next;
 	}
 
-	cout << "ThreeTimes" << endl;
+	cout << "ThreeTimes LL" << endl;
 	return temp;//visual studio compiler will change it to return move(temp); 
 }
 
@@ -193,11 +193,15 @@ public:
 	tree(int k);//constructor; k is level
 	tree() : root{ nullptr } {}
 	//function help_c for constructor
-	void help_il(const initializer_list<T>& list, int index, Node<T>* &node);
 
+
+	void help_il(const initializer_list<T>& list, int index, Node<T>* &node);
+	void help_cc(const Node<T>* nodeO, Node<T>* &nodeN);
+	void help_d(Node<T>* node);
 
 	tree(const initializer_list<T>& I);//initializer_list
 	//help_il
+
 	tree(const tree<T>& T1);//copy constructor
 	//help_cc
 
@@ -205,7 +209,7 @@ public:
 	tree operator=(const tree<T>& T1);
 	//help_ca
 
-	// ~tree();
+	~tree();
 	//help_d
 
 	tree ThreeTimes();
@@ -235,28 +239,78 @@ template <class T> void tree<T>::help_il(const initializer_list<T>& list, int in
 
 
 // template <class T> tree<T>::tree(int k):tree<T>::tree(){
+template <class T> void tree<T>::help_cc(const Node<T>* nodeO, Node<T>* &nodeN){
+	if(nodeO == nullptr){
+		return;
+	}
+
+	nodeN = new Node<T>(nodeO->value);
+
+	help_cc(nodeO->l_child, nodeN->l_child);
+	help_cc(nodeO->r_child, nodeN->r_child);
+
+	return;
+}
 
 // }
 
 // Constructors ---------------------------
 template <class T> tree<T>::tree(const initializer_list<T>& I){
 	help_il(I, 0, root);
+
+	cout << "Initializer List tree" <<endl;
+
 	return;
 }
 
 template <class T> tree<T>::tree(const tree<T>& T1){
+	help_cc(T1.root, root);
 
+	cout << "Copy Constructor tree" <<endl;
+
+	return;
 }
 
-template <class T> tree<T>::tree(tree<T>&& T1){
+template <class T> tree<T> tree<T>::operator=(const tree<T>& T1){
+	// help_cc(T1.root, root);
+	help_d(root);
 
+	tree<T> temp(T1);
+	this->root = temp.root;
+	temp.root = nullptr;
+
+	cout << "Copy Assignment tree" <<endl;
+
+	return *this;
+}
+
+
+// Deconsturctor-----------------------------------------
+template <class T> tree<T>::~tree(){
+	help_d(root);
+
+	cout << "Destructor tree" <<endl;
+
+	return;
+}
+
+template <class T> void tree<T>::help_d(Node<T>* node){
+	if(node == nullptr){
+		return;
+	}
+
+	help_d(node->l_child);
+	help_d(node->r_child);
+
+	delete node;
+
+	return;
 }
 
 
 
 
-
-//Overload : Inorder treversal
+//Overload : Inorder treversal --------------------------------------
 
 template <class T> void help_p(ostream& str, int index, const Node<T>* node){
 	if(node == nullptr){
@@ -282,12 +336,12 @@ int main() {
 	tree<int> T1{ 0, 11, 2, 3, 4, 5, 6 };
 	cout << T1 << endl;
 	
-	// tree<int> T2{ T1 };
-	// cout << T2 << endl;
+	tree<int> T2{ T1 };
+	cout << T2 << endl;
 
-	// tree<int> T3;
-	// T3 = T1;
-	// cout << T3<< endl;
+	tree<int> T3;
+	T3 = T1;
+	cout << T3<< endl;
 
 	// T3 = T1.ThreeTimes();
 	// cout << T3 << endl;
