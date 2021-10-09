@@ -40,7 +40,7 @@ LinkedList LinkedList::operator=(LinkedList&& L) {
 	}
 	head = L.head;
 	L.head = nullptr;
-	cout << "Move Assignment" << endl;
+	cout << "Move Assignment Tree" << endl;
 	return *this;
 }
 

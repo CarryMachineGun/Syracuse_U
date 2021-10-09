@@ -17,11 +17,20 @@ public:
 	T dep;
 	ThreeD(T i, T j, T k) :ht(2 * i), wid(2 * j), dep(2 * k) {};
 	ThreeD() { ht = wid = dep = 0; }
+	void operator*=(int num);
 };
 
 template <class T> ostream& operator<<(ostream& str, const ThreeD<T>& t1) {
 	str << "(" << t1.ht << ", " << t1.wid << ", " << t1.dep << ")";
 	return str;
+}
+
+template <class T> void ThreeD<T>::operator*=(int num){
+	ht *= num;
+	wid *= num;
+	dep *= num;
+
+	return;
 }
 
 
@@ -53,6 +62,7 @@ public:
 	~LinkedList();//destructor
 	LinkedList(LinkedList<T>&& L);//move constructor; Notice that const is removed.
 	LinkedList<T> operator=(LinkedList<T>&& L);//move assignment
+    void operator*=(int num);
 
 };
 
@@ -144,6 +154,7 @@ template <class T> LinkedList<T> LinkedList<T>::operator=(const LinkedList<T>& L
 	node<T>* p1{ L.head };
 	while (p1) {
 		node<T>* p2{ new node<T>{} };
+
 		p2->next = head;
 		head = p2;
 		p1 = p1->next;
@@ -174,6 +185,19 @@ template <class T> ostream& operator<<(ostream& str, const LinkedList<T>& L) {
 	return str;
 }
 
+template <class T> void LinkedList<T>::operator*=(int num){
+	node<T>* p{ head };
+	
+	while (head) {
+		head->value *= num;
+		head = head->next;
+	}
+
+	head = p;
+
+	return;
+}
+
 /*implement for the following class tree, constructor, copy constructor, initializer_list, copy assignment,
 destructor, move constructor, move assignment, ThreeTimes, print_inO, print_preO, print_postO.  in addition, you need to overload operator<< for tree class.
 For all of them, print a statement such as "copy Assignment tree" .   You might need to overload additional things for handling ThreeTimes..
@@ -184,7 +208,11 @@ public:
 	T value;
 	Node<T>* l_child, * r_child;
 	Node(T i) : value{ i }, l_child{ nullptr }, r_child{ nullptr }{};
-	Node() {  }
+	Node() {
+		l_child=nullptr;
+		r_child=nullptr;
+		return;
+	}
 };
 
 template <class T> class tree {
@@ -199,6 +227,7 @@ public:
 	void help_cc(const Node<T>* nodeO, Node<T>* &nodeN);
 	void help_d(Node<T>* node);
 	void help_tt(Node<T>* node);
+	void help_mul(Node<T>* node, int num);
 
 	tree(const initializer_list<T>& I);//initializer_list
 	//help_il
@@ -219,6 +248,7 @@ public:
 	tree(tree<T>&& T1);//Move Constructor
 	tree operator=(tree<T>&& T1);//Move Assignment
 
+	void operator*=(int num);
 
 };
 // helper----------------------------------
@@ -245,7 +275,9 @@ template <class T> void tree<T>::help_cc(const Node<T>* nodeO, Node<T>* &nodeN){
 		return;
 	}
 
-	nodeN = new Node<T>(nodeO->value);
+	// nodeN = new Node<T>(nodeO->value);
+	nodeN = new Node<T>();
+	nodeN->value = nodeO->value;
 
 	help_cc(nodeO->l_child, nodeN->l_child);
 	help_cc(nodeO->r_child, nodeN->r_child);
@@ -375,9 +407,28 @@ template <class T> void help_p(ostream& str, int index, const Node<T>* node){
 }
 template <class T> ostream& operator<<(ostream& str, const tree<T>& L){
 	help_p(str, 0, L.root);
+
 	return str;
 }
 
+
+template <class T> void tree<T>::help_mul(Node<T>* node, int num){
+	if(node == nullptr){
+		return;
+	}
+
+	node->value *= num;
+	help_mul(node->l_child, num);
+	help_mul(node->r_child, num);
+
+	return;
+}
+
+template <class T> void tree<T>::operator*=(int num){
+	help_mul(root, num);
+
+	return;
+}
 
 int main() {
 
@@ -395,25 +446,25 @@ int main() {
 	cout << T3 << endl;
 
 
-	// tree<ThreeD<int>> T4{ {1,2,3}, {4,5,6}, {2,2,2}, {3,3,3}, {4,4,4}, {5,5,5}, {1,1,1} };
-	// cout << T4 << endl;
+	tree<ThreeD<int>> T4{ {1,2,3}, {4,5,6}, {2,2,2}, {3,3,3}, {4,4,4}, {5,5,5}, {1,1,1} };
+	cout << T4 << endl;
 
-	// tree<ThreeD<int>> T5{ {4,4,4}, {5,5,5}, {6,6,6} };
-	// cout << T5 << endl;
+	tree<ThreeD<int>> T5{ {4,4,4}, {5,5,5}, {6,6,6} };
+	cout << T5 << endl;
 
-	// tree<LinkedList<int>> T6{ {1} , { 4, 5, 6 }, { 7,8 } };
-	// cout << T6 << endl;
+	tree<LinkedList<int>> T6{ {1} , { 4, 5, 6 }, { 7,8 } };
+	cout << T6 << endl;
 
-	// tree < LinkedList<ThreeD<int>>> T7{ {{1,2,3}, {4,5,6}, {7,8,9}}, {{1,1,1}, {2,2,2}}, {{3,3,3},{4,4,4}, {5,5,5}} };
-	// cout << T7 << endl;
+	tree < LinkedList<ThreeD<int>>> T7{ {{1,2,3}, {4,5,6}, {7,8,9}}, {{1,1,1}, {2,2,2}}, {{3,3,3},{4,4,4}, {5,5,5}} };
+	cout << T7 << endl;
 
-	// T7 *= 4;
-	// cout << T7 << endl;
-	// tree < LinkedList<ThreeD<int>>> T8;
-	// T8 = T7.ThreeTimes();
-	// cout << T8 << endl;
+	T7 *= 4;
+	cout << T7 << endl;
+	tree < LinkedList<ThreeD<int>>> T8;
+	T8 = T7.ThreeTimes();
+	cout << T8 << endl;
 
-	// auto p3{ new tree < LinkedList<ThreeD<int>>> { {{1,2,3}, {4,5,6}, {7,8,9}}, {{1,1,1}, {2,2,2}}, {{3,3,3},{4,4,4}, {5,5,5}} } };
-	// delete p3;
+	auto p3{ new tree < LinkedList<ThreeD<int>>> { {{1,2,3}, {4,5,6}, {7,8,9}}, {{1,1,1}, {2,2,2}}, {{3,3,3},{4,4,4}, {5,5,5}} } };
+	delete p3;
 	return 0;
 }
