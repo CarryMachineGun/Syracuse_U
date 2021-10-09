@@ -159,6 +159,7 @@ int main() {
 
 	cout << " --------------------------------- " << endl;
 	L3 = L1.ThreeTimes();
+	cout << L1 << endl;
 	cout << L3 << endl;
 
 

@@ -130,7 +130,7 @@ template <class T> LinkedList<T> LinkedList<T>::operator=(LinkedList<T>&& L) { /
 	}
 	head = L.head;
 	L.head = nullptr;
-	cout << "Move Assignment" << endl;
+	cout << "Move Assignment LL" << endl;
 	return *this;
 }
 
@@ -156,7 +156,7 @@ template <class T> LinkedList<T> LinkedList<T>::operator=(const LinkedList<T>& L
 		p2 = p2->next;
 	}
 
-	cout << "Copy Assignment" << endl;
+	cout << "Copy Assignment LL" << endl;
 	return *this;
 }
 
@@ -198,6 +198,7 @@ public:
 	void help_il(const initializer_list<T>& list, int index, Node<T>* &node);
 	void help_cc(const Node<T>* nodeO, Node<T>* &nodeN);
 	void help_d(Node<T>* node);
+	void help_tt(Node<T>* node);
 
 	tree(const initializer_list<T>& I);//initializer_list
 	//help_il
@@ -255,6 +256,17 @@ template <class T> void tree<T>::help_cc(const Node<T>* nodeO, Node<T>* &nodeN){
 // }
 
 // Constructors ---------------------------
+template <class T> tree<T>::tree(tree<T>&& T1){//Move Constructor
+	root = T1.root;
+	T1.root = nullptr;
+	
+	cout << "Move Constructor tree" << endl;
+	
+	return;
+}
+
+
+
 template <class T> tree<T>::tree(const initializer_list<T>& I){
 	help_il(I, 0, root);
 
@@ -271,15 +283,28 @@ template <class T> tree<T>::tree(const tree<T>& T1){
 	return;
 }
 
-template <class T> tree<T> tree<T>::operator=(const tree<T>& T1){
+//Assigbnment ------------------------------------------------
+
+template <class T> tree<T> tree<T>::operator=(const tree<T>& T1){//copy assignment of Tree
 	// help_cc(T1.root, root);
 	help_d(root);
 
 	tree<T> temp(T1);
-	this->root = temp.root;
+	root = temp.root;
 	temp.root = nullptr;
 
 	cout << "Copy Assignment tree" <<endl;
+
+	return *this;
+}
+
+template <class T> tree<T> tree<T>::operator=(tree<T>&& T1){//Move Assignment
+	help_d(root);
+
+	root = T1.root;
+	T1.root = nullptr;
+	
+	cout << "Move Assignment tree" << endl;
 
 	return *this;
 }
@@ -307,7 +332,30 @@ template <class T> void tree<T>::help_d(Node<T>* node){
 	return;
 }
 
+//ThreeTimes -------------------------------------------------------
 
+template <class T> void tree<T>::help_tt(Node<T>* node){
+	if(node == nullptr){
+		return;
+	}
+
+	node->value *= 3;
+
+	help_tt(node->l_child);
+	help_tt(node->r_child);
+
+	return;
+}
+	
+template <class T> tree<T> tree<T>::ThreeTimes(){
+	tree<T> temp(*this);
+
+	help_tt(temp.root);
+
+	cout<< "ThreeTimes tree" <<endl;
+
+	return move(temp);
+}
 
 
 //Overload : Inorder treversal --------------------------------------
@@ -343,8 +391,8 @@ int main() {
 	T3 = T1;
 	cout << T3<< endl;
 
-	// T3 = T1.ThreeTimes();
-	// cout << T3 << endl;
+	T3 = T1.ThreeTimes();
+	cout << T3 << endl;
 
 
 	// tree<ThreeD<int>> T4{ {1,2,3}, {4,5,6}, {2,2,2}, {3,3,3}, {4,4,4}, {5,5,5}, {1,1,1} };
