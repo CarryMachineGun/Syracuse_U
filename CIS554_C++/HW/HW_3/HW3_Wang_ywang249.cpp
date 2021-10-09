@@ -260,7 +260,9 @@ template <class T> void tree<T>::help_il(const initializer_list<T>& list, int in
 		return;
 	}
 
-	node = new Node<T>(*next(list.begin(), index));
+	// node = new Node<T>(*next(list.begin(), index));
+	node = new Node<T>();
+	node->value = *next(list.begin(), index);
 
 	help_il(list, (index * 2 + 1), node->l_child);
 	help_il(list, (index * 2 + 2), node->r_child);
