@@ -6,7 +6,9 @@
         "tuple": "cpp",
         "ostream": "cpp",
         "iostream": "cpp",
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "__bit_reference": "cpp",
+        "type_traits": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }

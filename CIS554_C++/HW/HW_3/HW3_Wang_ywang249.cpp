@@ -236,7 +236,8 @@ public:
 	//help_cc
 
 
-	tree operator=(const tree<T>& T1);
+	void operator=(const tree<T>& T1);
+
 	//help_ca
 
 	~tree();
@@ -246,7 +247,7 @@ public:
 	//help_tt
 
 	tree(tree<T>&& T1);//Move Constructor
-	tree operator=(tree<T>&& T1);//Move Assignment
+	// void operator=(tree<T>&& T0);//Move Assignment
 
 	void operator*=(int num);
 
@@ -260,7 +261,9 @@ template <class T> void tree<T>::help_il(const initializer_list<T>& list, int in
 		return;
 	}
 
-	node = new Node<T>(*next(list.begin(), index));
+	// node = new Node<T>(*next(list.begin(), index));
+	node = new Node<T>();
+	node->value = *next(list.begin(), index);
 
 	help_il(list, (index * 2 + 1), node->l_child);
 	help_il(list, (index * 2 + 2), node->r_child);
@@ -289,10 +292,10 @@ template <class T> void tree<T>::help_cc(const Node<T>* nodeO, Node<T>* &nodeN){
 
 // Constructors ---------------------------
 template <class T> tree<T>::tree(tree<T>&& T1){//Move Constructor
+	cout << "Move Constructor tree, Object: " << this << endl;
+	
 	root = T1.root;
 	T1.root = nullptr;
-	
-	cout << "Move Constructor tree" << endl;
 	
 	return;
 }
@@ -300,53 +303,59 @@ template <class T> tree<T>::tree(tree<T>&& T1){//Move Constructor
 
 
 template <class T> tree<T>::tree(const initializer_list<T>& I){
-	help_il(I, 0, root);
+	cout << "Initializer List tree, Object: " << this << endl;
 
-	cout << "Initializer List tree" <<endl;
+	help_il(I, 0, root);
 
 	return;
 }
 
 template <class T> tree<T>::tree(const tree<T>& T1){
-	help_cc(T1.root, root);
+	cout << "Copy Constructor tree, Object: " << this << endl;
 
-	cout << "Copy Constructor tree" <<endl;
+	help_cc(T1.root, root);
 
 	return;
 }
 
 //Assigbnment ------------------------------------------------
 
-template <class T> tree<T> tree<T>::operator=(const tree<T>& T1){//copy assignment of Tree
+// template <class T> tree<T> tree<T>::operator=(const tree<T>& T1){//copy assignment of Tree
+template <class T> void tree<T>::operator=(const tree<T>& T1){//copy assignment of Tree
+	cout << "Copy Assignment tree, Object: " << this <<endl;
+
 	// help_cc(T1.root, root);
 	help_d(root);
 
+	cout << "the T1 in copy assignment is "<< &T1<< endl;
 	tree<T> temp(T1);
+	cout << &temp << endl;
 	root = temp.root;
 	temp.root = nullptr;
-
-	cout << "Copy Assignment tree" <<endl;
-
-	return *this;
+	// return *this;
+	return;
 }
 
-template <class T> tree<T> tree<T>::operator=(tree<T>&& T1){//Move Assignment
-	help_d(root);
+// template <class T> tree<T> tree<T>::operator=(tree<T>&& T1){//Move Assignment
+// template <class T> void tree<T>::operator=(tree<T>&& T1){//Move Assignment
+// 	cout << "Move Assignment tree, Object: " << this << endl;
 
-	root = T1.root;
-	T1.root = nullptr;
-	
-	cout << "Move Assignment tree" << endl;
+// 	help_d(root);
+// 	root = T1.root;
+// 	T1.root = nullptr;	
 
-	return *this;
-}
+// 	cout << "the T1 in Move assignment is "<< &T1<< endl;
+
+// 	// return *this;
+// 	return;
+// }
 
 
 // Deconsturctor-----------------------------------------
 template <class T> tree<T>::~tree(){
+	cout << "Destructor tree, Object: " << this << endl;
+	
 	help_d(root);
-
-	cout << "Destructor tree" <<endl;
 
 	return;
 }
@@ -380,13 +389,14 @@ template <class T> void tree<T>::help_tt(Node<T>* node){
 }
 	
 template <class T> tree<T> tree<T>::ThreeTimes(){
-	tree<T> temp(*this);
+	cout<< "ThreeTimes tree, Object: " << this <<endl;
 
+	tree<T> temp(*this);
+	cout << &temp << endl;
 	help_tt(temp.root);
 
-	cout<< "ThreeTimes tree" <<endl;
-
-	return move(temp);
+	// return move(temp);
+	return temp;
 }
 
 
@@ -439,9 +449,12 @@ int main() {
 	cout << T2 << endl;
 
 	tree<int> T3;
+	cout << "Why the line below is noT processed by move assignment?" << endl;
+	//@Yuchen: because T1 is also a left object?
 	T3 = T1;
 	cout << T3<< endl;
 
+	cout << "Why the line below is noW processed by move assignment?" << endl;
 	T3 = T1.ThreeTimes();
 	cout << T3 << endl;
 

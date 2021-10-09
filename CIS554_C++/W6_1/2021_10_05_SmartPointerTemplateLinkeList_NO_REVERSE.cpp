@@ -14,6 +14,8 @@ public:
 	T dep;
 	ThreeD(T i, T j, T k) : ht{ 2 * i }, wid{ 2 * j }, dep{ 2 * k }{}
 	ThreeD() {}
+	int vol() const { return ht * wid * dep; }
+	bool operator<(const ThreeD<T>& t) const { return vol() < t.vol(); }
 };
 
 template <class T> ostream& operator<<(ostream& str, const ThreeD<T>& t) {
@@ -26,14 +28,17 @@ template <class T> ostream& operator<<(ostream& str, const ThreeD<T>& t) {
 template <class T> class node {
 public:
 	T value;
-	node<T>* next;
+	//node<T>* next;
+	shared_ptr<node<T>> next;
 	node(T i) : value(i), next(nullptr) {}
 	node() : next(nullptr) {}
 };
 template <typename T> class LinkedList {
 public:
-	node<T>* head;
-	LinkedList() : head(nullptr) {}
+	//node<T>* head;
+	shared_ptr<node<T>> head;
+	//LinkedList() : head(nullptr) {}
+	LinkedList() {}
 	LinkedList(const initializer_list<T>& I);//initializer_list
 	LinkedList(const LinkedList<T>& L);//copy constructor
 	//Will be invoked by sysmtem in three cases:
@@ -46,17 +51,79 @@ public:
 	LinkedList(LinkedList<T>&& L);//move constructor; Notice that const is removed.
 	LinkedList<T> operator=(LinkedList<T>&& L);//move assignment
 
+	void sort();
+	void removeOne(int k);
+	void reverse();
+
+
+
+
+
+
+
 };
+
+
+template <class T> void LinkedList<T>::sort() {
+	if (!head || !head->next) return;//0 or 1 node
+	//node<T>* p1{ head };
+	shared_ptr<node<T>> p1{ head };
+	while (p1) {
+		//node<T>* p2{ p1->next };
+		shared_ptr<node<T>> p2{ p1->next };
+		T min{ p1->value };
+		//node<T>* p_min{ p1 };
+		shared_ptr<node<T>> p_min{ p1 };
+		while (p2) {
+			if (p2->value < min) { min = p2->value; p_min = p2; }
+			p2 = p2->next;
+		}
+		p_min->value = p1->value;
+		p1->value = min;
+		p1 = p1->next;
+	}
+}
+
+template <class T> void LinkedList<T>::removeOne(int k) {
+	if (!head) return; //empty linked list
+	//if (head->value == k) { node<T>* p1{ head->next }; delete head; head = p1; return; }
+		if (head->value == k) {  head = head->next; return; }
+	//node<T>* p1{ head }, * p2{ head->next };
+		shared_ptr<node<T>> p1{ head }, p2{ head->next };
+	while (p2) {
+		if (p2->value == k) {
+			p1->next = p2->next;
+			//delete p2;
+			return;
+		}
+		p1 = p2;
+		p2 = p2->next;
+	}
+}
+
+
+//void LinkedList::reverse() {
+//	if (!head || !head->next) return;//0 or 1 node
+//	node* p1{ head }, * p2{ head->next };
+//	while (p2) {//while (p2 != nullptr)
+//		node* p3{ p2->next };
+//		p2->next = p1;
+//		if (p1 == head) { p1->next = nullptr; }
+//		p1 = p2;
+//		p2 = p3;
+//	}
+//	head = p1;
+//}
+
+
+
 
 template <class T> LinkedList<T> LinkedList<T>::operator=(LinkedList<T>&& L) {
 	while (head) {
-		node<T>* p1{ head->next };
-		delete head;
-		head = p1;
+		head = head->next;
 	}
 	head = L.head;
 	L.head = nullptr;
-    cout << &L << endl;
 	cout << "Move Assignment" << endl;
 	return *this;
 }
@@ -70,45 +137,37 @@ template <class T> LinkedList<T>::LinkedList(LinkedList<T>&& L) {//Will be invok
 }
 
 template <class T> LinkedList<T>::~LinkedList() {//Destructor
-	while (head) {
-		node<T>* p{ head->next };
-		delete head;
-		head = p;
-	}
+	head.reset();
 	cout << "Destructor" << endl;
 }
 
 template <class T> LinkedList<T> LinkedList<T>::ThreeTimes() {
 	LinkedList<T> temp{ *this };
-	node<T>* p{ temp.head };
+	//node<T>* p{ temp.head };
+	shared_ptr<node<T>> p{ temp.head };
 	while (p) {
 		p->value *= 3;
 		p = p->next;
 	}
 
-	cout << "ThreeTimes, and temp is :" << &temp <<endl;
-	// return *this;//visual studio compiler will change it to return move(temp); 
+	cout << "ThreeTimes" << endl;
 	return temp;//visual studio compiler will change it to return move(temp); 
 }
 
 
 template <class T> LinkedList<T> LinkedList<T>::operator=(const LinkedList<T>& L) {//operator=; copy assignment
-	cout << &L << endl;
-	while (head) {
-		node<T>* p1{ head->next };
-		delete head;
-		head = p1;
-	}
-
-	node<T>* p1{ L.head };
+	head.reset();
+	shared_ptr<node<T>> p1{ L.head };
 	while (p1) {
-		node<T>* p2{ new node<T>{} };
+		//node<T>* p2{ new node<T>{} };
+		shared_ptr<node<T>> p2{ make_shared<node<T>>() };
 		p2->next = head;
 		head = p2;
 		p1 = p1->next;
 	}
 	p1 = L.head;
-	node<T>* p2 = head;
+	//node<T>* p2 = head;
+	shared_ptr<node<T>> p2{ head };
 	while (p1) {
 		p2->value = p1->value;
 		p1 = p1->next;
@@ -121,15 +180,18 @@ template <class T> LinkedList<T> LinkedList<T>::operator=(const LinkedList<T>& L
 
 
 template <class T>LinkedList<T>::LinkedList(const LinkedList<T>& L) :LinkedList() {//copy constructor
-	node<T>* p1{ L.head };
+	//node<T>* p1{ L.head };
+	shared_ptr<node<T>> p1{ L.head };
 	while (p1) {
-		node<T>* p2{ new node<T>() };
+		//node<T>* p2{ new node<T>() };
+		shared_ptr<node<T>> p2{ make_shared<node<T>>() };
 		p2->next = head;
 		head = p2;
 		p1 = p1->next;
 	}
 	p1 = L.head;
-	node<T>* p2 = head;
+	//node<T>* p2 = head;
+	shared_ptr<node<T>> p2{ head };
 	while (p1) {
 		p2->value = p1->value;
 		p1 = p1->next;
@@ -141,10 +203,11 @@ template <class T>LinkedList<T>::LinkedList(const LinkedList<T>& L) :LinkedList(
 
 
 template <class T> LinkedList<T>::LinkedList(const initializer_list<T>& I) {//initializer_list
-	head = nullptr;
+	//head = nullptr;
 	auto it{ I.end() - 1 };
 	while (it != I.begin() - 1) {
-		node<T>* p{ new node<T>(*it) };
+		//node<T>* p{ new node<T>(*it) };
+		shared_ptr<node<T>> p{ make_shared<node<T>>(*it) };
 		p->next = head;
 		head = p;
 		--it;
@@ -155,7 +218,8 @@ template <class T> LinkedList<T>::LinkedList(const initializer_list<T>& I) {//in
 
 template <class T> ostream& operator<<(ostream& str, const LinkedList<T>& L) {
 	str << "{ ";
-	node<T>* p{ L.head };
+	//node<T>* p{ L.head };
+	shared_ptr<node<T>> p{ L.head };
 	while (p) {
 		str << p->value << " ";
 		p = p->next;
@@ -187,14 +251,13 @@ int main() {
 	//LinkedList L2 = L1;
 
 	LinkedList<int> L3;//deault operator assignment if no operator= defined
-	cout << &L1 << endl;
 	L3 = L1;
 	cout << L1 << endl;
 	cout << L2 << endl;
 	cout << L3 << endl;
 	cout << L1.head << "  " << L2.head << "   " << L3.head << endl;
 
-	//为什么在我将treeTime返回的值设为L1而不是temp后，用的不是copy assignment，而是在hidden copy之后用的move assugnment
+
 	L3 = L1.ThreeTimes();//L3.operator=(L1.ThreeTimes());//L1.ThrreTimes() is Rvalue
 	cout << L3 << endl;
 
@@ -204,45 +267,17 @@ int main() {
 
 	LinkedList<ThreeD<int>> L5{ {1,2,3}, {1,1,1}, {2,2,2} };
 	cout << L5 << endl;
+	L5.sort();
+	cout << L5 << endl;
+
+	LinkedList<int> L6{ 6,5,4,3,2,1 };
+	L6.removeOne(4);
+	cout << L6 << endl;
 
 
 
-
-	//int i{ 25 };
-	//f1(i);//i Lvalue
-	//cout << i << endl;
-	//f1(25);//25 Rvalue
-	//f1(i - 1);//i-1 Rvalue
-	//f1(move(i)); //change i to Rvalue
-
-
-
-	//int& i{ f2() };//Used to be error, but now the C++ does not complain anymore.
-	//cout << i << endl;
 
 
 
 	return 0;
 }
-
-/*
-Lvalue:  "Anything" that can be placed on the left hand side of an assignment is an Lvalue.
-Rvalue: "Anything" that can only be placed on the right hand side of an assignment is an Rvalue.
-
-i = 10;  //i is Lvalue; 10 is Rvalue
-int k {25};
-i = sqrt(k); //sqrt(k) is Rvalue
-A[2] = k; //A[2] if Lvalue
-
-//if your class contains any deep structure (thrught pointers), you need to do deep processing
-class myClass{
-public:
-
-vector<list<ThreeD>>> V1;
-int * p;//need deep processing
-vector<int *> V2;//need deep processing
-
-}
-
-
-*/
