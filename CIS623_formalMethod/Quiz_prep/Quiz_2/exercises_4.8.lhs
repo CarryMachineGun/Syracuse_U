@@ -55,11 +55,18 @@
 > or2 False True = True 
 > or2 False False = False 
 
+> f :: [Int -> Int] -> Int -> Int 
+> f [] a = a
+> f (g:gs) a = g (f gs a)
+
+> h :: [a] -> [a]
+> h [] = []
+> h [x] = [x] 
+> (x:y:xs) = h xs
 
 > or3 :: Bool -> Bool -> Bool 
 > or3 False False = False 
 > or3 _ _ = True 
-
 
 > -- 5. 
 > and1 :: Bool  -> Bool  -> Bool 

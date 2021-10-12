@@ -1,0 +1,3239 @@
+.inventoryListHead tr th.sortasc {
+    background-image: url(/images/ci/icons/sort_on_up.gif);
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.inventoryListHead tr th.sortdesc {
+    background-image: url(/images/ci/icons/sort_on.gif);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+}
+
+.lateIndicator {
+    background-color: #888;
+    color: #fff;
+    font-size: 8px;
+    font-weight: bold;
+    margin: 2px 5px 2px 10px;
+    padding: 1px 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.overrideTotalDiv {
+    margin-top: 10px;
+}
+
+
+/* start from gradebook.css */
+
+.subActionBar {
+    font-size: 95%
+}
+
+.subActionBar {
+    *z-index: 500;
+}
+
+.subActionBar:hover {
+    z-index: 1000;
+}
+
+.subActionBar div.block,
+.subActionBar div.button {
+    float: left;
+    margin: 0;
+    padding: 2px 9px 4px;
+    border-left: 1px dotted #999;
+    _border-left: none;
+}
+
+.subActionBar span.block,
+.subActionBar span.button {
+    float: none;
+}
+
+.subActionBar li.sub {
+    position: relative;
+}
+
+.subActionBar fieldset legend + div.block {
+    border-left: 0!important;
+}
+
+.subActionBar select {
+    vertical-align: middle;
+}
+
+.subActionBar div.button {
+    padding: 6px 12px;
+}
+
+.subActionBar div.last {
+    border-right: none;
+}
+
+.subActionBar fieldset {
+    padding: 0;
+    margin: 0;
+}
+
+.subActionBar optgroup {
+    font-style: normal;
+    font-weight: normal;
+    color: #777;
+    border-top: 1px solid #ddd;
+    margin-top: 6px;
+}
+
+.subActionBar optgroup option {
+    color: #000;
+}
+
+.subActionBar ul li.sortableSelector a {
+    padding-left: 18px;
+}
+
+.bubbleStem {
+    height: 14px;
+    position: relative;
+    width: 190px;
+}
+
+.bottom .bubbleStem {
+    bottom: 4px;
+}
+
+.top .bubbleStem {
+    top: -2px;
+}
+
+.left .bubbleStem {
+    padding-left: 24px;
+}
+
+.right .bubbleStem {
+    right: 24px;
+    text-align: right;
+}
+
+@media print {
+    div.hideOnPrint {
+        display: none
+    }
+}
+
+
+/*-- PULLDOWN MENUS IN A SECONDARY ACTION BAR ON GRADE CENTER'S MAIN PAGE---*/
+
+#viewList {
+    z-index: 1000!important
+}
+
+ul.selectList {
+    list-style: none;
+    margin: 0 6px 0 0;
+    padding: 0;
+    float: left;
+    z-index: 1000;
+}
+
+ul.selectList li {
+    float: left;
+    margin: 0 4px 0 0;
+    z-index: 199;
+}
+
+ul.selectList li.sub a {
+    display: block;
+    text-decoration: none;
+}
+
+ul.selectList li.sub:hover {
+    z-index: 1000;
+}
+
+ul.selectList li.sub:hover ul {
+    left: 0;
+    top: 20px!important;
+}
+
+ul.selectList li.sub ul li {
+    float: none;
+    position: static!important;
+    margin: 0;
+    padding: 0;
+}
+
+ul.selectList li.sub ul li h4 {
+    color: #888;
+    margin: 0;
+    padding: 6px 0 0 3px;
+    font-weight: bold;
+    font-size: 90%;
+    display: block;
+    border-bottom: 1px solid #ccc;
+}
+
+ul.selectList li.sub ul li h4 {
+    width: 152px;
+}
+
+ul.selectList li.sub ul li a,
+ul.selectList li.sub ul li a:hover,
+ul.selectList li.sub ul li a:focus {
+    border: none!important;
+    background-image: none;
+    padding: 2px 3px 2px 14px;
+}
+
+ul.selectList li.sub ul li a:hover,
+ul.selectList li.sub ul li a:focus,
+ul.selectList li.sub .flyout ul li a:hover,
+ul.selectList li.sub .flyout ul li a:focus {
+    background-color: #FFFFFF;
+    *border: 1px;
+}
+
+ul.selectList li.sub a span#currentView,
+ul.selectList li.sub a span#currentSortBy,
+ul.selectList li.sub a span#currentColSortDir {
+    background-image: none;
+}
+
+ul.selectList li.sub ul li.current a,
+ul.selectList li.sub ul li.current a:hover,
+.nav .sub .current a,
+.nav .sub .current a:hover,
+.nav .sub .current.favorite a,
+.nav .sub .current.favorite a:hover {
+    background-color: #c7d9f3;
+    background-image: url(/images/ci/icons/current_li.png)!important;
+    background-repeat: no-repeat;
+    background-position: 0 4px;
+}
+
+
+/*Grade information bar.*/
+
+.cellInfoPanel {
+    border: 1px solid #eee;
+    border-bottom: 2px solid #999;
+}
+
+.cellStatus {
+    border: 0;
+    background: #f6f6f6;
+    font-size: 85%;
+}
+
+.cellStatus div {
+    float: left;
+    padding: 2px 8px;
+}
+
+.cellStatus div.gbTableTimeStamp {
+    float: right;
+    padding: 2px 3px;
+    color: #666666;
+    white-space: nowrap;
+}
+
+.statusTitle {
+    background: #eee;
+    color: #666666;
+}
+
+.statdata {
+    color: #000;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch
+}
+
+
+/* sometimes span are used as simple locator for DHTML, in which case using a span should not imply a style - this is a work around */
+
+span.unstyled {
+    font-size: 100%;
+    display: inline;
+    color: #000000;
+    padding: 0;
+}
+
+div.areaHighlight table.gbColumns thead tr td.clear,
+td.clear,
+div.areaHighlight table.gbColumns tbody tr.frozenbar td.dragCell,
+div.areaHighlight table.gbColumns tbody tr td.dragCell,
+div.areaHighlight table.gbColumns tbody tr.frozen td.dragCell,
+div.areaHighlight table.gbColumns tfoot tr.lastRow td.clear {
+    background: inherit;
+    *background: #f9f9f9;
+}
+
+div.gradeDetailsStep {
+    overflow-x: auto;
+    overflow-y: visible;
+    border-bottom: 2px solid #CCCCCC;
+    margin: 0 0 6px;
+    -webkit-overflow-scrolling: touch;
+}
+
+ul.gb_currView li.sub ul li.favorite a,
+ul.gb_currView li.sub ul li.favorite a:hover {
+    background-image: url(/images/ci/icons/favorite_on_li.png)!important;
+    background-repeat: no-repeat;
+    background-position: 0 4px;
+}
+
+
+/* end from gradebook.css */
+
+
+/* start from gradebook2.css */
+
+
+/*General Styles*/
+
+.gbtable tr td,
+.gbtable tr th,
+.gbtable_header tr th {
+    font-size: 0.95em;
+    *height: 1%;
+}
+
+#table1_viewport {
+    z-index: 2;
+}
+
+
+/*COLORS*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*this ends up being the border color for the cells*/
+
+.gbtable,
+.gbtable_header {
+    margin: 0;
+    border-collapse: collapse;
+    border-spacing: 1px;
+    zoom: 1;
+}
+
+
+/*background color for all header cells*/
+
+.gbtable_header th,
+.gbtable thead th {
+    background: #777;
+    color: #fff;
+    border-top: 1px solid #999;
+    border-bottom: 2px solid #999;
+    border-left: 1px solid #999;
+}
+
+.gbtable_header th:first-child,
+.gbtable thead th:first-child {
+    border-left: none;
+}
+
+
+/*background color for frozen cells*/
+
+.gbtable th,
+.gbtablesimple tbody th {
+    background: #E8E8E8;
+    color: #003366;
+}
+
+
+/*mouseover colors for cells and cell headers*/
+
+tbody tr.rowhigh td {
+    background: #f0f0f0;
+}
+
+tr td.cellhigh,
+tr td.cellhighNoCM {
+    background: #D9DED3;
+}
+
+tbody tr.rowhigh th {
+    background: #cecece;
+}
+
+.gbtable_header tr.rowhigh th,
+.gbtable thead tr.rowhigh th {
+    background: #666;
+    color: #fff;
+}
+
+
+/*hightlight colors for focussed cell*/
+
+td.cellClick,
+td.cellClickNoCM,
+th.cellClick {
+    background: #819AC0 url(../../themes/as_default/images/gradient_black_short_bt.png) repeat-x 0 100%!important;
+    border: 1px solid #000;
+}
+
+
+/*text color for focussed cell*/
+
+td.cellClick a,
+th.cellClick a {
+    color: #fff;
+}
+
+.gbtable td.cellClick div.gbText span {
+    color: #efefef;
+}
+
+td.cellClick input {
+    color: #036;
+}
+
+
+/*put border on the highlighted cell*/
+
+.gbtable tr td.cellhigh,
+.gbtable tr td.cellhighNoCM,
+.gbtable tr th.cellhigh,
+.gbtable tr td.cellClick,
+.gbtable tr td.cellClickNoCM,
+.gbtable tr th.cellClick {
+    /*border:1px solid #000!important;*/
+    *height: 1%;
+}
+
+
+/*row highlight colors for cell and cell headers of focussed row*/
+
+tr.focusRowHigh td {
+    background: #eee;
+}
+
+tr.focusRowHigh th,
+th.focusHeader {
+    background: #ccc;
+}
+
+.gbtable_header tr th.focusHeader {
+    background: #999;
+}
+
+td.cellClick div.gbView div.gbText a,
+td.cellClickNoCM div.gbView div.gbText a,
+th.cellClick div.gbView div.gbText a,
+th.cellClickNoCM div.gbView div.gbText a,
+td.cellClick div.gbView a,
+th.cellClick div.gbView a,
+td.cellClickNoCM div.gbView a,
+th.cellClickNoCM div.gbView a {
+    color: #fff;
+}
+
+
+/*GRADEBOOK TABLE*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*Container for gradebook, allows scrolling in accessible view*/
+
+.gbContainer {
+    border: 2px solid #999900;
+    width: 95%;
+    overflow: scroll;
+    height: 400px;
+    -webkit-overflow-scrolling: touch
+}
+
+
+/*set continer to relative so the scroll bars can be positioned relative to it*/
+
+#table1_container {
+    position: relative;
+    *height: 1%;
+}
+
+.gbtable tbody {
+    *position: static;
+    zoom: 1;
+    *height: 1%;
+}
+
+
+/*white border add a little touch to the edges*/
+
+.gbtable td {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 0;
+    *height: 1%;
+}
+
+.gbtable td:first-child {
+    border-left: 0;
+}
+
+
+/*style for freeeze pane headers*/
+
+.gbtable th {
+    border: 1px solid #ccc;
+    padding: 0;
+    text-align: left;
+    font-weight: normal;
+}
+
+
+/*style for top row headers*/
+
+.gbtable_header th,
+.gbtable thead th {
+    padding: 1px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.accessibleTable th,
+.accessibleTable thead th {
+    padding: 6px 3px;
+}
+
+.accessibleTable thead th.sortedUp {
+    background-image: url(/images/ci/icons/sort_on_up.gif);
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.accessibleTable thead th.sortedDown {
+    background-image: url(/images/ci/icons/sort_on.gif);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+}
+
+.gbtable_header thead tr th.sortedUp {
+    background-image: url(/images/ci/icons/sort_on_up.gif);
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.gbtable_header thead tr th.sortedDown {
+    background-image: url(/images/ci/icons/sort_on.gif);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+}
+
+
+/*remove border from highlighted cell if it's in the top row*/
+
+.gbtable_header tr th.cellhigh,
+.gbtable thead tr th.cellhigh {
+    border: 0;
+}
+
+.gbtable_header th div.gbData a,
+.gbtable thead th div.gbData a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+/*get rid of borders and align images*/
+
+.gbtable_header img,
+.gbtable img {
+    border: 0;
+    vertical-align: middle;
+}
+
+h2.gbsub {
+    margin: 4px 0;
+    font-size: 110%;
+}
+
+
+/*GRADEBOOK CELLS*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*every cell has a div that manages the cell size and doesn't allow wrapping*/
+
+.gbtable div,
+.gbtable_header div {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    width: 110px;
+}
+
+
+/*Everything but the context menu image are grouped in a div that is floated left*/
+
+.gbtable div.gbText,
+.gbtable_header div.gbText {
+    display: block;
+    float: left;
+    width: 110px;
+    padding: 1px;
+}
+
+
+/* the THs in the table_header table should be narrow enough to show the contextual menu at all times. */
+
+.gbtable_header div.gbText,
+.accessibleTable thead th div.gbText {
+    width: 86px;
+}
+
+.gbtable {
+    *height: 1%;
+    zoom: 1;
+    position: static;
+}
+
+.gbtable tbody tr td,
+.gbtable tbody tr th {
+    padding: 1px;
+    border-left: none;
+    *height: 1%;
+    zoom: 1;
+    *position: static;
+}
+
+.accessibleTable tbody tr td,
+.accessibleTable tbody tr th {
+    padding: 2px 3px 1px;
+}
+
+.accessibleTable tr td.checkbox,
+.accessibleTable tr th.checkbox {
+    width: auto;
+}
+
+.gbtable tbody tr th.checkcol,
+.gbtable_header thead tr th.checkcol {
+    width: 22px;
+}
+
+/*add some extra padding to the top row headers to make space for sort icon*/
+
+.gbtable_header div.gbText,
+.gbtable thead div.gbText {
+    padding-top: 6px;
+}
+
+
+/*Checkbox column gets adjusted to be smaller*/
+
+.checkcol {
+    width: 20px;
+    text-align: center;
+}
+
+.gbtable th.checkcol div,
+.gbtable_header th.checkcol div {
+    width: 20px;
+    text-align: center;
+}
+
+
+/*remove all link underlines in the spreadsheet*/
+
+.gbtable a {
+    text-decoration: none;
+}
+
+
+/*when cell is hovered over or clicked, shrink size of gbText to make room for CM icon*/
+
+.gbtable td.cellhigh div.gbText,
+.gbtable_header th.cellhigh div.gbText,
+.gbtable_header th.cellhighNoCM div.gbText,
+.gbtable th.cellhigh div.gbText,
+.gbtable td.cellClick div.gbText,
+.gbtable th.cellClick div.gbText,
+.gbtable td.cellhigh div.gbView,
+.gbtable_header th.cellhigh div.gbView,
+.gbtable th.cellhigh div.gbView,
+.gbtable td.cellClick div.gbView,
+.gbtable th.cellClick div.gbView,
+.gbtable td.cellhigh div.gbEdit,
+.gbtable th.cellhigh div.gbEdit,
+.gbtable td.cellClick div.gbEdit,
+.gbtable th.cellClick div.gbEdit {
+    width: 84px;
+}
+
+.accessibleTable a {
+    display: block;
+    padding: 1px 20px 1px 0;
+    background: url(/images/ci/icons/cm_arrow.gif) no-repeat right center;
+}
+
+.accessibleTable a.noMenu {
+    background-image: none;
+}
+
+.gbView,
+.gbEdit {
+    float: left;
+}
+
+
+/*for chekcbox column have it shrink to 0*/
+
+.gbtable_header th.cellhigh div.gbCheck,
+.gbtable th.cellhigh div.gbCheck {
+    width: 0px;
+}
+
+
+/*input fields for editing a grade, field is hidden and positioned where the text was*/
+
+.gbtable td input,
+.gbtable th input,
+.gbtable_header th input {
+    font-family: Arial, Helvetica, sans-serif;
+    float: left;
+    border-top: 2px solid #558097;
+    border-left: 2px solid #558097;
+    border-right: 2px solid #CEDCE3;
+    border-bottom: 2px solid #CEDCE3;
+    width: 70px;
+    padding: 0;
+    font-size: 98%;
+    margin: 0 0 0 1px;
+    height: 1.5em;
+}
+
+.gbtable td input.override {
+    text-align: right;
+    background-image: url(/images/ci/gradebook/grade_modified_3.gif);
+    background-repeat: no-repeat;
+    background-position: top left;
+}
+
+.accessibleTable td input,
+.accessibleTable th input {
+    width: auto;
+}
+
+
+/*style the checkbox so it stays in its box*/
+
+.gbtable th.checkcol input,
+.gbtable_header th.checkcol input {
+    width: auto;
+    font-size: 80%;
+    height: auto;
+    outline: none;
+    margin: 0 0 0 3px;
+    *margin: 0;
+    background: none;
+    border: none;
+}
+
+
+/*style the link inside the cell with a bit of padding*/
+
+td a.titleAnchor {
+    padding: 1px 2px;
+    display: block;
+}
+
+
+/*the modified indicator icon, placed at top left of cell*/
+
+a.titleAnchor .gmodified {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+/* set the position relative so that the exempt icon can properly overlay the grade*/
+
+span.gexempt_container {
+    position: relative;
+}
+
+.gradething {
+    z-index: 1000;
+    display: block;
+}
+
+
+/*the saving message for the cells*/
+
+div.saveDiv {
+    position: absolute;
+    background: #fff;
+    display: none;
+    width: 110px;
+    z-index: 20;
+}
+
+div.saveDiv img {
+    vertical-align: middle;
+}
+
+div.savDiv div.saveText {
+    padding: 2px;
+    color: #f00;
+}
+
+
+/*error message when the cell data is invalid*/
+
+#errorDiv {
+    position: absolute;
+    display: none;
+    font-size: 110%;
+    width: 180px;
+    border: 1px solid #000;
+    COLOR: #000000;
+    background-color: #ffc;
+    border-top: 0;
+}
+
+.errorDiv2 {
+    background-image: url(/images/cs/path_not_found.gif);
+    background-repeat: no-repeat;
+    background-position: 4px 4px;
+    padding: 6px 3px 0 33px;
+    margin: 0 0 3px 0;
+    min-height: 20px;
+}
+
+.gbtable tr td.cellError {
+    background: #fdea9f!important;
+    border: 1px solid #fdea9f;
+    color: #000;
+}
+
+td.cellError input {
+    color: #000;
+}
+
+
+/*CONTEXTUAL MENUS*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*when cell is highligted or clicked make the cm image is displayed*/
+
+.gbtable td.cellhigh a.cmimg,
+.gbtable th.cellhigh a.cmimg,
+.gbtable_header th.cellhigh a.cmimg,
+.gbtable_header th.cellhighNoCM a.cmimg,
+.gbtable td.cellClick a.cmimg,
+.gbtable th.cellClick a.cmimg {
+    display: block;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+
+/*trigger for contextual menu is positioned on the side of the cell and hidden initially*/
+
+.gbtable td a.cmimg,
+.gbtable th a.cmimg,
+.gbtable_header th a.cmimg {
+    float: right;
+    display: none;
+    width: 16px;
+    height: 16px;
+    padding: 1px 1px 0 0;
+    margin: 0 1px 0 0;
+    _margin: 0;
+    outline: none;
+}
+
+
+/* show the contextual menu in the table head */
+
+.gbtable_header th a.cmimg,
+.gbtable_header th a.cmimg,
+.accessibleTable thead th a.cmimg {
+    float: right;
+    display: block;
+    width: 16px;
+    height: 16px;
+    padding: 1px 1px 0 0;
+    margin: 6px 1px 0 0;
+    _margin: 0;
+    outline: none;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+
+
+/* but hide it in the checkbox column until it is rolled over */
+
+.gbtable_header th.checkcol a.cmimg {
+    display: none;
+}
+
+.gbtable_header th.cellhigh a.cmimg {
+    display: block;
+}
+
+
+/*SPECIAL CONTEXT MENUS POPUPS*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*the dates div from teh clear attempts options*/
+
+.dates {
+    width: 260px;
+}
+
+.dates a {
+    display: inline;
+}
+
+.dates table td {
+    color: #666;
+    padding: 2px;
+}
+
+
+/*column info and adding comments popups*/
+
+.gc_info,
+.comments {
+    position: fixed;
+    display: none;
+    z-index: 1000;
+    width: 216px;
+    padding: 0;
+}
+
+.comments {
+    width: auto;
+    *width: 250px;
+    _width: 250px;
+}
+
+.gc_info ul {
+    clear: both;
+    background-color: #E2EEFE;
+    border: 1px solid #ACC2DF;
+    border-bottom: 1px solid #5577bb;
+    border-right: 1px solid #5577bb;
+    list-style-type: none;
+    margin: 0;
+    padding: 6px 6px 0 6px;
+    overflow: hidden;
+    zoom: 1;
+    -webkit-overflow-scrolling: touch
+}
+
+.gc_info ul li {
+    float: left;
+    clear: left;
+    margin: 0 0 4px 0;
+    padding: 0;
+    font-size: 90%;
+    font-weight: bold;
+    color: #666666;
+    width: 200px;
+}
+
+.gc_info ul li span {
+    display: block;
+    width: 80px;
+    float: left;
+    margin-right: 3px;
+    font-weight: normal;
+    color: #666;
+}
+
+.gc_info ul li div {
+    float: right;
+    width: 115px;
+}
+
+#icondiv ul li span.icon {
+    width: 20px;
+    float: left;
+}
+
+#icondiv ul li span.label {
+    text-align: left;
+    font-weight: bold;
+    font-size: 100%;
+    width: 147px;
+}
+
+.info ul li div {
+    float: left;
+    width: 90px;
+}
+
+.stats ul li span {
+    width: 130px;
+}
+
+.stats ul li div {
+    float: left;
+    width: 30px;
+}
+
+.info a.contextmenubar {
+    text-decoration: none;
+    border-top: 1px solid #999;
+    text-align: right;
+    color: #888;
+    padding: 3px;
+    display: block;
+    font-size: 80%;
+}
+
+.comText {
+    margin: 0;
+    padding: 8px;
+    font-weight: normal;
+    clear: both;
+    min-width: 240px;
+    color: #666666;
+    width: 250px;
+    /*  width:auto;7*/
+}
+
+.comText a.contextmenubar {
+    text-decoration: none;
+    border-top: 1px solid #999;
+    text-align: right;
+    color: #888;
+    padding: 3px;
+    display: block;
+    font-size: 80%;
+}
+
+.comText table tr td textarea {
+    font-size: 100%;
+    font-family: "Lucinda Grande", Arial, Verdana, sans-serif;
+}
+
+.comments .bSpell {
+    width: 98%;
+}
+
+.bSpell {
+    text-align: right;
+    /*Style modified in rtol.css*/
+}
+
+.commentButtons {
+    margin-top: 3px;
+    text-align: right;
+}
+
+.commentButtons a:hover {
+    background: none;
+}
+
+
+/*styles for the arrows that appear on the top and bottom of these popups*/
+
+.bubArrowTop,
+.bubArrowBot {
+    border-color: transparent transparent #444A6C transparent;
+    border-style: solid;
+    border-width: 0 12px 10px;
+    top: -12px;
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+
+.bubArrowBot {
+    top: 0px;
+    border-width: 10px 12px 0;
+    position: relative;
+    border-color: #444A6C transparent transparent transparent;
+}
+
+.bubArrowTop2 {
+    height: 14px;
+    width: 75px;
+    position: relative;
+    top: 2px;
+    left: 195px;
+}
+
+.bubArrowTopFix {
+    padding-bottom: 4px;
+}
+
+.bubArrowBot2 {
+    height: 14px;
+    width: 75px;
+    bottom: 2px;
+    left: 195px;
+}
+
+.gc_bubArrowBot {
+    height: 14px;
+    width: 75px;
+    bottom: 4px;
+    left: 145px;
+}
+
+
+/*shadow div that can appear behind context menus*/
+
+#shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #000;
+    display: none;
+    opacity: .2;
+    filter: alpha(opacity=20);
+}
+
+
+/*OTHER PAGE LEVEL ELEMENTS ON THE GRID VIEW*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*make some minor adjustments to the default action bar styles*/
+
+.multiAction {
+    clear: both;
+    z-index: 400;
+    margin-bottom: 3px;
+}
+
+.multiAction td img {
+    vertical-align: middle;
+}
+
+.cellstatus div.iconlegend {
+    float: right;
+    padding: 0;
+    border: 0;
+    margin-right: 3px;
+}
+
+div.gdIconlegend {
+    text-align: right;
+    position: relative;
+    z-index: 99;
+}
+
+div.gdIconlegend div.gd_bubArrowBot img {
+    float: right;
+    margin-top: -2px;
+}
+
+
+/*filter bar for picking the current view and sorting*/
+
+.viewdiv {
+    margin: 0 0 3px 0;
+    padding: 6px 6px 4px 6px;
+    border: 1px solid #ccc;
+    background: #fefae9;
+}
+
+.viewdiv label {
+    font-weight: bold;
+}
+
+.viewdiv .actionButton {
+    font-size: 120%;
+    margin: 0 5px;
+}
+
+.viewdiv div,
+.viewdiv ul.flynav {
+    float: left;
+}
+
+.viewdiv ul.flynav li {
+    zoom: normal;
+}
+
+.viewdiv div.sortcolsLabel {
+    margin-left: 20px;
+}
+
+.ortext,
+h3.ortext {
+    width: 95%;
+    text-align: center;
+    font-size: 125%;
+    font-weight: bold;
+    margin-bottom: 3px;
+    margin-left: 10px;
+    background: #ededed;
+}
+
+h3.ortext {
+    margin-top: 0px;
+}
+
+.ortext a.inlineAction {
+    font-size: 70%;
+    padding: 0px;
+    margin: 2px 5px 0px 0px;
+    float: right;
+}
+
+.ortext a.closeor img {
+    border: 0px;
+}
+
+.headbar {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+.valdiv {
+    white-space: nowrap;
+}
+
+
+/*div that gives the last saved info*/
+
+.saveStatus {
+    padding: 3px;
+    margin-top: 5px;
+    width: auto;
+    display: table;
+    float: left;
+}
+
+
+/*the div that shows how many rows have been checked*/
+
+.selectRows {
+    background-color: #ccc;
+    font-size: 90%;
+    padding: 0px 1px 1px 4px;
+    color: #555;
+    border-top: 1px solid #999;
+    height: 15px;
+}
+
+.selectRows span#rowindicator {
+    font-weight: bold;
+}
+
+div.scrollHint {
+    z-index: 100;
+    position: absolute;
+    border: 1px solid #000;
+    padding: 3px;
+    background: #FFF;
+    font-size: 85%;
+    max-width: 200px;
+}
+
+
+/*MANAGE LIST PAGES*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*the list style for all the manage pages*/
+
+ul.gblist {
+    list-style-type: none;
+    margin: 0 0 0 10px;
+    padding: 5px;
+    border-top: 1px solid #ddd;
+}
+
+ul.gblist li {
+    clear: left;
+    margin: 0 0 6px 0;
+    padding: 0 0 6px 190px;
+    overflow: auto;
+    font-weight: normal;
+    border-bottom: 1px solid #ddd;
+    zoom: 1;
+    -webkit-overflow-scrolling: touch
+}
+
+ul.gblist li span {
+    display: block;
+    width: 150px;
+    float: left;
+    margin-right: 3px;
+    margin-left: -170px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+ul.gblist li div.desc {
+    width: 400px;
+    float: left;
+    margin-right: 3px;
+}
+
+ul.gblist li div.actionButtons {
+    margin-top: 6px;
+}
+
+
+/*CREATE/EDIT GRADING SCHEMAS*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*tables that are layed out for creating a new grading schema*/
+
+table.gradingSchema {
+    border-collapse: collapse;
+    border: 1px solid #999;
+}
+
+table.gradingSchema tr.hilightrow {
+    background: #efefef;
+}
+
+table.gradingSchema th {
+    background-color: #ddd;
+    padding: 6px;
+    text-align: left;
+}
+
+table.gradingSchema td {
+    padding: 6px;
+}
+
+
+/*give some extra padding to space out the table a bit more*/
+
+table.gradingSchema td.padit,
+table.gradingSchema th.padit {
+    padding-left: 30px;
+}
+
+
+/*border to split the table in 2*/
+
+table.gradingSchema td.manualgrades,
+table.gradingSchema th.manualgrades {
+    border-left: 1px solid #999;
+    padding-left: 30px;
+}
+
+table.gradingSchema td.autogrades,
+table.gradingSchema th.autogrades {
+    padding-right: 30px;
+}
+
+
+/*remove the border on the insert column*/
+
+table.gradingSchema .insertButton {
+    border: 1px solid #fff;
+    border-left: 1px solid #999;
+    background: #fff;
+    font-size: 70%;
+}
+
+table.gradingSchema .removeButton {
+    padding-left: 5px;
+    white-space: nowrap;
+}
+
+
+/*CUMULATIVE GRADING*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/* the preview box for adding columns or categories */
+
+
+/*div.noLabelField div.selectItems.cumulativeSelectItems > div
+{
+  width:auto;
+}
+
+div.noLabelField div.cumulativeSelectItems div.leftSelection
+{
+  width:390px;margin:0;padding:0;
+}
+
+div.noLabelField div.cumulativeSelectItems div.leftSelection div.select
+{
+  width:360px;margin:0;padding:0;
+}*/
+
+
+/*div.noLabelField div.cumulativeSelectItems div.cumul_arrows
+{
+  width:20px;padding:50px 0 0 0;
+}
+
+div.noLabelField div.cumulativeSelectItems div.selected_items
+{
+  width:400px;
+}
+*/
+
+div.noLabelField div.selectItems.cumulativeSelectItems {
+    display: block;
+    width: 96%;
+}
+
+div.noLabelField div.cumulativeSelectItems > div {
+    width: 48%;
+}
+
+.cumulativeSelectItems > div > div {
+    width: 100%;
+    padding: 0;
+}
+
+.cumulativeSelectItems .leftSelection > div {
+    margin: 0 0 12px 3%
+}
+
+.cumulativeSelectItems div.select {
+    width: 90%;
+    float: left;
+    padding: 0
+}
+
+.cumulativeSelectItems div.select label,
+.cumulativeSelectItems .title {
+    padding: 3px 0;
+    display: block
+}
+
+.cumulativeSelectItems div.leftSelection div.select select {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.cumulativeSelectItems .cumul_arrows {
+    width: 10%;
+    *width: 8%;
+    float: left;
+    padding: 5em 0 0 0;
+    text-align: center
+}
+
+.cumulativeSelectItems .selected_items .itemList {
+    background: #fff;
+    border: 1px solid #666666;
+    width: 100%;
+    height: 350px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+
+/*The following line overrides the input type text style defined in controls.css which sets some styles we don't want here.*/
+
+.cumulativeSelectItems .selected_items .itemList input[type=text] {
+    display: inline;
+    margin: 6px 0;
+    width: auto;
+}
+
+div.selected_items span {
+    display: inline;
+}
+
+.cumulativeSelectItems div.criteriaItem div.catOptions {
+    clear: both;
+    width: 96%;
+}
+
+.cumulativeSelectItems .previewdiv,
+.cumulativeSelectItems .previewdiv > div {
+    float: none;
+}
+
+.previewdiv {
+    background: #ddd;
+    border: 1px solid #999;
+    border-top: 0;
+    padding-bottom: 8px;
+    font-size: 90%;
+}
+
+.prevhead {
+    color: #666;
+    padding-bottom: 0px!important;
+    padding-top: 0px!important
+}
+
+.prevlist p {
+    font-size: 90%;
+    margin: 2px 0;
+    padding: 0;
+}
+
+
+/*LOADING ANIMATION*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/* shows initial loading gif */
+
+.gradebookLoading {
+    text-align: center;
+}
+
+.gbloading {
+    margin-top: 20px;
+    font-size: 90%;
+    color: #555;
+}
+
+.gbloading img {
+    vertical-align: middle;
+}
+
+.gradebookLoading .gbloading img {
+    clear: both;
+    display: block;
+    margin: 0 auto 8px auto;
+}
+
+
+/*FLY OUT MENUS*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/* for the menus that popup on mouseover */
+
+
+/*center all uls, get rid of spacing and bullets, and give it a fixed width */
+
+ul.flynav,
+ul.flynav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.flynav li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: block;
+    position: relative;
+    z-index: 99;
+    zoom: 1;
+}
+
+ul.flynav li span {
+    margin: 0;
+}
+
+
+/*give the li the layout property to make it cooperate in IE*/
+
+.cmdiv ul.nav li {
+    zoom: 1;
+}
+
+
+/*hide the submenus initially by pushing off screen so screenreaders still see it*/
+
+ul.flynav ul {
+    position: absolute;
+    display: none;
+    border-top: 1px solid #000;
+    max-height: 250px;
+    *height: 250px;
+    width: 163px;
+    _width: 166px;
+    *width: 163px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+ul.flynav li.flyhead h6 {
+    display: block;
+    margin: 0;
+    background: #999;
+    color: white;
+    padding: 2px 10px;
+    border: 1px solid #000;
+    border-top: 0;
+    text-decoration: none;
+    width: 141px;
+    *width: 163px;
+    font-size: 100%;
+}
+
+.cmdiv ul.flynav ul {
+    border: 0;
+    border-top: 1px solid #000;
+    background-color: transparent;
+    padding: 0!important;
+}
+
+
+/*style the submenu links, must give them a width for it to work*/
+
+ul.flynav li li {
+    width: 150px;
+    zoom: 1;
+}
+
+.cmdiv ul.flynav li ul li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-image: none;
+}
+
+
+/*show the submenus on mouseover (or hover for nav) */
+
+ul.nav li:hover ul,
+ul.nav li.over ul,
+ul.nav li ul.over,
+ul.flynav li.over ul,
+ul.flynav li ul.over {
+    top: 18px;
+    left: 12px;
+}
+
+
+/*position them a bit different for context menu flyouts*/
+
+.cmdiv ul.nav li:hover ul,
+.cmdiv ul.nav li.over ul,
+.cmdiv ul.nav li ul.over {
+    left: 32px;
+    top: 21px;
+}
+
+ul.nav li:hover,
+ul.nav li.over,
+ul.flynav li:hover,
+ul.flynav li.over {
+    z-index: 10000;
+}
+
+
+/* hack to show to all but macie and adjust location of submenus for keyboard navigation \*/
+
+ul.nav li.over ul,
+ul.nav li ul.over,
+ul.flynav li.over ul,
+ul.flynav li ul.over {
+    top: 16px;
+}
+
+
+/* recover from hack */
+
+
+/*adjust sublinks
+ul.nav li li a, ul.flynav li li a, .cmdiv ul.flynav li li a{
+  background:none;
+  background-color:#eee;
+  font-weight:normal;
+  display: block;
+  margin:0;
+  padding: 2px 10px;
+  border:1px solid #000;
+  border-top:0;
+  text-decoration:none;
+  width:141px;
+  *width:163px;
+}
+ul.nav li li a:hover, ul.nav li li a:focus, a.highlight, ul.flynav li li a:hover, ul.flynav li li a:focus{
+  background-color:#aaa!important;
+  color:#fff!important;
+  outline:0;
+}*/
+
+ul.flynav li li.sorted a {
+    background-color: #bbb;
+}
+
+ul.flynav li li.sorted a img {
+    vertical-align: middle;
+}
+
+.viewdiv ul.flynav .actionItem {
+    border: 0;
+}
+
+.viewdiv ul.flynav .actionItem:hover {
+    border: 0;
+}
+
+.viewdiv ul.flynav {
+    margin-left: 5px;
+}
+
+
+/*GRADE DETAIL PAGE*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*definition list of grade data*/
+
+dl.gdetail {
+    font-size: 130%;
+}
+
+dl.gdetail dt {
+    float: left;
+    width: 180px;
+    text-align: right;
+    margin: 0 0 5px 0;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+dl.gdetail dd {
+    margin: 0 0 5px 0;
+    padding: 5px 0;
+    padding-left: 190px;
+}
+
+dl.gdetail .grade {
+    font-size: 120%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0;
+}
+
+
+/*div the current grade div a background color*/
+
+.curgrade {
+    background: #efefef;
+}
+
+
+/*hide the editing functions at first*/
+
+.editgrade {
+    display: none;
+}
+
+
+/*show the non-editing parts first*/
+
+.viewgrade {
+    display: block;
+    position: relative;
+    z-index: 10;
+}
+
+.attachments.attempts .viewgrade .button-4 {
+    margin-bottom: 3px;
+}
+
+.columnDetailsPane {
+    padding: 16px;
+}
+
+span#overrideExempt {
+    display: inline;
+}
+
+
+/*style the blocks that have the comments areas*/
+
+.viewgrade div.viewblock,
+.editgrade div.editblock {
+    float: left;
+    font-size: 70%;
+    margin-right: 15px;
+    padding: 2px;
+    width: 200px;
+}
+
+.viewgrade div.gradeval {
+    float: left;
+    margin-right: 15px;
+    width: auto;
+}
+
+.editgrade div.editblock {
+    width: auto;
+}
+
+.viewgrade div.viewblock {
+    padding: 6px 2px 3px 12px;
+    font-weight: normal;
+    font-size: 65%;
+}
+
+.editgrade div.editblock label strong {
+    font-weight: normal;
+}
+
+div.viewblock strong {
+    font-weight: normal;
+    color: #666;
+}
+
+
+/*make the grade input text large*/
+
+.editgrade div.editblock input {
+    font-size: 160%;
+}
+
+
+/*size the comments areas for thier default size*/
+
+.editgrade textarea,
+.editBlock textarea {
+    margin: 0;
+    /* width:200px; */
+    height: 50px;
+    *height: 50px;
+    font-size: 100%;
+}
+
+table .editgrade textarea {
+    font-size: 110%;
+}
+
+
+/*style the spell check bar a bit different from the default*/
+
+.editgrade .bSpell {
+    color: #900;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    text-align: right;
+    width: auto;
+    margin-bottom: 5px;
+}
+
+
+/*alert messages in the attempt table*/
+
+.viewgrade .alert {
+    color: #f00;
+    font-weight: bold;
+    margin-bottom: 3px;
+    font-size: 95%;
+}
+
+
+/* style for alert message that grade is overridden in grade_details*/
+
+div.overalert {
+    clear: both;
+    font-size: 90%;
+    font-weight: normal;
+    color: #f00;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+table.attempts tr.ignored td.attempt_data {
+    font-style: italic;
+}
+
+.stucomments {
+    font-size: 80%;
+}
+
+.extraAttempt {
+    font-size: 80%;
+}
+
+
+/*SIMPLE GRADEBOOK TABLE*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*has same basic look as the main grid, but  less fancy*/
+
+.gbtablesimple {
+    padding: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.gbtablesimple th {
+    background: #669999;
+    color: #fff;
+    text-align: left;
+}
+
+.gbtablesimple tbody th {
+    font-weight: normal;
+}
+
+.gbtablesimple th,
+.gbtablesimple td {
+    border: 1px solid #000;
+    padding: 3px;
+    vertical-align: top;
+}
+
+.gbtablesimple td,
+.gbtablesimple thead tr th {
+    vertical-align: top;
+    padding: 3px;
+}
+
+.gbtablesimple .actionbutton {
+    margin: 10px 5px;
+    padding: 0 3px;
+    line-height: 180%;
+    white-space: nowrap;
+}
+
+
+/*make the textarea fill the cell in the attempt table*/
+
+.gbtablesimple td div.editgrade .resizeCommentsTable,
+.gbtablesimple td div.editgrade textarea {
+    width: 100%;
+    height: 60px;
+    *height: 80px;
+}
+
+
+/*in the grade history table, give the comments a bit of space*/
+
+.gbtablesimple .notes {
+    margin-bottom: 4px;
+}
+
+.hidden td {
+    background-color: #f6f6f6;
+    color: #777;
+}
+
+.gbtablesimple tr.rowhigh td {
+    background-color: red;
+}
+
+.addbottom {
+    margin-bottom: 5px;
+}
+
+
+/* styles for highlighted attempt rows*/
+
+.overrow {
+    background-color: #efefef;
+}
+
+.overrow input {
+    color: #036;
+}
+
+.savebuts {
+    vertical-align: bottom;
+}
+
+.savebuts .actionButton {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+.overrow div {
+    width: auto;
+    overflow: none;
+}
+
+.overrow textarea {
+    width: 100%;
+    height: 80px;
+    margin: 0;
+}
+
+
+/*an alternate version of the simple table using gray instead of green*/
+
+.gradetable {
+    background: #F7FAF3;
+    width: 100%;
+    margin-bottom: 5px;
+    border-collapse: collapse;
+}
+
+.gradetable th {
+    background-color: #999;
+    border: 1px solid #ccc;
+    padding: 4px;
+    color: #fff;
+}
+
+.gradetable th a,
+.gradetable2 th a {
+    color: #fff!important;
+}
+
+.gradetable td {
+    border: 1px solid #ccc;
+    padding: 6px 3px 4px 6px;
+    vertical-align: top;
+}
+
+.gradetable ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.gradetable ul li {
+    margin-bottom: 5px;
+}
+
+.gradetable .notes,
+.gradetable2 .notes {
+    margin-bottom: 4px;
+}
+
+
+/*TEXTAREA RESIZING*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*styles for the live textarea resizing*/
+
+div.editblock table,
+div.editgrade table,
+.comText table {
+    border: 0;
+    border-collapse: collapse;
+    background-color: #cdcdcd;
+}
+
+div.editgrade table td,
+.comText table td {
+    border: 0;
+    padding: 0;
+}
+
+.resizingTable {
+    background: #666;
+}
+
+.saver {
+    clear: left;
+}
+
+.saver .actionButton {
+    font-size: 80%;
+    font-weight: bold;
+}
+
+.exemptdiv {
+    clear: left;
+}
+
+.gbtablesimple .exemptdiv {
+    margin-top: 5px;
+    font-size: 90%;
+    padding-left: 20px;
+}
+
+.gbtablesimple .exemptdiv input {
+    margin-left: -20px;
+}
+
+table.resizeCommentsTable {
+    border: 0;
+    border-collapse: collapse;
+    background-color: #cdcdcd;
+    *zoom: 1;
+}
+
+table.resizeCommentsTable tbody tr td {
+    border: 0;
+    padding: 0;
+    *zoom: 1;
+}
+
+table.resizeCommentsTable tbody tr td.se {
+    width: 4px;
+    height: 4px;
+    background: #999;
+}
+
+table.resizeCommentsTable tbody tr td.s {
+    height: 6px;
+    min-height: 6px;
+    max-height: 6px;
+    background-image: url(/images/ci/misc/resizeV.gif);
+    background-repeat: no-repeat;
+    background-position: 50% top;
+}
+
+table.resizeCommentsTable tbody tr td.e {
+    padding: 3px;
+    background-image: url(/images/ci/misc/resizeH.gif);
+    background-repeat: no-repeat;
+    background-position: left 50%;
+}
+
+
+/*ADDING NEW ITEMS INLINE*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*used for creating a new item from within a create page*/
+
+.settingcontrols ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    margin-top: 8px;
+}
+
+.settingcontrols ul li {
+    margin: 1px;
+    margin-left: 10px;
+    clear: left;
+}
+
+.settingcontrols ul li input {
+    clear: none;
+}
+
+.catlabel {
+    float: left;
+    width: 140px;
+    padding-top: 3px;
+    padding-right: 5px;
+    text-align: right;
+}
+
+.settingcontrols ul li label {
+    width: 150px;
+    padding-top: 3px;
+    padding-right: 5px;
+    text-align: right;
+}
+
+
+/*REORDER PAGE*/
+
+
+/*_________________________________________________________________________________*/
+
+table.reordertable {
+    /*width:100%;
+   background-color:#fff;*/
+    padding: 0;
+    margin-top: 4px;
+}
+
+table.reordertable th {
+    background-color: #699;
+    color: #fff;
+    /* border:1px solid #336;
+ padding:1px 3px 1px 3px;
+ vertical-align:top;*/
+    border-right: 0;
+    text-align: left;
+}
+
+table.reordertable td {
+    /*padding:1px 3px 1px 3px;
+  border-bottom:1px solid #336;
+  border-left:1px solid #336;*/
+    vertical-align: top;
+}
+
+table.reordertable tr.frozen td {
+    background-color: #ddd;
+}
+
+table.reordertable th a.cmimg {
+    opacity: .4;
+    filter: alpha(opacity=40);
+    position: relative;
+    top: -2px;
+}
+
+table.reordertable th a.cmimg:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+table.reordertable th a.cmimg img {
+    border: none;
+    vertical-align: middle;
+}
+
+table.reordertable tr.frozenbar td {
+    height: 8px;
+    /* padding:2px 3px 3px 3px;*/
+    color: #fff;
+    font-size: 70%;
+}
+
+table.reordertable tr.frozenbar td.frozenbar {
+    background-color: #959595;
+    border-right: 1px solid #336;
+}
+
+table.reordertable tr.frozenbar td .dragbar {
+    height: 10px;
+}
+
+table.reordertable tr.frozen td.clickOrder,
+table.reordertable tr.frozdiv td.clickOrder {
+    background-color: transparent;
+}
+
+table.reordertable th a,
+table.reordertable th a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+table.reordertable tr.sort th {
+    background-color: #366;
+    border-bottom: 0;
+    color: #fff;
+    padding: 2px;
+}
+
+tr.hidden_user td {
+    font-style: italic;
+    color: #999;
+}
+
+tr.hiddenColumn td {
+    font-style: italic;
+    color: #999;
+}
+
+table.reordertable tr td.lastcol,
+table.reordertable tr th.lastcol {
+    border-right: 1px solid #336;
+}
+
+table.reordertable tr.thinrow td.lastcol {
+    border-right: 0
+}
+
+
+/*while dragging give the row a different color*/
+
+tr.rowdrag {
+    background: #CCC;
+    z-index: 1;
+}
+
+
+/*headers for each grading period*/
+
+h3.termhead {
+    margin: 15px 0 0 0;
+    padding: 3px;
+    background-color: #efefef;
+}
+
+h3.termhead img {
+    vertical-align: middle;
+    margin-right: 5px;
+    border: 0;
+}
+
+h3.termhead a {
+    color: #000;
+    text-decoration: none;
+    outline: none;
+}
+
+h3.firstterm {
+    margin-top: 10px;
+}
+
+
+/*adjust the location of the insert arrow*/
+
+.insertImg {
+    position: relative;
+    top: 10px;
+    z-index: 2000;
+}
+
+.insertMore {
+    top: 16px;
+}
+
+.insertImg img {
+    border: 0;
+}
+
+table tr td.clickOrder,
+table tr th.clickOrder {
+    border: 0;
+    background: transparent;
+    vertical-align: bottom;
+}
+
+table tr td.clickOrder a img,
+table tr th.clickOrder a img {
+    border: 0;
+}
+
+
+/*styles for the draggable cell*/
+
+.dragcell,
+table.reordertable tr.frozen td.dragcell {
+    background: url(/images/ci/misc/dragstrip.gif) repeat-y 0 0;
+    padding: 0;
+}
+
+
+/*change the cursor for when mousing over the drag cell*/
+
+.dragbar {
+    width: 12px;
+    height: 22px;
+    cursor: url(/images/ci/icons/dragicon.gif), n-resize;
+}
+
+div.dropmarker {
+    height: 6px;
+    width: 99%;
+    border-top: 3px solid #000;
+    color: #fff;
+    z-index: 1000;
+    margin: 0 0 30px 20px;
+}
+
+.dragRow {
+    background-color: #eee;
+}
+
+.dragRow td.clickOrder,
+.dragRow td.dragcell {
+    background-color: transparent;
+}
+
+.smalldiv {
+    margin-top: 7px;
+}
+
+.smButton {
+    font-size: 90%;
+    background: #efefef;
+    text-decoration: none;
+    padding: 2px;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
+}
+
+.reorderCell {
+    display: none;
+}
+
+div.keyboardAccess div.minicolumn.orderColumns select {
+    width: 100%;
+    min-width: 200px;
+}
+
+
+/*RANDOM ITEMS*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/* This is a fix which solves floating issues. To be used when containing div allows children to hang outside */
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+
+/* Hides from IE-mac \*/
+
+* html .clearfix {
+    height: 1%;
+}
+
+
+/* End hide from IE-mac */
+
+.clearme {
+    clear: left;
+}
+
+
+/*ACTION BAR TABS*/
+
+
+/*_________________________________________________________________________________*/
+
+
+/*the list style for the tabs*/
+
+ul.navtabs {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 105%;
+    position: relative;
+    bottom: -1px;
+    clear: left;
+}
+
+.navtabs li {
+    float: left;
+    border: 1px solid #CCC;
+    border-right: 2px solid #AAA;
+    margin: 0 4px 0 0;
+    padding: 0;
+    background: #ddd;
+    white-space: nowrap;
+    font-size: 100%;
+    text-align: center;
+}
+
+.navtabs li.active {
+    background: #eee;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+}
+
+.navtabs li a {
+    text-decoration: none;
+    padding: 2px 10px;
+    display: block;
+    background: #ddd;
+}
+
+.navtabs li.active a,
+.navtabs li a:hover {
+    background: #eee;
+}
+
+
+/*turn off the dotted line around the active link*/
+
+.navtabs li a:focus {
+    outline: none;
+}
+
+#ab0.hiddenBar,
+#ab1.hiddenBar,
+#ab2.hiddenBar,
+#ab3.hiddenBar {
+    position: absolute;
+    left: -3000px;
+    top: 0;
+}
+
+
+/*TABLE SORT HEADERS*/
+
+
+/*_________________________________________________________________________________*/
+
+.sortcol {
+    cursor: pointer;
+    padding-top: 7px!important;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+.sortasc {
+    background-image: url(/images/ci/icons/sort_on_up.gif);
+    background-position: 50% 2px;
+}
+
+.sortdesc {
+    background-image: url(/images/ci/icons/sort_on.gif);
+    background-position: 50% 2px;
+}
+
+.nosort {
+    cursor: default;
+}
+
+
+/*INLINE RECEIPT*/
+
+
+/*_________________________________________________________________________________*/
+
+div.inlineReceipt2 {
+    float: right;
+    border: 1px solid #000;
+    font-weight: bold;
+    color: #000000;
+    background-color: #ffc;
+    background-image: url(/images/ci/actionbar/alert_gradient.gif);
+    padding: 0 0 3px 0;
+}
+
+div.inlineReceipt2 p {
+    margin: 0;
+    font-weight: normal;
+}
+
+div.inlineReceipt2 strong {
+    color: #067500;
+    font-size: 130%;
+}
+
+div.inlineReceipt2 table tr td.buttoncell {}
+
+div.inlineReceipt2 .inlineReceiptSUCCESS2 {
+    background-image: url(/images/cs/permissions_ok.gif);
+    background-repeat: no-repeat;
+    background-position: 4px 4px;
+    padding: 0 0 0 33px;
+    margin-bottom: 3px;
+}
+
+div.inlineReceipt2 .inlineReceiptFAILURE2 {
+    background-image: url(/images/cs/path_not_found.gif);
+    background-repeat: no-repeat;
+    background-position: 4px 4px;
+    padding: 6px 3px 0 33px;
+    margin-bottom: 3px;
+}
+
+.filterdiv {
+    float: left;
+    width: 48%;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.filterdiv select {
+    width: 200px;
+}
+
+.nofloat {
+    float: none;
+    border-bottom: 0;
+    margin-bottom: 5px;
+}
+
+.weightField {
+    background-color: #fff;
+    border-right: 2px solid #D9C9B8;
+    border-top: 2px solid #000;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #D9C9B8;
+    width: 325px;
+    height: 350px;
+    margin: 5px 8px 5px 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+div.criteriaItem {
+    margin: 5px 8px;
+    padding: 4px;
+    overflow: auto;
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 8px;
+    display: block;
+    -webkit-overflow-scrolling: touch
+}
+
+div.criteriaItem img {
+    border: 0;
+    vertical-align: middle;
+}
+
+div.criteriaItem a {
+    float: right;
+}
+
+div.criteriaItem .catTermOption {
+    font-size: 90%;
+    margin-left: 10px;
+}
+
+div.criteriaItem .catTermOption select {
+    width: auto;
+    display: inline;
+    vertical-align: middle;
+}
+
+div.criteriaItem .catData {
+    border-top: 1px solid #eee;
+    margin: 5px 0 0 10px;
+    padding-top: 5px;
+    font-size: 90%;
+    width: 100%;
+    float: none;
+}
+
+div.criteriaItem .catData input {
+    font-size: 90%;
+}
+
+div.criteriaItem .catData .catData2 {
+    float: left;
+    width: 40%;
+}
+
+div.criteriaItem .catData .catDataDiv {
+    float: left;
+    width: 10%;
+}
+
+.letterid {
+    font-size: 150%;
+    font-weight: bold;
+    color: #666;
+    margin-right: 8px;
+}
+
+.formulaprev {
+    border: 1px solid #666;
+    margin-bottom: 5px;
+    background: #efefef;
+    padding: 3px;
+}
+
+.formulaprev2 {
+    margin-bottom: 5px;
+    padding: 3px;
+}
+
+.multiselect {
+    margin-bottom: 5px;
+}
+
+.cumulativeDiv {
+    padding: 3px;
+    margin: 5px 0;
+    background: #efefef;
+    border: 1px solid #ccc;
+}
+
+.sortedplus {
+    background-image: url(http://ui/images/ci/icons/sort_on.gif);
+    background-repeat: no-repeat;
+    background-position: 48% 2px;
+}
+
+.dragCol {
+    background-color: #999;
+}
+
+.inventory tbody tr td {
+    border-left: 1px solid #eee;
+}
+
+.inventory {
+    border: 1px solid #000;
+}
+
+.reorderContainer {
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 8px;
+    padding-bottom: 16px;
+}
+
+.statbox {
+    width: 30%;
+    float: left;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.stattable {
+    width: 90%;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.statbox h2,
+.stattable h2 {
+    background-color: #699;
+    color: #fff;
+    padding: 3px;
+    font-weight: bold;
+    font-size: 100%;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.statbox table,
+.stattable table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.statbox table tr td,
+.statbox table tr th {
+    padding: 2px;
+    width: 50%;
+    vertical-align: top;
+}
+
+.stattable table tr td,
+.stattable table tr th {
+    padding: 2px;
+    width: 20%;
+    vertical-align: top;
+}
+
+.statbox table tr td {
+    width: 100%;
+}
+
+.statbox table tr th,
+.stattable table tr th {
+    padding-right: 5px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.stattable table thead tr th {
+    background: #ccc;
+}
+
+.statbox table tr.altrow td,
+.statbox table tr.altrow th,
+.stattable table tr.altrow td,
+.stattable table tr.altrow th {
+    background: #eee;
+}
+
+@media print {
+    div.locationPane {
+        margin: 0;
+        display: block;
+    }
+    div.contentPaneWide {
+        margin: 0;
+    }
+    body {
+        background: white;
+    }
+    div.reporttable tr,
+    div.reporttable td,
+    div.reporttable h3 {
+        border-top: 1px solid black;
+        margin-top: 1px;
+    }
+}
+
+.splitcol1 {
+    width: 60%;
+    float: left;
+    font-size: 120%;
+    padding-left: 2%;
+}
+
+.splitcol2 {
+    width: 32%;
+    float: left;
+    font-size: 120%;
+    padding-left: 2%;
+}
+
+.customtext {
+    clear: left;
+    padding: 10px;
+    font-size: 120%;
+}
+
+.reportFooter {
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    padding-top: 20px;
+    page-break-after: always;
+}
+
+.reportHeader {
+    background: #efefef;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.splitcol1 h2,
+.splitcol2 h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 110%;
+    margin-left: -2%;
+}
+
+.reporttable {
+    width: 90%;
+    border-bottom: 1px solid #ccc;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.reporttable h2 {
+    background-color: #699;
+    color: #fff;
+    padding: 3px;
+    font-weight: bold;
+    font-size: 100%;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.reporttable table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reporttable table tr th,
+.reporttable table tr td {
+    padding: 4px;
+    vertical-align: top;
+}
+
+.reporttable table tr th {
+    padding-right: 5px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.reporttable table thead tr th {
+    background: #ccc;
+}
+
+.reporttableHeader {
+    background: #ccc;
+}
+
+.reporttable table tr.altrow td,
+.reporttable table tr.altrow th {
+    background: #eee;
+}
+
+.reporttabletdheader {
+    font-weight: bold;
+}
+
+.reportDivider {
+    border-top: 2px solid #000;
+    width: 100%;
+    height: 3px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.reportDivider span {
+    background-color: #fff;
+    position: relative;
+    top: -.6em;
+    padding: 8px;
+    color: #666;
+    font-size: 90%;
+}
+
+table.mygrades th,
+table.mygrades td {
+    white-space: normal;
+}
+
+
+/* gradebook details page header */
+
+.gb_gridTable {
+    background: url(/images/ci/ng/dcp_block_bg.png) no-repeat right 20%;
+    margin-bottom: 12px;
+}
+
+.gb_gridTable caption {
+    text-align: left;
+    display: none;
+}
+
+.gb_gridTable td,
+.gb_gridTable th {
+    padding: 0.6em;
+}
+
+.gb_gridColumn {
+    border: 1px solid #ddd;
+    border-width: 1px 1px 0;
+}
+
+.gb_gridRow {
+    border: 1px solid #ddd;
+    border-width: 1px 0 1px 1px;
+}
+
+.gb_gridColumn a,
+.gb_gridRow a {
+    line-height: 1;
+}
+
+.gb_gridCell {
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-width: 0 1px 1px 0;
+}
+
+.gb_gridCell_inner {
+    padding: .6em;
+    border: 2px solid #ccc;
+    background: #fff;
+    font-size: 120%;
+}
+
+.gradeHelp {
+    font-size: 85%;
+    color: #555;
+    font-weight: normal;
+}
+
+.gb_gridCell_inner {
+    padding: .6em;
+    border: 2px solid #ccc;
+    background: #fff;
+    font-size: 100%;
+}
+
+.gb_gridCell_inner {
+    padding: .6em;
+    border: 2px solid #ccc;
+    background: #fff;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+.gb_gridCell_inner .genericButton {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.gb_gridTable h3 {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    font-size: 110%;
+}
+
+.gb_gridTable h3 span {
+    color: #666666;
+    font-weight: normal;
+    position: absolute;
+}
+
+.gb_gridTable .gb_gridRow span {
+    top: 0;
+    left: 24px;
+}
+
+.gb_gridTable .gb_gridColumn span {
+    top: 0;
+    left: 48px;
+}
+
+.gb_gridColumn div {
+    position: relative;
+    padding: 24px 0 0 0;
+}
+
+.gb_gridRow div {
+    position: relative;
+    padding: 1.2em 0 0 24px;
+    margin-top: -12px;
+}
+
+.gb_gridColumn a,
+.gb_gridRow a {
+    position: absolute;
+}
+
+a.prevRow {
+    top: -6px;
+    left: 0;
+}
+
+a.nextRow {
+    bottom: -6px;
+    left: 0;
+}
+
+a.prevColumn {
+    top: 0;
+    left: 0;
+}
+
+a.nextColumn {
+    top: 0;
+    left: 24px;
+}
+
+div.gbDetailsUserColumn {
+    min-width: 210px;
+}
+
+div.gbDetailsGradeColumn {
+    min-width: 350px;
+}
+
+
+/* delegated grading table */
+
+.stepcontent {
+    width: 100%;
+}
+
+.statisticBody {
+	width: auto;
+}
+
+.statisticHeader {
+	background: transparent;
+	position: inherit;
+}
+
+.profileCardAvatarThumb img {
+    height: 36px;
+    margin-right: 6px;
+    width: 36px;
+}
+
+.cardimg {
+    float: left;
+}
+
+.cardname {
+    display: block;
+    font-weight: bold;
+    margin-top: 3px;
+}
+
+.courserole {
+    color: #555555;
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 2px;
+}
+
+.submissionSelect {
+    float: left;
+}
+
+.randAmtSelect {
+    width: auto;
+}
+
+.groupSelection {
+    width: 120px;
+    /* chosen js requires an explict width.  without it, the multi select box is too narrow */
+}
+
+.chzn-container-multi {
+    margin-left: 10px;
+}
+
+#selectId_chzn .chzn-drop {
+    bottom: 20px;
+    top: auto !important;
+}
+
+.subtitle {
+    font-weight: italic;
+    font-size: small;
+    margin: 10px 0px 2px
+}
+
+.disabledUser {
+    font-weight: bold;
+    color: #4f4f4f
+}
+
+#delegatedGrader .table-data-cell-value {
+    width: 100%;
+    margin-right: 0px;
+}
+
+/* end from gradebook2.css */
+
+.primarySchemaHeader {
+    float: left;
+    width: 30%;
+}
+
+.separatorSchemaHeader {
+    float: left;
+    width: 15%;
+}
+
+.secondarySchemaHeader {
+    float: left;
+}
+
+
+/* styles the list of delegated graders in the Create/Edit Assignment page */
+
+
+/* these styles could apply to any inventory page that appears in a .collapsibleStepContent if we want */
+
+#delegatedGraderWrapper .inventory {
+    margin: 12px 0 0;
+}
+
+#delegatedGraderWrapper .inventory > thead tr th {
+    color: #444;
+    padding: 6px 9px 9px;
+    text-shadow: none;
+    border-bottom: 2px solid #ccc;
+}
+
+#delegatedGraderWrapper .inventoryListHead .sortcol {
+    text-decoration: underline;
+    padding: 6px 9px 6px 16px;
+}
+
+#delegatedGraderWrapper .inventoryListHead .sortcol:hover {
+    background-color: #ddd;
+}
+
+#delegatedGraderWrapper .inventoryListHead tr th.sortasc {
+    background-image: url(../images/sort_on_up_dark.gif);
+    background-position: 2px center;
+}
+
+#delegatedGraderWrapper .inventoryListHead tr th.sortdesc {
+    background-image: url(../images/sort_on_dark.gif);
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+
+
+/* styles the display of the grader avatar, name and role */
+
+#delegatedGraderWrapper .delegatedGraderProfileCard {
+    position: relative;
+}
+
+#delegatedGraderWrapper .delegatedGraderProfileCard .profileCardAvatarThumb img {
+    float: left;
+}
+
+.reconcileGraderTooltip {
+    width: 25px;
+    height: 25px;
+    background: url(../images/reconcile-icon.png) 0 0 no-repeat;
+}
+
+.centered {
+    text-align: center;
+}
+
+.dateColumnWidth{
+    width:15%;
+}
+
+.itemColumnWidth{
+    width:10%;
+}
+
+.modifierColumnWidth{
+    width:10%;
+}
+
+.studentColumnWidth{
+    width:10%;
+}
+
+.valueColumnWidth{
+    width:15%;
+}
+
+.attemptSubmittedColumnWidth{
+    width:15%;
+}
+
+.commentColumnWidth{
+    width:35%;
+}
+
+/*styles for gradebook view on mobile*/
+@media only screen and (min-width:320px) and (max-width:667px) {
+    
+    .previewer {
+        width: 100%;
+        float: left;
+    }
+
+    .gradingPanel {
+       width: 100%;
+       float:left;
+    }
+
+    .resizeControls {
+        display: none;
+    }
+}
+/* scrollbars visible */
+
+#nonAccessibleTableDiv ::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+#nonAccessibleTableDiv ::-webkit-scrollbar-thumb {
+    background-color: rgba(35, 35, 35, 0.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+    border-radius: 20px;
+}
+
+#nonAccessibleTableDiv ::-webkit-scrollbar-track {
+    background-color:  rgb(204, 204, 204);
+    border-radius: 0px;
+}

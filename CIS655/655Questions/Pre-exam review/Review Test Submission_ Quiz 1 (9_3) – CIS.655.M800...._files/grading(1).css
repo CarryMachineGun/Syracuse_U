@@ -1,0 +1,178 @@
+/* Start of styles copied from as_2012/gradebook.css  */
+
+.gbtable_header div.gbText,
+.gbtable thead div.gbText { text-shadow: 0 -1px 0 #777 }
+
+/* @group ORGANIZE COLUMNS (Gradebook)
+ ----------------------------------------------- */
+ 
+ /*-- PULLDOWN MENUS IN A SECONDARY ACTION BAR ON GRADE CENTER'S MAIN PAGE---*/
+
+.selectList {
+    list-style: none;
+    margin: 0 6px 0 0;
+    padding: 0;
+    float: left;
+    z-index: 100;
+}
+
+
+.selectList li {
+    float: left;
+    margin: 0 4px 0 0;
+    z-index: 101;
+}
+
+.selectList .sub a {
+    display: block;
+    text-decoration: none;
+}
+
+.selectList .sub:hover ul {
+    left: 0;
+    top: 20px!important;
+}
+
+.selectList .sub ul li {
+    float: none;
+    position: static!important;
+    margin: 0;
+    padding: 0;
+}
+
+.selectList .sub ul li h4 {
+    color: #888;
+    margin: 0;
+    padding: 6px 0 0 3px;
+    font-weight: bold;
+    font-size: 90%;
+    display: block;
+    border-bottom: 1px solid #ccc;
+}
+
+.selectList .sub ul li h4 { width: 152px }
+
+.selectList .sub ul li a,
+.selectList .sub ul li a:hover,
+.selectList .sub ul li a:focus {
+    background-image: none;
+    padding-left: 18px!important;
+}
+
+.selectList .sub a #currentView,
+.selectList .sub a #currentSortBy,
+.selectList .sub a #currentColSortDir { background-image: none }
+
+ul.selectList li.sub ul li.current a,
+ul.selectList li.sub ul li.current a:hover,
+.nav .sub .current a,
+.nav .sub .current a:hover,
+.nav .sub .current.favorite a,
+.nav .sub .current.favorite a:hover {
+    background-color: #f9f9f9;
+    background-image: url(/images/ci/icons/current_li.png)!important;
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+
+ 
+ /*================ GRADEBOOK "ORGANIZE COLUMNS" PAGE ==============================================*/
+ 
+ div.staticFooter div.details,
+ div.staticHeader div.details { margin-left: 18px }
+ 
+ div.staticHeader { margin: 10px 0 0  0 }
+ 
+ div.staticFooter div.details { border-bottom: 1px solid #ddd!important }
+ 
+ .gbColumns_rumble,
+ .gbColumns_rumble_bottom {
+     margin-left: 38px!important;
+     border: 1px solid #ddd!important;
+     border-bottom: 0!important;
+ }
+ 
+ .gbColumns_rumble_bottom {
+     border: 1px solid #ddd!important;
+     border-top: 0!important;
+ }
+ 
+ .staticHeader,
+ .staticFooter {
+     clear: both;
+     position: relative;
+     zoom: 1;
+ }
+ 
+ .staticHeader div.itemHeaderControl,
+ .staticFooter div.itemHeaderControl,
+ ul.gbCategories li div.itemHeaderControl { right: 0 }
+ 
+ .staticHeader div.itemHeaderControl,
+ .staticFooter div.itemHeaderControl,
+ ul.gbCategories li div.itemHeaderControl {
+     right: 0;
+     top: 0;
+ }
+ 
+ .staticHeader div.itemHeaderControl a,
+ .staticFooter div.itemHeaderControl a,
+ ul.gbCategories li div.itemHeaderControl a { display: inline-block }
+ 
+ ul.dragableHighlight {
+     background: #fff;
+     border-top: 1px dashed #999;
+     border-bottom: 1px dashed #999;
+     padding: 12px 12px 3px 12px;
+     margin: 12px -30px;
+ }
+ 
+ ul.gbCategories li h3.item,
+ div.staticHeader h3.item,
+ div.staticFooter h3.item { padding: 6px  6px 18px 0 }
+ 
+ ul.gbCategories li h3.item a.toggleLink,
+ div.staticHeader h3.item a.toggleLink,
+ div.staticFooter h3.item a.toggleLink {
+     margin-right: 6px;
+     margin-top: -2px;
+ }
+ 
+ div.areaHighlight div.container { background: #f9f9f9 }
+ 
+ ul.dragableHighlight li h3.item,
+ .dragableHighlight div.details { border-color: #999 }
+
+
+ .tabletLabel { display: none; }
+ 
+.gc_info {
+    position: absolute;
+}
+ .comments {
+    padding: 37px 0px 0px 80px;
+ }
+
+ /* @end ORGANIZE COLUMNS*/
+
+
+ /* prevent horizontal scroll abr from overlapping context menu */
+
+ #table1_viewport+div {
+    left: auto !important;
+    right: -30px !important;
+    width: 30px;
+}
+.gbtable td:last-of-type {
+    padding-right: 8px;
+}
+
+.gbtable td:last-of-type a.cmimg {
+    position: relative;
+    right: 15px;
+}
+
+.gbtable tbody tr td,
+.gbtable tbody tr th {
+    width: 110px;
+}

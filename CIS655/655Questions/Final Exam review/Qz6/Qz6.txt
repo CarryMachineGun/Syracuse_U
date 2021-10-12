@@ -1,0 +1,2 @@
+anti-dependency和 output dependency是不是data dependency？
+ - 不是，他们是name dependency

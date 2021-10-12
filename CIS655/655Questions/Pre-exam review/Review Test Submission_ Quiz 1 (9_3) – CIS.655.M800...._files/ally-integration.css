@@ -1,0 +1,133 @@
+div.axScoreIndicator {
+  position: absolute;
+  left: 20px;
+}
+
+li.liItem div.axScoreIndicator {
+  top: 46px;
+  left: 18px;
+}
+
+div.axScoreIndicator.axEntriesList {
+  display: inline;
+  position: relative;
+}
+
+div.axScoreIndicator.axIconEntriesList {
+  position: relative;
+}
+
+div.axScoreIndicator.axIndividualContent {
+  display: inline-block;
+  float: left;
+  margin-right: 5px;
+}
+
+div.axScoreIndicator.axViewFile {
+  position: relative;
+  float: right;
+  margin-right: 40px;
+  top: -50px;
+}
+
+div.axScoreIndicator.axViewLearningUnit {
+  position: relative;
+  float: right;
+  margin-right: 40px;
+  top: -73px;
+}
+
+/* styles for Content's direct attachments in no edit mode. */
+
+.noteditmode ul.attachments li {
+  position: relative;
+}
+
+.noteditmode ul.attachments li span.axScoreIndicator.axVtbeEmbedded {
+  left: -25px;
+}
+
+/* styles for vtbe generated content in list. */
+
+#content .vtbegenerated span.axScoreIndicator.axVtbeEmbedded,
+#content .vtbegenerated p span.axScoreIndicator.axVtbeEmbedded {
+    display: inline-block;
+    position: relative;
+}
+
+/*different sized thumbnails for content collection*/
+.itemGallery.x-small div.axScoreIndicator.axIconEntriesList {
+  left: -28px;
+  top: -38px;
+  height:0px;
+  overflow: visible;
+}
+
+.itemGallery.small div.axScoreIndicator.axIconEntriesList {
+  left: -36px;
+  top: -38px;
+  height:0px;
+  overflow: visible;
+}
+
+.itemGallery.normal div.axScoreIndicator.axIconEntriesList {
+  left: -51px;
+  top: -42px;
+  height:0px;
+  overflow: visible;
+}
+
+
+.itemGallery.large div.axScoreIndicator.axIconEntriesList {
+  left: -66px;
+  top: -44px;
+  height:0px;
+  overflow: visible;
+}
+
+.itemGallery.x-large div.axScoreIndicator.axIconEntriesList {
+  left: -80px;
+  top: -50px;
+  height:0px;
+  overflow: visible;
+}
+
+.contentList.iconsOnly li.liItem div.axScoreIndicator {
+    top: 90px;
+    left: 10px;
+}
+
+.contentListPlain li.liItem div.axScoreIndicator {
+    top: 20px;
+    left: 5px;
+}
+
+/* styles for indicators within the detailValue element */
+ul.contentList .detailsValue li span.axScoreIndicator.axVtbeEmbedded,
+.noteditmode ul.contentList .detailsValue li span.axScoreIndicator.axVtbeEmbedded {
+    position: relative;
+    top: 0px;
+    left: -3px;
+    width: 20px;
+    margin: 0px;
+    float: left;
+}
+
+.contentListPlain .detailsValue span.axScoreIndicator.axVtbeEmbedded {
+    position: relative;
+    top: 0px;
+    left: -5px;
+    width: 10px;
+    float: left;
+    margin-right: 10px;
+}
+
+/* prevent reorder handle from overlapping ally icon in text only view */
+
+.contentListPlain .liItem {
+  padding-left: 50px;
+}
+
+.contentListPlain li.liItem div.axScoreIndicator {
+  left: 25px;
+}
