@@ -3,7 +3,7 @@ Fall 2021 CIS 623
 Activity 4
 ---------------------------------------------------------------------------
 
-Lastname :  < Wang >
+Lstname :  < Wang >
 Firstname:  < Yuchen > 
 Stud. num:  < 530 >
 
