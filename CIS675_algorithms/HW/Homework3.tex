@@ -1,0 +1,46 @@
+
+\documentclass[12pt]{article}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\begin{document}
+\noindent
+\large Homework 3:\\
+ \normalsize 
+ \noindent
+Due March 11 midnight Eastern time.  Submit your solutions typed and in a pdf document.  To receive full credit, explain your answers.\\
+
+\noindent
+If you collaborate with another student or use outside sources, please list those students' names and the URL/title/etc. of the sources that you referred to.  Collaboration is permitted, but you must write up your own solutions.\\
+
+
+\noindent
+1. Suppose you want to measure the quality of a search engine's ranking.  For a given search query, the search engine has returned $N$ documents in order $a_1, .... a_N$.  The `true' ranking is given by $b_1, ..., b_N$.  Both of these rankings contain the same $N$ documents, but in (possibly) different orders.  For simplicity, you can use $i$ to denote the $i^{th}$ document in the true ranking (e.g., `5' represents the 5th best document).  Then the search engine's ranking is just an ordering of the numbers $1, ..., N$.  To measure how good the search engine's ranking is, you can count the number of out-of-order pairs in its rankings.  For any two documents $i, j$ where $i < j$, if $i$ appears after $j$ in the search engine's ranking, that counts as an out-of-order pair.  Design an efficient divide-and-conquer algorithm to compute this value.  What is the running time of your algorithm?  (Hint: this can be done with a modification of MergeSort.)  \\
+
+\noindent
+2.  Suppose you often drive from your home in city A to city B to visit your friends.  You are given a road network that shows cities and roads (with distances) between cities.  Assume each road connects one city to another city.  Your car gets poor gas mileage, so you want to make sure that the length of the route you are taking is as low as possible.  However, because you get bored easily, you'd like to take many different shortest routes, if there are multiple routes that are tied for `shortest'.  Design an efficient algorithm to determine the number of such routes.\\
+
+\noindent
+3.  Suppose you are given a road network for a set of $K$ islands.  Each island has many cities.  Suppose you want to build a set of roads for a particular island $A$ with $n_A$ cities.  Assume each road costs \$$D$ to build (regardless of length).  You want to make sure that every city on island $A$ is reachable from every other city on island $A$, but at minimal total cost.\\
+
+\noindent
+(a) Suppose someone proposes a set of roads.  You confirm that every city is indeed reachable from every other city.  However, you find that for two cities $C_1, C_2$, there are multiple routes between $C_1$ and $C_2$.  Prove that this road network does not have minimal total cost. \\
+
+\noindent
+(b) Design an efficient algorithm to determine which roads to build.  What is the total cost required?\\
+
+
+\noindent
+4.  Suppose you are given a tree $T$ containing $N$ nodes.  Each node represents a person, and a connection between two people indicates that they are enemies with one another (coincidentally, this `enemy network' forms a tree).  You are hiring people to work as a team to accomplish some task.  Your goal is to hire as many people as possible.  However, you cannot hire two people who are enemies, because that will cause problems for the entire team.  Design an efficient algorithm to determine which people to hire.  Hint: for each node, you either hire that node or don't hire that node.  What does that tell you about the choices made about people lower in the subtree rooted at that node?\\
+
+\noindent
+5. Explain, with an example, why Dijkstra's algorithm can fail if your graph has negative-weight edges.\\
+
+\noindent
+\textbf{Extra Credit:}  This is a continuation of Problem 3 above.  Suppose we've applied the above algorithm to each of the islands, so now each island has a functioning road network.  However, there are no roads between islands.  Suppose there are a total of $N$ cities across all $K$ islands.  In terms of $N$ and $K$, how many roads did you build?\\
+
+
+
+ \end{document} 
+

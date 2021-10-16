@@ -1,0 +1,42 @@
+
+\documentclass[12pt]{article}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\begin{document}
+\noindent
+\large Homework 2:\\
+ \normalsize 
+ \noindent
+Due March 4 at midnight Eastern time.  Submit your solutions typed and in a pdf document.  To receive full credit, explain your answers.\\
+
+\noindent
+If you collaborate with another student or use outside sources, please list those students' names and the URL/title/etc. of the sources that you referred to.  Collaboration is permitted, but you must write up your own solutions.\\
+
+\noindent
+1.  Suppose that you are implementing a version of MergeSort in which the subarrays \textit{cannot} be created by using pointers to the original array; instead, you must allocate new space and copy over the appropriate elements one by one.  Assume that allocating space does not take any time.  (a) Analyze the running time of this version of MergeSort.  (b) Analyze the \textit{space usage} (i.e., in memory) of this version of MergeSort.  You only need to consider the space used by arrays and sub-arrays, not temporary helper variables.  Assume that an array of size $k$ requires $k$ units of space.  Assume that nothing is ever deleted.\\
+
+\noindent
+2.  Suppose you are using Binary Search to find a particular element $k$ in a sorted array $A$.  In the worst case, Binary Search takes O(log $n$) time to find the desired element, where $n$ is the length of $A$ (i.e., if we get all the way down to a subarray of size 1 before finding $k$).  However, in the best case, the element you are searching for might be the first one that you check (i.e., if the value you are searching for is the middle element of the array), so the best-case running time is $O(1)$.  In the \textit{median} case, how many elements do you need to check?  (In other words, if you make a list showing how many checks need to be performed before finding $k$, what would the median of this list be?). Report your answer in big-O terms.  You must explain your answer.\\
+
+\noindent
+Hint: Think about how many elements are found with just 1 check.  How many are found with 2 checks? 3? $i$?\\
+
+\noindent
+3.  Suppose you are using an instrument to measure the depth of a body of water.  You are in a boat on top of a large `valley' in the lake, and want to know how deep this valley is.  Assume this depth is an integer.  Each time you fire the instrument, you specify a maximum distance $d$, and the instrument tells you whether the bottom of the valley is more or less than $d$ units away (but it does not tell you the depth directly).  Using this instrument is very expensive, so you want to minimize the number of times you use it.  One way to use this instrument would be to initially set $d=1$, then if the lake is deeper than that, set $d = 2$, and so on, until you find the depth.  However, this algorithm will require many uses of the instrument.  Design an efficient algorithm to determine how to set the $d$ values so that you find the depth with as few uses as possible.  How many times will the instrument be used?\\
+
+\noindent
+4.  Suppose you have an unsorted array with some duplicates.  You want to count the number of elements that are a duplicate of some other number.  Design an efficient algorithm to compute this value.  What is its running time?\\
+
+\noindent
+Extra Credit.  Suppose you have a sequence of sticks in a line.  Assume these posts are numbered $1, ..., k$.  You want to find the tallest stick and the shortest stick.  However, you forgot your measuring scale, and the only means you have of determining this is by pulling out two sticks from the line, holding them in front of you, and seeing which one is shorter and which is taller. After this, you return them to their original places in the line. At no point do you learn their actual heights: all you can do is bring two sticks forward and see which one of the two is shorter/taller.  Assume each such process takes 1 minutes.\\
+
+\noindent
+(a) One thing you could do is go through the line sequentially, keeping track of indices of the tallest/shortest you've seen so far.  At each iteration, you pull out stick $i$ and compare to the tallest stick so far and the shortest stick so far, to see if $i$ is the new tallest/shortest.  What is the total running time (give this as an exact function of $k$, not big-O).\\ 
+
+\noindent
+(b) Describe an algorithm that requires fewer than $1.5k$ minutes in the worst case.  \\
+
+ \end{document} 
+
