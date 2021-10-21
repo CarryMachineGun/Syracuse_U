@@ -50,3 +50,5 @@ Stud. num:  < 530 >
 > d2 :: Int -> [a] -> [a]
 > d2 k xs = (iterate  tail xs) !! (length xs - k)
 
+> play xs = iterate tail xs
+
