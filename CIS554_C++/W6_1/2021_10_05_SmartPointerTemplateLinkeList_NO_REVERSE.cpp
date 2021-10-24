@@ -55,12 +55,6 @@ public:
 	void removeOne(int k);
 	void reverse();
 
-
-
-
-
-
-
 };
 
 
@@ -70,12 +64,15 @@ template <class T> void LinkedList<T>::sort() {
 	shared_ptr<node<T>> p1{ head };
 	while (p1) {
 		//node<T>* p2{ p1->next };
-		shared_ptr<node<T>> p2{ p1->next };
-		T min{ p1->value };
+		shared_ptr<node<T>> p2 = p1->next;
+		T min =  p1->value;
 		//node<T>* p_min{ p1 };
 		shared_ptr<node<T>> p_min{ p1 };
 		while (p2) {
-			if (p2->value < min) { min = p2->value; p_min = p2; }
+			if (p2->value < min) { 
+				min = p2->value; 
+				p_min = p2; 
+			}
 			p2 = p2->next;
 		}
 		p_min->value = p1->value;
@@ -102,18 +99,21 @@ template <class T> void LinkedList<T>::removeOne(int k) {
 }
 
 
-//void LinkedList::reverse() {
-//	if (!head || !head->next) return;//0 or 1 node
-//	node* p1{ head }, * p2{ head->next };
-//	while (p2) {//while (p2 != nullptr)
-//		node* p3{ p2->next };
-//		p2->next = p1;
-//		if (p1 == head) { p1->next = nullptr; }
-//		p1 = p2;
-//		p2 = p3;
-//	}
-//	head = p1;
-//}
+template <typename T> void LinkedList<T>::reverse() {
+	if (!head || !head->next) return;//0 or 1 node
+	shared_ptr<node<T>> p1{ head }, p2{ head->next };
+	shared_ptr<node<T>> p3 = make_shared<node<T>>(); 
+	while (p2) {//while (p2 != nullptr)
+		// node* p3{ p2->next };
+		// shared_ptr<node<T>> p3 = make_shared<node<T>>(p2->next); 
+		p3 = p2->next;
+		p2->next = p1;
+		if (p1 == head) { p1->next = nullptr; }
+		p1 = p2;
+		p2 = p3;
+	}
+	head = p1;
+}
 
 
 
@@ -272,6 +272,8 @@ int main() {
 
 	LinkedList<int> L6{ 6,5,4,3,2,1 };
 	L6.removeOne(4);
+	cout << L6 << endl;
+	L6.reverse();
 	cout << L6 << endl;
 
 

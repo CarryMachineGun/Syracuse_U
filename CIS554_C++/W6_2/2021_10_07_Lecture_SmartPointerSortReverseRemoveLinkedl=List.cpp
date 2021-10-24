@@ -122,7 +122,8 @@ void LinkedList::print() {
 LinkedList::LinkedList(int A[], int size) {
 	for (int i = size - 1; i >= 0; --i) {
 		//node* p1{ new node {A[i]} };
-		shared_ptr<node> p1{ new node{A[i]} };
+		// shared_ptr<node> p1{ new node(A[i]) };
+		shared_ptr<node> p1{ make_shared<node>(A[i])};
 		p1->next = head;
 		head = p1;
 	}

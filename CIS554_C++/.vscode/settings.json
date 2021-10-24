@@ -8,7 +8,8 @@
         "iostream": "cpp",
         "initializer_list": "cpp",
         "__bit_reference": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "memory": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
