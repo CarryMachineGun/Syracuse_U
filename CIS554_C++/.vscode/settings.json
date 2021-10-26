@@ -9,7 +9,8 @@
         "initializer_list": "cpp",
         "__bit_reference": "cpp",
         "type_traits": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "list": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
