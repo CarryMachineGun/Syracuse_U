@@ -102,11 +102,11 @@ template <class T> void LinkedList<T>::removeOne(int k) {
 template <typename T> void LinkedList<T>::reverse() {
 	if (!head || !head->next) return;//0 or 1 node
 	shared_ptr<node<T>> p1{ head }, p2{ head->next };
-	shared_ptr<node<T>> p3 = make_shared<node<T>>(); 
+	// shared_ptr<node<T>> p3 = make_shared<node<T>>(); 
 	while (p2) {//while (p2 != nullptr)
 		// node* p3{ p2->next };
-		// shared_ptr<node<T>> p3 = make_shared<node<T>>(p2->next); 
-		p3 = p2->next;
+		shared_ptr<node<T>> p3 = make_shared<node<T>>(p2->next); 
+		// p3 = p2->next;
 		p2->next = p1;
 		if (p1 == head) { p1->next = nullptr; }
 		p1 = p2;
