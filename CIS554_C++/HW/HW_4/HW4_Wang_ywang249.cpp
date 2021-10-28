@@ -99,7 +99,12 @@ ostream &operator<<(ostream &str, const TwoD &T)
 
 TwoD::~TwoD()
 {
-	cout << "Destructor " << this << endl;
+	// cout << "Destructor " << this << endl;
+	cout << "Destructor " << endl;
+
+	Cols = 0;
+	Rows = 0;
+
 	if (!head)
 	{
 		return;
@@ -113,7 +118,8 @@ TwoD::~TwoD()
 
 TwoD::TwoD(const TwoD &T) : TwoD(T.Rows, T.Cols)
 {
-	cout << "Copy Constructor " << &T << endl;
+	cout << "Copy Constructor " << endl;
+	// cout << "Copy Constructor " << &T << endl;
 	shared_ptr<node> o_curr = T.head, curr = head;
 	shared_ptr<list<shared_ptr<int>>> curr_list;
 
@@ -139,7 +145,12 @@ TwoD::TwoD(const TwoD &T) : TwoD(T.Rows, T.Cols)
 
 TwoD::TwoD(TwoD &&T)
 {
-	cout << "Move Constructor " << this << endl;
+	cout << "Move Constructor " << endl;
+	// cout << "Move Constructor " << this << endl;
+
+	Cols = T.Cols;
+	Rows = T.Rows;
+
 	head = T.head;
 	T.head.reset();
 
@@ -148,7 +159,8 @@ TwoD::TwoD(TwoD &&T)
 
 TwoD TwoD::operator=(const TwoD &T)
 {
-	cout << "Copy Assignment " << &T << endl;
+	cout << "Copy Assignment " << endl;
+	// cout << "Copy Assignment " << &T << endl;
 	if (head)
 	{
 		head->South.reset();
@@ -156,6 +168,9 @@ TwoD TwoD::operator=(const TwoD &T)
 	}
 
 	TwoD temp(T);
+	
+	Cols = temp.Cols;
+	Rows = temp.Rows;
 
 	head = temp.head;
 	temp.head.reset();
@@ -165,12 +180,16 @@ TwoD TwoD::operator=(const TwoD &T)
 
 TwoD TwoD::operator=(TwoD &&T)
 {
-	cout << "Move Assignment " << &T << " " << this << endl;
+	cout << "Move Assignment " << endl;
+	// cout << "Move Assignment " << &T << " " << this << endl;
 	if (head)
 	{
 		head->South.reset();
 		head.reset();
 	}
+
+	Cols = T.Cols;
+	Rows = T.Rows;
 
 	head = T.head;
 	T.head.reset();
@@ -201,51 +220,77 @@ TwoD TwoD::Times(int k) const
 	{
 		*i = k * (*i);
 	}
-	cout << "Times " << &temp << endl;
+	cout << "Times " << endl;
+	// cout << "Times " << &temp << endl;
 
 	return move(temp);
 }
 
 void TwoD::DeleteR(int r)
 {
-	// there could be the special case of 1 or 2 rows
-	shared_ptr<node> pre_row_head = head, next_row_head = head;
+	if(r > (Rows - 1) || r < 0){
+		return;
+	}
 
+	// there could be the special case of 1 or 2 rows
+	shared_ptr<node> pre = head; 
 	for (int i = 1; i < (r + Rows); i++)
 	{
-		pre_row_head = pre_row_head->South;
+		pre = pre->South;
 	}
 
-	// pre_row_tail = pre_row_head;
-
-	// for(int i = 1; i < Cols; i++){
-	// 	pre_row_tail = (pre_row_tail->East).lock();
-	// }
-
-	for(int i = 0; i <= r; i ++){
-		next_row_head = next_row_head->South;
-	}
-
-	shared_ptr<node> pre = pre_row_head, next = next_row_head;
-
-	if(r == 0 || r == Rows - 1){
-		next = (next->East).lock();
-	}	
-
-	for(int i = 0; i < Cols; i++){
-		pre->South = next;
+	for (int i = 0; i < Cols; i++)
+	{
+		if(pre->South == head){
+			head = pre->South->South;
+		}
+		pre->South = pre->South->South;
 		pre = (pre->East).lock();
-		next = (next->East).lock();
 	}
 
 	Rows--;
 
 	return;
-
 }
 
 void TwoD::DeleteC(int c)
 {
+	if(c > (Cols - 1) || c < 0){
+		return;
+	}
+
+	shared_ptr<node> pre_column_head = head, pre_column_curr, next_column_head, pre_column_tail;
+
+	// initilize values
+	for(int i = 1; i < (c + Cols); i++){
+		pre_column_head = pre_column_head->East.lock();
+	}
+
+	pre_column_tail = pre_column_head;
+	for(int i = 1; i < Rows; i++){
+		pre_column_tail = pre_column_tail->South;
+	}
+
+	pre_column_curr = pre_column_head;
+	next_column_head = pre_column_head->East.lock()->East.lock();
+
+	// reset east
+	for(int i = 0; i < Rows; i++){
+		pre_column_curr->East = pre_column_curr->East.lock()->East;
+		pre_column_curr = pre_column_curr->South;
+	}
+
+	//reset head
+	if(c == 0){
+		head = head->East.lock();
+	}
+
+	// remove the column
+	pre_column_tail->South = next_column_head;
+
+	Cols--;
+
+	return;
 }
 
 TwoD::TwoD(int r, int c)
@@ -315,7 +360,6 @@ TwoD::TwoD(const initializer_list<initializer_list<initializer_list<int>>> &I) :
 	return;
 }
 
-
 int main()
 {
 	TwoD T1{{{1, 1, 1}, {2, 2}, {3, 3, 3}}, {{4, 4}, {5, 5, 5, 5}, {6, 6}}, {{7, 7, 7}, {8, 8}, {9}}, {{10, 10, 10, 10}, {11, 11}, {12, 12, 12, 12, 12}}}; //4 rows, 3 columns
@@ -325,10 +369,12 @@ int main()
 	T2 = T1.Times(4);
 	cout << T2 << endl;
 	T1.DeleteR(3);
+	// T1.DeleteR(0);
 	cout << T1 << endl;
 	cout << move(T1) << endl;
-	// T2.DeleteC(2);
-	// cout << T2 << endl;
-	// cout << move(T2) << endl;
+	T2.DeleteC(2);
+	// T2.DeleteC(0);
+	cout << T2 << endl;
+	cout << move(T2) << endl;
 	return 0;
 }
