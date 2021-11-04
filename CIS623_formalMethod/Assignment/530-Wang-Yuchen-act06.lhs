@@ -10,7 +10,8 @@ Stud. num:  < 530 >
 ---------------------------------------------------------------------------
 
 > import Data.List
-
+import Main (countvertex1)
+  
 Datatypes 
 
 1. Prop (propositional formulas, from Hutton's Ch.8)
@@ -132,6 +133,15 @@ b. Compute the height of a  BTree
 In the space below, compose a function height that will compute
 the height of a BTree.
 
+
+> height1 :: BTree a -> Int 
+> height1 Nil = -1
+> height1 (Node l x r) = 1 + max (height1 l) (height1 r)  
+
+
+
+
+
 > height :: BTree a -> Int
 > height Nil   = -1
 > height (Node l x r) = 1 + max (height l) (height r)
@@ -151,6 +161,11 @@ an inorder listing of a BTree.
 > inorder  :: BTree a -> [a]
 > inorder Nil = []
 > inorder (Node l x r) = (inorder l) ++ [x] ++ (inorder r)
+
+> preorder :: BTree a -> [a]
+> preorder Nil = [] 
+> preorder (Node l x r) = [x] ++ (preorder l) ++ (preorder r)
+
 
 
 
@@ -201,6 +216,16 @@ b. countvertex: count the number of vertices in a rooted tree
 
 In the space below, compose a function countvertex that will find 
 the number of vertices in a RTree.
+
+
+
+
+
+
+> countvertex1 :: RTree a -> Int
+> countvertex1 (Vertex _ []) = 0
+> countvertex1 (Vertex _ xs) = 1 + sum(map countvertex1 xs)
+
 
 
 > countvertex   :: RTree a -> Int

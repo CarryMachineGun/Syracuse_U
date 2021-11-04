@@ -223,6 +223,7 @@ TwoD TwoD::Times(int k) const
 	cout << "Times " << endl;
 	// cout << "Times " << &temp << endl;
 
+	cout << "temp add: " << temp << endl;
 	return move(temp);
 }
 

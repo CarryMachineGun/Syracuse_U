@@ -52,3 +52,5 @@ Stud. num:  < 530 >
 
 > play xs = iterate tail xs
 
+> play2 xs = iterate tail xs
+
