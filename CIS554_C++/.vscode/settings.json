@@ -11,7 +11,8 @@
         "type_traits": "cpp",
         "memory": "cpp",
         "list": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "set": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
