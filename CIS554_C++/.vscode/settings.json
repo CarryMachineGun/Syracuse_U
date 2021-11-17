@@ -12,7 +12,9 @@
         "memory": "cpp",
         "list": "cpp",
         "complex": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "iosfwd": "cpp",
+        "map": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
