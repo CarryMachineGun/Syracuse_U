@@ -62,7 +62,8 @@ bool myCompareClass::operator()(const map<list<set<int *, myCompareClass> *> *, 
 				sum1 += *k;
 		}
 
-		for(int* j : *(i.second)) sum1 += *j;
+		for (int *j : *(i.second))
+			sum1 += *j;
 	}
 
 	for (pair<list<set<int *, myCompareClass> *> *, vector<int *> *> i : M2)
@@ -72,7 +73,8 @@ bool myCompareClass::operator()(const map<list<set<int *, myCompareClass> *> *, 
 			for (int *k : *j)
 				sum2 += *k;
 		}
-		for(int* j : *(i.second)) sum2 += *j;
+		for (int *j : *(i.second))
+			sum2 += *j;
 	}
 
 	return sum1 < sum2;
@@ -100,8 +102,9 @@ bool myHashEqualClass::operator()(const map<list<set<int *, myCompareClass> *> *
 			for (int *k : *j)
 				sum1 += *k;
 		}
-		
-		for(int* j : *(i.second)) sum1 += *j;
+
+		for (int *j : *(i.second))
+			sum1 += *j;
 	}
 
 	for (pair<list<set<int *, myCompareClass> *> *, vector<int *> *> i : M2)
@@ -112,7 +115,8 @@ bool myHashEqualClass::operator()(const map<list<set<int *, myCompareClass> *> *
 				sum2 += *k;
 		}
 
-		for(int* j : *(i.second)) sum2 += *j;
+		for (int *j : *(i.second))
+			sum2 += *j;
 	}
 
 	// cout << "Sum1 = " << sum1 << "Sum2 = " << sum2 << endl;
@@ -132,8 +136,9 @@ size_t myHashEqualClass::operator()(const map<list<set<int *, myCompareClass> *>
 			for (int *k : *j)
 				sum += *k % 2 == 0 ? *k : (*k) * 2;
 		}
-		
-		for(int* j : *(i.second)) sum += *j % 2 == 0 ? *j : (*j) * 2;
+
+		for (int *j : *(i.second))
+			sum += *j % 2 == 0 ? *j : (*j) * 2;
 	}
 
 	// cout << "hashcode of " << &M << " s " << sum << endl;
@@ -241,8 +246,6 @@ ostream &operator<<(ostream &str, const set<T, myCompareClass> &S)
 	}
 
 	str << ">" << endl;
-	;
-
 	return str;
 }
 
@@ -257,7 +260,6 @@ ostream &operator<<(ostream &str, const unordered_map<T1, T2, myHashEqualClass, 
 	}
 
 	str << "}" << endl;
-	;
 	return str;
 }
 
@@ -267,20 +269,32 @@ int main()
 																				  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(5), new int(17)}, new set<int *, myCompareClass>{new int(3), new int(5), new int(8)}, new set<int *, myCompareClass>{new int(1), new int(3), new int(6)}}, new vector<int *>{new int(4), new int(14), new int(3)}},
 																				  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(4), new int(13)}, new set<int *, myCompareClass>{new int(2), new int(5), new int(18)}, new set<int *, myCompareClass>{new int(2), new int(6), new int(13)}}, new vector<int *>{new int(5), new int(11), new int(13)}}};
 
-	map<list<set<int *, myCompareClass> *> *, vector<int *> *, myCompareClass> M2{{new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(5), new int(6), new int(13)}, new set<int *, myCompareClass>{new int(3), new int(4), new int(5)}, new set<int *, myCompareClass>{new int(3), new int(9), new int(11)}}, new vector<int *>{new int(4), new int(14), new int(3)}},
-																				  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(5), new int(7), new int(13)}, new set<int *, myCompareClass>{new int(1), new int(11), new int(15)}, new set<int *, myCompareClass>{new int(3), new int(6), new int(8)}}, new vector<int *>{new int(5), new int(12), new int(3)}},
-																				  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(4), new int(13)}, new set<int *, myCompareClass>{new int(2), new int(5), new int(12)}, new set<int *, myCompareClass>{new int(2), new int(13), new int(16)}}, new vector<int *>{new int(5), new int(17), new int(2)}}};
-
-	map<list<set<int *, myCompareClass> *> *, vector<int *> *, myCompareClass> M3{{new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(5), new int(7)}, new set<int *, myCompareClass>{new int(2), new int(5), new int(8)}, new set<int *, myCompareClass>{new int(3), new int(6), new int(11)}}, new vector<int *>{new int(7), new int(19), new int(13)}},
+	map<list<set<int *, myCompareClass> *> *, vector<int *> *, myCompareClass> M2{{new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(5), new int(7)}, new set<int *, myCompareClass>{new int(1), new int(5), new int(8)}, new set<int *, myCompareClass>{new int(3), new int(2), new int(11)}}, new vector<int *>{new int(7), new int(11), new int(3)}},
 																				  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(5), new int(17)}, new set<int *, myCompareClass>{new int(3), new int(5), new int(8)}, new set<int *, myCompareClass>{new int(1), new int(3), new int(6)}}, new vector<int *>{new int(4), new int(14), new int(3)}},
-																				  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(1), new int(7), new int(13)}, new set<int *, myCompareClass>{new int(1), new int(2), new int(15)}, new set<int *, myCompareClass>{new int(6), new int(16), new int(20)}}, new vector<int *>{new int(5), new int(19), new int(4)}}};
+																				  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(4), new int(13)}, new set<int *, myCompareClass>{new int(7), new int(5), new int(18)}, new set<int *, myCompareClass>{new int(2), new int(6), new int(13)}}, new vector<int *>{new int(5), new int(11), new int(13)}}};
+
+	map<list<set<int *, myCompareClass> *> *, vector<int *> *, myCompareClass> M3{{new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(5), new int(7)}, new set<int *, myCompareClass>{new int(2), new int(5), new int(10)}, new set<int *, myCompareClass>{new int(3), new int(6), new int(9)}}, new vector<int *>{new int(7), new int(11), new int(3)}},
+																				  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(5), new int(17)}, new set<int *, myCompareClass>{new int(3), new int(5), new int(8)}, new set<int *, myCompareClass>{new int(1000), new int(3), new int(4)}}, new vector<int *>{new int(-995), new int(16), new int(3)}},
+																				  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(4), new int(13)}, new set<int *, myCompareClass>{new int(2), new int(5), new int(18)}, new set<int *, myCompareClass>{new int(2), new int(6), new int(13)}}, new vector<int *>{new int(5), new int(11), new int(13)}}};
+
+	// map<list<set<int *, myCompareClass> *> *, vector<int *> *, myCompareClass> M2{{new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(5), new int(6), new int(13)}, new set<int *, myCompareClass>{new int(3), new int(4), new int(5)}, new set<int *, myCompareClass>{new int(3), new int(9), new int(11)}}, new vector<int *>{new int(4), new int(14), new int(3)}},
+	// 																			  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(5), new int(7), new int(13)}, new set<int *, myCompareClass>{new int(1), new int(11), new int(15)}, new set<int *, myCompareClass>{new int(3), new int(6), new int(8)}}, new vector<int *>{new int(5), new int(12), new int(3)}},
+	// 																			  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(4), new int(13)}, new set<int *, myCompareClass>{new int(2), new int(5), new int(12)}, new set<int *, myCompareClass>{new int(2), new int(13), new int(16)}}, new vector<int *>{new int(5), new int(17), new int(2)}}};
+
+	// // map<list<set<int *, myCompareClass> *> *, vector<int *> *, myCompareClass> M3{{new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(5), new int(7)}, new set<int *, myCompareClass>{new int(2), new int(5), new int(8)}, new set<int *, myCompareClass>{new int(3), new int(6), new int(11)}}, new vector<int *>{new int(7), new int(19), new int(13)}},
+	// // 																			  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(5), new int(17)}, new set<int *, myCompareClass>{new int(3), new int(5), new int(8)}, new set<int *, myCompareClass>{new int(1), new int(3), new int(6)}}, new vector<int *>{new int(4), new int(14), new int(3)}},
+	// // 																			  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(1), new int(7), new int(13)}, new set<int *, myCompareClass>{new int(1), new int(2), new int(15)}, new set<int *, myCompareClass>{new int(6), new int(16), new int(20)}}, new vector<int *>{new int(5), new int(19), new int(4)}}};
+
+	// map<list<set<int *, myCompareClass> *> *, vector<int *> *, myCompareClass> M3{{new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(5), new int(9), new int(13)}, new set<int *, myCompareClass>{new int(3), new int(1000), new int(5)}, new set<int *, myCompareClass>{new int(3), new int(9), new int(11)}}, new vector<int *>{new int(4), new int(14), new int(3)}},
+	// 																			  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(5), new int(7), new int(13)}, new set<int *, myCompareClass>{new int(1), new int(11), new int(15)}, new set<int *, myCompareClass>{new int(3), new int(6), new int(8)}}, new vector<int *>{new int(5), new int(12), new int(3)}},
+	// 																			  {new list<set<int *, myCompareClass> *>{new set<int *, myCompareClass>{new int(3), new int(4), new int(13)}, new set<int *, myCompareClass>{new int(2), new int(5), new int(12)}, new set<int *, myCompareClass>{new int(2), new int(13), new int(16)}}, new vector<int *>{new int(5), new int(17), new int(2)}}};
 
 	set<map<list<set<int *, myCompareClass> *> *, vector<int *> *, myCompareClass>, myCompareClass> S1{M1, M2, M3};
 	//For each STL container, at least three elements are required.
 
 	cout << S1 << endl;
 
-	unordered_map<map<list<set<int *, myCompareClass> *> *, vector<int *> *, myCompareClass>, vector<int>, myHashEqualClass, myHashEqualClass> H1{{M1, vector<int>{7,8,9}}, {M2, vector<int>{1,2,3}}, {M3, vector<int>{3,5,7}}};
+	unordered_map<map<list<set<int *, myCompareClass> *> *, vector<int *> *, myCompareClass>, vector<int>, myHashEqualClass, myHashEqualClass> H1{{M1, vector<int>{7, 8, 9}}, {M2, vector<int>{1, 2, 3}}, {M3, vector<int>{3, 5, 7}}};
 	// //For each STL container, at least three elements are required.
 
 	cout << H1 << endl;
