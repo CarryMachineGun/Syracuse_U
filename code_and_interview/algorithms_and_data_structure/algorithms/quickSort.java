@@ -1,4 +1,4 @@
-package code_and_algorithms.java;
+package algorithms_and_data_structure.algorithms;
 import java.io.*;
 
 class main{
