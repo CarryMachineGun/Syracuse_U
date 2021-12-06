@@ -28,4 +28,7 @@ It is likely that there will be problems in the following 3 topics.
 
 It is possible that there will be a problem in miscellaneous topics
 
-
+## Review
+- [ ] LinkedList; smart_pointer; assignment_construction
+- [ ] Callable_map_hash
+- [ ] STL_find_it_for_each_etc

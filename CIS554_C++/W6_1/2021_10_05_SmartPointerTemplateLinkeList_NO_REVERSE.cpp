@@ -238,11 +238,10 @@ void f1(int&& i) {
 }
 
 
-int& f2() {
-	int k{ 200 };
-	return k;
-
-}
+// int& f2() {
+// 	int k{ 200 };
+// 	return k;
+// }
 
 int main() {
 	LinkedList<int> L1{ 1,2,3, 4, 5 };//initialilizer_list
