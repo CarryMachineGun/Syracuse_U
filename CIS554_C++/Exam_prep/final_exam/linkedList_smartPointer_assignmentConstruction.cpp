@@ -20,9 +20,10 @@ public:
         value = make_shared<vector<int>>();
     } // default constructor
 
-    Node(const Node &N):Node()
+    Node(const Node &N) : Node()
     {
-        for (int i : *(N.value)){
+        for (int i : *(N.value))
+        {
             value->push_back(i);
         }
 
@@ -36,6 +37,19 @@ public:
             value->push_back(i);
         }
         return;
+    }
+
+    bool operator<(const Node &N2)
+    {
+        int sum1 = 0, sum2 = 0;
+
+        for (int i : *value)
+            sum1 += i;
+
+        for (int i : *(N2.value))
+            sum2 += i;
+
+        return sum1 < sum2;
     }
 };
 
@@ -56,6 +70,7 @@ public:
     DoublyLinkedList operator=(DoublyLinkedList &&L);
     DoublyLinkedList operator=(const DoublyLinkedList &L);
     DoublyLinkedList kTimes(int k);
+    void sort();
     void print_F();
     void print_B();
 
@@ -153,8 +168,10 @@ DoublyLinkedList DoublyLinkedList::kTimes(int k)
 
     shared_ptr<Node> curr = temp.head;
 
-    while(curr){
-        for(int &i : *(curr->value)){
+    while (curr)
+    {
+        for (int &i : *(curr->value))
+        {
             i = k * i;
         }
 
@@ -290,10 +307,41 @@ DoublyLinkedList::DoublyLinkedList(const initializer_list<initializer_list<int>>
 }
 
 // remove all node contains value k
+// sort
+
+void DoublyLinkedList::sort()
+{
+    if(!head || !(head->next)) return;
+
+    shared_ptr<Node> pre = head, curr = head->next;
+    bool change = false;
+
+    while (!change)
+    {
+        pre = head;
+        curr = head->next;
+        change = true;
+
+        while (curr)
+        {
+            if (*curr < *pre)
+            {
+                shared_ptr<vector<int>> temp = curr->value;
+                curr->value = pre->value;
+                pre->value = temp;
+                change = false;
+            }
+            curr = curr->next;
+            pre = pre->next;
+        }
+    }
+
+    return;
+}
 
 int main()
 {
-    DoublyLinkedList L1{{1, 2, 3}, {3, 4, 5}, {5, 6, 7}, {9, 10, 12}, {11, 23, 57}};
+    DoublyLinkedList L1{{9, 10, 12}, {1, 2, 3}, {3, 4, 5}, {5, 6, 7}, {11, 23, 57}};
     L1.print_F();
     L1.print_B();
 
@@ -317,6 +365,13 @@ int main()
     L2.print_B();
 
     L2 = L1.kTimes(2);
+
+    L2.print_F();
+    L2.print_B();
+
+    cout << "===============================" << endl;
+
+    L2.sort();
 
     L2.print_F();
     L2.print_B();
