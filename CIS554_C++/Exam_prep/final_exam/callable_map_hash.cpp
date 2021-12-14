@@ -33,6 +33,15 @@ public:
     }
 };
 
+class myCompare2{
+public:
+    bool operator()(int a, int b){
+        return a > b;
+    }
+
+};
+
+
 class myCompare
 {
 public:
@@ -91,6 +100,7 @@ int max(int a, int b, bool (*F)(int a, int b)){
 
 int main()
 {
+    auto g = [](int a, int b){return a > b;};
     cout << "set, hash and equal_to ============================== " <<endl;
 
     foo f1({1, 2, 3}, 2);
@@ -110,7 +120,6 @@ int main()
 
     cout << s.size() << endl;
 
-    auto g = [](int a, int b){return a > b;};
 
     set<int, decltype(g)> s2(g);
 
@@ -130,7 +139,8 @@ int main()
 
     // auto f = [](int a, int b){return a < b;};
     // priorityQueue
-    priority_queue<int, vector<int>, function<bool(int a, int b)>> pq([](int a, int b){return a < b;});
+    // priority_queue<int, vector<int>, function<bool(int a, int b)>> pq([](int a, int b){return a < b;});
+    priority_queue<int, vector<int>, myCompare2> pq;
 
     pq.emplace(1);
     pq.emplace(2);

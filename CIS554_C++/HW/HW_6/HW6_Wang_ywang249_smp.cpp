@@ -25,12 +25,12 @@ public:
         data = vector<shared_ptr<pair<vector<int>, vector<int>>>>();
     }
 
-    Circuit(vector<string>& L, int input_l, int output_l) : Circuit()
+    Circuit(vector<string> *L, int input_l, int output_l) : Circuit()
     {
         input_length = input_l;
         output_length = output_l;
 
-        for (string &i : L)
+        for (string &i : *L)
         {
             vector<int> input_digit;
             vector<int> output_digit;
@@ -294,6 +294,7 @@ ostream &operator<<(ostream &str, const Circuit &c)
     str << c.output_length << "\n";
 
     for (shared_ptr<pair<vector<int>, vector<int>>> i : c.data)
+    // for (int i = 0; i < c.data.size(); i++)
     {
         for (int j : i->first)
             str << j;
@@ -309,11 +310,15 @@ ostream &operator<<(ostream &str, const Circuit &c)
     return str;
 }
 
-ostream &operator<<(ostream &str, const unordered_map<Circuit, vector<string>, myHashEqualClass, myHashEqualClass> &DB)
+ostream &operator<<(ostream &str, const unordered_map<Circuit, vector<string> *, myHashEqualClass, myHashEqualClass> &DB)
 {
     for (auto i = DB.begin(); i != DB.end(); i++)
     {
         str << (i->first);
+
+        // for(string j : i->second){
+        //     str << j << "\n";
+        // }
     }
 
     str << endl;
@@ -321,18 +326,14 @@ ostream &operator<<(ostream &str, const unordered_map<Circuit, vector<string>, m
     return str;
 }
 
-bool myFind(const Circuit &c, unordered_map<Circuit, vector<string>, myHashEqualClass, myHashEqualClass> &DB){
-    for(auto &i : DB){
-        if(i.first == c) return true;
-    }
+// bool myFind(const Circuit &c){
 
-    return false;
-}
+// }
 
 int main()
 {
     // Declare you DB of type unordered_map< â€¦,â€¦> DB;
-    unordered_map<Circuit, vector<string>, myHashEqualClass, myHashEqualClass> DB;
+    unordered_map<Circuit, vector<string> *, myHashEqualClass, myHashEqualClass> DB;
 
     string line;
     ifstream myfile("circuits.txt");
@@ -352,16 +353,17 @@ int main()
         int output_length = stoi(line);
 
         // circuit data
-        vector<string> curr_circuit;
+        vector<string> *curr_circuit = new vector<string>();
+        // vector<string> curr_circuit;
 
         while (num_of_row-- > 0 && getline(myfile, line))
         {
-            curr_circuit.push_back(line);
+            curr_circuit->push_back(line);
         }
 
         Circuit curr(curr_circuit, input_length, output_length);
 
-        // if (!myFind(curr, DB))
+        // cout << "The circuit is NOT already in DB. BEDORE" << endl;
         if (DB.find(curr) == DB.end())
         {
             DB[curr] = curr_circuit;
