@@ -1,4 +1,8 @@
 // CIS554 HW6. Due: 11:59pm, Saturday, Dec. 11.
+//hw6 by yuchen wang
+//su net id: ywang249  suid: 905508464
+
+//hw6 due: 11:59pm, friday october 29
 
 #include <iostream>
 #include <vector>
@@ -25,7 +29,7 @@ public:
         data = vector<shared_ptr<pair<vector<int>, vector<int>>>>();
     }
 
-    Circuit(vector<string>& L, int input_l, int output_l) : Circuit()
+    Circuit(vector<string> &L, int input_l, int output_l) : Circuit()
     {
         input_length = input_l;
         output_length = output_l;
@@ -53,7 +57,6 @@ public:
 
     bool operator==(const Circuit &M2) const;
 };
-
 
 bool Circuit::operator==(const Circuit &M2) const
 {
@@ -178,7 +181,6 @@ size_t myHashEqualClass::operator()(const Circuit &M1) const
         for (int j : i->second)
             sum_one += j;
     }
-
 
     return h(sum_one);
 }
@@ -313,7 +315,7 @@ ostream &operator<<(ostream &str, const unordered_map<Circuit, vector<string>, m
 {
     for (auto i = DB.begin(); i != DB.end(); i++)
     {
-        str << (i->first);
+        str << (i->first) << "\n";
     }
 
     str << endl;
@@ -321,9 +323,12 @@ ostream &operator<<(ostream &str, const unordered_map<Circuit, vector<string>, m
     return str;
 }
 
-bool myFind(const Circuit &c, unordered_map<Circuit, vector<string>, myHashEqualClass, myHashEqualClass> &DB){
-    for(auto &i : DB){
-        if(i.first == c) return true;
+bool myFind(const Circuit &c, unordered_map<Circuit, vector<string>, myHashEqualClass, myHashEqualClass> &DB)
+{
+    for (auto &i : DB)
+    {
+        if (i.first == c)
+            return true;
     }
 
     return false;
@@ -373,7 +378,8 @@ int main()
     }
 
     cout << DB << endl;
-    cout << "DB size is : " << DB.size() << endl;
+
+    // cout << "DB size is : " << DB.size() << endl;
 
     myfile.close();
 

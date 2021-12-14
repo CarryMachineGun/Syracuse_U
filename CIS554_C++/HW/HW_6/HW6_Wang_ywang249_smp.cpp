@@ -321,7 +321,7 @@ ostream &operator<<(ostream &str, const unordered_map<Circuit, vector<string> *,
         // }
     }
 
-    str << endl;
+    str << "\n" << endl;
 
     return str;
 }
