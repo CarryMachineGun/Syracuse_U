@@ -171,6 +171,12 @@ an inorder listing of a BTree.
 
 
 
+> inorder1 :: BTree a -> [a]
+> inorder1 Nil = []
+> inorder1 (Node l x r) = (inorder1 l) ++ [x] ++ (inorder r) 
+
+
+
 --------------------------------------------------------------------------------
 
 

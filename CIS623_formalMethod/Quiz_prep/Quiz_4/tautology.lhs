@@ -8,6 +8,7 @@
 >           | Not Prop
 >           | And Prop Prop
 >           | Imply Prop Prop
+>            deriving Show  -- not part of the question 
 
 > p1 :: Prop
 > p1 = And (Var 'A') (Not (Var 'A'))
