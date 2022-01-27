@@ -1,0 +1,3 @@
+#ignoire all logs
+*.log
+*.out
