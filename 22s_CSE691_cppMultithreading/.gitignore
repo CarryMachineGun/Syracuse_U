@@ -1,4 +1,2 @@
 #ignoire all logs
-*.log
-*.out
 *.txt
