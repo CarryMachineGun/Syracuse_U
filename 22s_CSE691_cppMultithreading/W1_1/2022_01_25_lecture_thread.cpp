@@ -39,6 +39,7 @@ int main() {
 
 	int s1{ 0 }, s2{ 0 };
 	thread T1{ f1, 200, ref(s1) };//start running
+	// thread T1{ f1, 200, s1 };//start running
 	/*
 	Alternatively we can write it as:
 	thread T1(f1, 200, ref(s1) );//{} is more up to date.
@@ -55,9 +56,17 @@ int main() {
 		T[i] = thread{f1, (i + 1) * 100, ref(s[i])};//start running
 	}
 
+	for (auto i : s) cout << i << " ";
+	cout << endl;
+	for (auto i : s) cout << i << " ";
+	cout << endl;
+
 	for (int i = 0; i < 10; ++i) T[i].join();
 
 	for (auto i : s) cout << i << " ";
+	cout << endl;
+	for (auto i : s) cout << i << " ";
+	cout << endl;
 
 
 	T1.join();//main thread will pause until T1 completes and then resume.
