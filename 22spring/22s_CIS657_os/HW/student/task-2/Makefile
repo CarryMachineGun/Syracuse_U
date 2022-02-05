@@ -15,7 +15,8 @@ OUT = test.out
 
 all: build 
 
-build: $(PROG)
+build: 
+	$(PROG)
 	@echo "Building ... done"
 
 $(PROG): $(SRC)

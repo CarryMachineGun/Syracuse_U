@@ -88,20 +88,29 @@ int main()
     //
     // Pseudocode:
     // 1. Fork the process. 
+    int rc = fork();
     // 2. If fork failed, then print error message (using PRINT_ERROR_PARENT) 
     //    and exit.
+    if(rc < 0){
+      PRINT_ERROR_PARENT;
+      exit(1);
     // 3. If fork was successful, then
     // 3a. Is this child? If so, then 
     //      - Invoke execvp() to execute the command available in `cmdargs[]`.
     //      - Check if execvp() failed, then print error message 
     //          (using PRINT_ERROR_CHILD) and exit.
+    }else if(rc == 0){
+      execvp(cmdargs[0], cmdargs);
+      PRINT_ERROR_CHILD;
     // 3b. Is this parent? If so, then
     //      - wait for the child process to finish. Use wait()/waitpid().
     //      - ** note: Once child is done, parent will continue the while loop
     //      for the next iteration. **
     //
     // 
-    
+    }else{
+      int wc = wait(NULL);
+    }     
   } // end of while(1)
 	
   return 0 ; // exit with SUCCESS
