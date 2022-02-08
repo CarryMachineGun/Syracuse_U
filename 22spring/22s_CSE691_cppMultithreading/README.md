@@ -11,6 +11,10 @@ more on advanced C++ language features, such as RAII, safety, race, exceptions, 
 - **TA**: Abel Armede
 - **On-Line Office Hours**: 1:30pm-2:00pm Tuesday & Thursday  
 
+## Exam
+
+- Heaplify will be on mid-term: claimed at week 2 class 1
+
 ## Questions:
 
 ### Week 1
@@ -22,3 +26,4 @@ more on advanced C++ language features, such as RAII, safety, race, exceptions, 
 - can we put T6 as 'T6{mf1::f1, 200, ....}'
 
 ### Week 2
+
