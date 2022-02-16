@@ -27,3 +27,9 @@ more on advanced C++ language features, such as RAII, safety, race, exceptions, 
 
 ### Week 2
 
+
+### Week 4
+- What about if we set 0 as the seet for srand, will we get same random number in a loop?
+- what are the different between using 0, as the seed for srand() or time(NULL) or nothing ?
+- 
+
