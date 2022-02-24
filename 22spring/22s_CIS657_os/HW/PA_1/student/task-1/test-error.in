@@ -1,0 +1,3 @@
+cd /no/such/path
+exit 10
+exyz

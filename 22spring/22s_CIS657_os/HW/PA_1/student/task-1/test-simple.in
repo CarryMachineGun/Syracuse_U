@@ -1,0 +1,8 @@
+ls /bin/cat
+which ps
+find /bin/ -name false -print 
+wc ./test-simple.in
+cd /tmp
+pwd
+/bin/true --help
+exit

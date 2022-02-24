@@ -1,0 +1,2 @@
+echo "Hello world" > out-1.log
+/bin/kill -L > out-2.log
