@@ -29,6 +29,7 @@
         "string_view": "cpp",
         "__locale": "cpp",
         "algorithm": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "iosfwd": "cpp"
     }
 }
