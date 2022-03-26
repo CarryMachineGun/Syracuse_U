@@ -30,6 +30,7 @@
         "__locale": "cpp",
         "algorithm": "cpp",
         "memory": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "chrono": "cpp"
     }
 }
