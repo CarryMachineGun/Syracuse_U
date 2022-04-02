@@ -48,118 +48,132 @@
 //  is in machine.h.
 //----------------------------------------------------------------------
 
-void
-ExceptionHandler(ExceptionType which)
+void ExceptionHandler(ExceptionType which)
 {
   int type = kernel->machine->ReadRegister(2);
   int result;
   int temp;
-  
+
   DEBUG(dbgSys, "Received Exception " << which << " type: " << type << "\n");
-  
-  switch (which) {
-    case SyscallException:
-      switch(type) {
-        case SC_Halt:
-          DEBUG(dbgSys, "Shutdown, initiated by user program.\n");
-          
-          SysHalt();
-          break;
-          
-        case SC_Add:
-          DEBUG(dbgSys, "Add " << kernel->machine->ReadRegister(4) << " + " << kernel->machine->ReadRegister(5) << "\n");
-          
-          /* Process SysAdd Systemcall*/
-          result = SysAdd(/* int op1 */(int)kernel->machine->ReadRegister(4),
-                          /* int op2 */(int)kernel->machine->ReadRegister(5));
-          
-          DEBUG(dbgSys, "Add returning with " << result << "\n");
-          /* Prepare Result */
-          kernel->machine->WriteRegister(2, (int)result);
-          
-          
-          break;
 
+  switch (which)
+  {
+  case SyscallException:
+    switch (type)
+    {
+    case SC_Halt:
+      DEBUG(dbgSys, "Shutdown, initiated by user program.\n");
 
-        case SC_Exit:
-          printf("Exit system call made by %s\n", kernel->currentThread->getName());
-          
-          // Let's finish this thread
-          kernel->currentThread->Finish();
-          break;
-         
+      SysHalt();
+      break;
 
+    case SC_Add:
+      DEBUG(dbgSys, "Add " << kernel->machine->ReadRegister(4) << " + " << kernel->machine->ReadRegister(5) << "\n");
 
-          /*======================================
-           * TODO: Finish the implementations
-           * for the following system calls
-           * ====================================
-           */
-        case SC_Read:
-          printf("Read system call made by %s\n", kernel->currentThread->getName());
-          
-          break;
+      /* Process SysAdd Systemcall*/
+      result = SysAdd(/* int op1 */ (int)kernel->machine->ReadRegister(4),
+                      /* int op2 */ (int)kernel->machine->ReadRegister(5));
 
-          
-        case SC_Write:
-          printf("Write system call made by %s\n", kernel->currentThread->getName());
-          
+      DEBUG(dbgSys, "Add returning with " << result << "\n");
+      /* Prepare Result */
+      kernel->machine->WriteRegister(2, (int)result);
 
-          break;
+      break;
 
+    case SC_Exit:
+      printf("Exit system call made by %s\n", kernel->currentThread->getName());
 
-      
-        case SC_Create:
-          printf("Create() system call is called \n");
+      int status;
+      status = (int)kernel->machine->ReadRegister(4);
 
-          break;
-
-
-
-        case SC_Open:
-          printf("Open() system call is called\n");
-                    
-          break;
-
-
-
-
-        case SC_Close:
-          printf("Close() system call is called\n");
-          
-          break;
-
-
-
-        case SC_Exec:
-          printf("Exec() system call is called\n");
-          break;
-
-
-        case SC_Join:
-          printf("Join() system call is called\n");
-          break;
-
-
-        default:
-          cerr << "Unexpected system call " << type << "\n";
-          break;
+      if (status == 0)
+      {
+        printf("Process exited normally\n");
       }
+      else
+      {
+        printf("Process exited abnormally with status %d\n", status);
+      }
+
+      // Let's finish this thread
+      kernel->currentThread->Finish();
       break;
+
+      /*======================================
+       * TODO: Finish the implementations
+       * for the following system calls
+       * ====================================
+       */
+    case SC_Read:
+      printf("Read system call made by %s\n", kernel->currentThread->getName());
+
+      break;
+
+    case SC_Write:
+      // printf("Write system call made by %s\n", kernel->currentThread->getName());
+      DEBUG(dbgSys, "Write " << kernel->machine->ReadRegister(4) << "; " << kernel->machine->ReadRegister(5) << "; " << kernel->machine->ReadRegister(6) << "\n");
+
+      // char content[2048];
+      int c;
+      int buffer, size;
+
+      buffer = (int)kernel->machine->ReadRegister(4);
+      size = (int)kernel->machine->ReadRegister(5);
+
+      for (int i = 0; i < size; i++)
+      {
+        // kernel->machine->ReadMem(buffer + i, 1, (int*)&(content[i]));
+        kernel->machine->ReadMem(buffer + i, 1, &c);
+        printf("%c", (char)c);
+      }
+      // printf("%s", content);
+
+      // printf("The first parameter is %d, the second parameter is %d, and the third parameter is %d.\n", (int)kernel->machine->ReadRegister(4), (int)kernel->machine->ReadRegister(5), (int)kernel->machine->ReadRegister(6));
+
+      break;
+
+    case SC_Create:
+      printf("Create() system call is called \n");
+
+      break;
+
+    case SC_Open:
+      printf("Open() system call is called\n");
+
+      break;
+
+    case SC_Close:
+      printf("Close() system call is called\n");
+
+      break;
+
+    case SC_Exec:
+      printf("Exec() system call is called\n");
+      break;
+
+    case SC_Join:
+      printf("Join() system call is called\n");
+      break;
+
     default:
-      cerr << "Unexpected user mode exception" << (int)which << "\n";
+      cerr << "Unexpected system call " << type << "\n";
       break;
+    }
+    break;
+  default:
+    cerr << "Unexpected user mode exception" << (int)which << "\n";
+    break;
   }
-  
+
   /* Modify return point */
   {
     /* set previous programm counter (debugging only)*/
     kernel->machine->WriteRegister(PrevPCReg, kernel->machine->ReadRegister(PCReg));
-    
+
     /* set programm counter to next instruction (all Instructions are 4 byte wide)*/
     kernel->machine->WriteRegister(PCReg, kernel->machine->ReadRegister(PCReg) + 4);
-    
+
     /* set next programm counter for brach execution */
-    kernel->machine->WriteRegister(NextPCReg, kernel->machine->ReadRegister(PCReg)+4);
+    kernel->machine->WriteRegister(NextPCReg, kernel->machine->ReadRegister(PCReg) + 4);
   }
 }
