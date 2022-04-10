@@ -167,7 +167,7 @@ void ExceptionHandler(ExceptionType which)
       printf("the address is: %s\n", addre);
 
       // run the program
-
+      
 
       //return a SpaceId (defined in userprog/syscall.h) of this new thread
       // kernel->machine->WriteRegister(2, (int)result);
