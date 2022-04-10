@@ -1,0 +1,85 @@
+Student ID: 11111
+Semester: 20171
+GPA : 3.77
+Credits : 13
+(CSE674 1 3 B+) (CIS554 1 3 A-) (MAT296 8 4 A) (WRT205 5 3 A)
+
+Student ID: 11111
+Semester: 20171
+GPA : 3.80
+Credits : 10
+(CSE674 1 3 B+) (MAT296 8 4 A) (WRT205 5 3 A)
+
+Student ID: 11111
+Overall GPA : 3.77
+Overall Credits : 22
+semester: 20171
+GPA : 3.80
+Credits : 10
+(CSE674 1 3 B+) (MAT296 8 4 A) (WRT205 5 3 A)
+semester: 20172
+GPA : 3.75
+Credits : 12
+(PSY205 5 3 B+) (CIS351 2 3 A-) (ECN203 4 3 A) (MAT331 2 3 A)
+
+
+Student ID: 11112
+Semester: 20171
+GPA : 3.75
+Credits : 12
+(CSE674 1 3 B+) (CIS351 2 3 A-) (MAT331 2 3 A) (WRT205 5 3 A)
+
+Student ID: 11112
+Semester: 20172
+GPA : 3.90
+Credits : 10
+(CIS554 1 3 A-) (ECN203 4 3 A) (MAT296 8 4 A)
+
+Student ID: 11112
+Overall GPA : 3.82
+Overall Credits : 22
+semester: 20171
+GPA : 3.75
+Credits : 12
+(CSE674 1 3 B+) (CIS351 2 3 A-) (MAT331 2 3 A) (WRT205 5 3 A)
+semester: 20172
+GPA : 3.90
+Credits : 10
+(CIS554 1 3 A-) (ECN203 4 3 A) (MAT296 8 4 A)
+
+
+Student ID: 11111
+Overall GPA: 3.77
+Overall Credits: 22
+Semester : 20171
+GPA : 3.80
+Credits : 10
+(CSE674 1 3 B+) (MAT296 8 4 A) (WRT205 5 3 A)
+Semester : 20172
+GPA : 3.75
+Credits : 12
+(PSY205 5 3 B+) (CIS351 2 3 A-) (ECN203 4 3 A) (MAT331 2 3 A)
+Student ID: 11112
+Overall GPA: 3.82
+Overall Credits: 22
+Semester : 20171
+GPA : 3.75
+Credits : 12
+(CSE674 1 3 B+) (CIS351 2 3 A-) (MAT331 2 3 A) (WRT205 5 3 A)
+Semester : 20172
+GPA : 3.90
+Credits : 10
+(CIS554 1 3 A-) (ECN203 4 3 A) (MAT296 8 4 A)
+
+
+Student ID: 11112
+Overall GPA: 3.82
+Overall Credits: 22
+Semester : 20171
+GPA : 3.75
+Credits : 12
+(CSE674 1 3 B+) (CIS351 2 3 A-) (MAT331 2 3 A) (WRT205 5 3 A)
+Semester : 20172
+GPA : 3.90
+Credits : 10
+(CIS554 1 3 A-) (ECN203 4 3 A) (MAT296 8 4 A)

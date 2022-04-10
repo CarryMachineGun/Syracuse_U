@@ -31,6 +31,8 @@
         "algorithm": "cpp",
         "memory": "cpp",
         "iosfwd": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "atomic": "cpp",
+        "condition_variable": "cpp"
     }
 }

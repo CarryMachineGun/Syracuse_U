@@ -1,0 +1,3 @@
+## Questions
+- when a product worker **A** come in at first and wait in buffer area, can another product worker **B** come in second but having all part he needs available in the buffer area leave with the parts? Even there are some overlapping parts between **B**'s required parts and **A**'s required parts?
+  - For instance: A[2,0,0,1,1], B[1,0,0,1,1] and the buffer_area[1,0,0,1,1]. can **B** leave with buffer_area left with [0,0,0,0,0]?

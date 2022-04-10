@@ -1,0 +1,72 @@
+//CIS554 HW6. Due: 11:59pm, Saturday, Dec. 11.
+//Store combinational logic circuits with one or more outputs to a database, implemented using unordered_map.
+//If you finish the above, you can consider also support sequential circuits. A limited bonus will be given for this.
+//In addition to submitting your code, you need to submit a PDF file ducumenting your design.
+//The PDF file should contain at least 2-3 pages with single space.
+
+/*This is more a take-home exam than regular HW. You are not allowed to discuss with other students.
+I will only reply to clarification questions or anything that leads to sharing reply to the whole class.
+Your design has to be realistic for applications.
+Note that permuting input columns, output columns, or rows
+will not affect the function of a circuit.
+
+*/
+
+Class Circuit {//Truth Table
+Public:
+int Inputs;//number of inputs
+int Output; //number of outputs
+//Design your own structure to store the Truth Table
+...
+
+//Optionally, you can design a function to preprocess the circuit (i.e., Truth Table) before hashing or equal_to.
+
+//Note that permuting input columns, output columns, or rows
+//will not affect the function of a circuit.
+
+};//End of class
+
+//You also need to design the needed hash and equal_to.
+
+//You will need to design a way to produce key for hashing and equal_to such that 
+//there will not be duplicates
+
+Int main(){
+//Declare you DB of type unordered_map< â€¦,â€¦> DB;
+
+//Declare DB
+//Read inuts from file "circuits.txt" and store them to DB by
+//adding circuits one by one to DB as follows:
+//DB[key] = value;
+
+//When adding a circuit, if a duplicate is detected, your program will print a message "The circuit is already in DB."
+
+//You should support cout <<DB << endl; You will need to overload operator<<
+//You need to support find function to see if a given circuit is in the DB
+
+
+return 0;
+}
+
+
+
+//input circuits in file circuits.txt
+
+//
+16//number of circuits
+3//number of inputs; the number of rows will be 2^(number of inputs)
+2//number of outputs
+000 10
+001 00
+010 00
+011 10
+100 00
+101 11
+110 01
+111 11
+4
+1
+0000 0
+0001 1
+0010 0
+â€¦

@@ -1,0 +1,69 @@
+# Nachos general README
+Author: Endadul Hoque (enhoque@syr.edu)
+
+## How to build NACHOS?
+
+From the scratch (assuming it's a fresh copy)
+
+1. Build a utility tool:
+
+Go to `coff2noff/` and build
+
+    $ make
+
+This step is only required for the first time. You don't have to
+re-build again unless you do a `clean` or `distclean` in `coff2noff/`.
+
+2. Build NACHOS:
+
+Go to `code/` and build NACHOS
+
+        $ cd build.linux
+        $ make distclean
+        $ make depend
+        $ make
+
+  `make depend` is essential.
+
+After the initial time, for incremental build, try
+
+    $ cd code/build.linux
+    $ make
+
+
+However, if you think the build is behaving weirdly or you observe the
+executable is not reflecting your edits in the code, it's a good idea of
+clean and re-build nachos. 
+
+    $ make distclean
+    $ make depend
+    $ make
+
+
+## How to build NACHOS (test) programs?
+
+The programs to be executed on NACHOS are built separately. All
+programs are stored in `test/`.
+
+**Build executables of the test programs**. Executables are created in
+two stages: 
+
+   - First, the compiler creates a .coff (regular MIPS exe) file
+   - Secode, the utility tool `coff2noff` is used to convert .coff file
+     to an executable for NACHOS
+
+  *Build command*: 
+
+    $ cd test/
+    $ make
+
+
+  *Clean command*: to remove `*.o` and `*.coff` files
+
+    $ make clean
+
+  *Dist-clean command:*  to remove all files produced by `make`
+  including the executables for nachos
+
+    $ make distclean
+
