@@ -27,6 +27,7 @@ class SynchDisk;
 
 class Kernel {
   public:
+    int thread_count = 0;
     Kernel(int argc, char **argv);
     				// Interpret command line arguments
     ~Kernel();		        // deallocate the kernel

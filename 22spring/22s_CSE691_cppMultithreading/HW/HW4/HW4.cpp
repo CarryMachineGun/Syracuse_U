@@ -97,6 +97,11 @@ public:
     }
 };
 
+//move parts from a worker to the buffer 
+void loadBuffer(PartWorker worker, Buffer buffer){
+
+}
+
 class Part
 {
 public:

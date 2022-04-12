@@ -144,7 +144,8 @@ void ExceptionHandler(ExceptionType which)
 
     case SC_Exec:
       // printf("Exec() system call is called\n");
-      DEBUG(dbgSys, "Write " << kernel->machine->ReadRegister(4)  << "\n");
+      {
+      DEBUG(dbgSys, "Write " << kernel->machine->ReadRegister(4) << "\n");
 
       // Retrieve parameters
       int buffer, c;
@@ -164,14 +165,26 @@ void ExceptionHandler(ExceptionType which)
         // printf("%c and the number is %d", (char)c, c);
       }
 
-      printf("the address is: %s\n", addre);
+      // printf("the address is: %s\n", addre);
 
       // run the program
-      
 
-      //return a SpaceId (defined in userprog/syscall.h) of this new thread
-      // kernel->machine->WriteRegister(2, (int)result);
+      Thread *t = new Thread(addre);
+      // t->id = kernel->(thread_count++);
+      t->Fork((VoidFunctionPtr)([](void *filename)
+                                {
+        AddrSpace *space = new AddrSpace;
+        ASSERT(space != (AddrSpace *)NULL);
+        if (space->Load((char *)filename))
+        {                   // load the program into the space
+          space->Execute(); // run the program
+        }
+        ASSERTNOTREACHED(); }),
+              (void *)addre);
 
+      // return a SpaceId (defined in userprog/syscall.h) of this new thread
+      kernel->machine->WriteRegister(2, (SpaceId)(t->id));
+      }
       break;
 
     case SC_Join:
