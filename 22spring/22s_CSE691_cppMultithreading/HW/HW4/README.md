@@ -1,4 +1,4 @@
-# CSE691 HW4
+  # CSE691 HW4
 
 ## Requirements
 ### Part Workers (with quantity of m)
@@ -31,7 +31,12 @@
 - **MaxTimeProduct**: If the wait time reaches MaxTimeProduct us (maximum wait time for a product worker), the product worker will move back the parts already picked up and randomly re-generate a load order which has to re-use all the parts that were moved back. The product worker **will then re-produce a brand-new pickup order.**
 - If the parts moved back after timeout event are (1,1,0,0,0). During the next iteration, if a new pickup order (2,1,2,0,0) is generated, then the real pickup order that the product worker will bring to the buffer area is (1,0,2,0,0), while the parts (1,1,0,0,0), which were brought back during the last iteration due to timeout event, will be staying at local area; (1,1,0,0,0) will be referred to as local state.？？？？？？？？？？？
 ### Description
-- Develop a simulation program of the activity of the above-described plant. Your implementation should be designed to improve the performance of the plant, while ensuring a fair treatment to all workers. Each part work or product worker is said to have completed one iteration when a load order or pickup order is completed, or if timeout event occurs such that an order is aborted. Your program should allow each worker to finish 5 iterations. Clearly you need to protect the shared resource, buffer, with proper lock/mutex. Every time when a part worker
+- Develop a simulation program of the activity of the above-described plant. Your implementation should be designed to improve the performance of the plant, while ensuring a fair treatment to all workers. Each part work or product worker is said to have completed one iteration when a load order or pickup order is completed, or if timeout event occurs such that an order is aborted. Your program should allow each worker to finish **5 iterations**. Clearly you need to protect the shared resource, buffer, with proper lock/mutex. Every time when a part worker
+
+
+### Output requirement
+- Wakeup-Notified: A sleeping thread wakes up upon receiving notification and CAN perform some work.**If a sleeping thread receives notification and CANNOT do anything, the worker will immediately go back to sleep. In this case, do not print.**
+  - An example for this: A sleeping part worker still needs a type A part. Upon receiving notification, the worker sees no type A part available and immediately go back to sleep. Do not print anything in this case.
 
 ## Logic 
 
@@ -42,3 +47,7 @@
 - Recall that it takes a part worker 20, 20, 30, 30, 40 us to move a part of type A, B, C, D, E, respectively. A part worker will then repeat the process to produce a brand-new load order.
   - Is 20, 20, 30, 30, 40 us or 200, 200, 300, 300, 400us?
   - Does part works moving back with parts takes the same time?
+- What are the differences between "&" and "ref" when creating threads?
+- Can PartWorkers and ProductWorkers work at the same time(using one lock)?
+  - Yes, otherwise the waiting of the two kind of workers is meaningless
+- Doesn't a iteration defined as (Each part work or product worker is said to have completed one iteration when a load order or pickup order is completed, or if timeout event occurs such that an order is aborted)? Why the partworker 8 is still in one iteration after doing two orders? 
