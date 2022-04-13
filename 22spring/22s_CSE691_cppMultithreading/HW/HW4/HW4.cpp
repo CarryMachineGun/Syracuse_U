@@ -23,15 +23,15 @@ public:
     // randomly fill the load till the size of load order
     void reloadLoadOrder()
     {
-        //calcuate the size we need to reload
+        // calcuate the size we need to reload
         int size_to_reload = size_of_load_order;
         for (int order : load_order)
         {
             size_to_reload -= order;
         }
 
-        //reload the load order
-        srand (time(NULL));
+        // reload the load order
+        // srand(time(NULL));
         while (size_to_reload-- > 0)
         {
             load_order[rand() % 5]++;
@@ -56,7 +56,8 @@ public:
     {
         size_of_load_order = 5;
         wait_time = 0;
-        load_order = {0, 0, 0, 0, 0};
+        // load_order = {0, 0, 0, 0, 0};
+        load_order = vector<int>(size_of_load_order, 0);
         reloadLoadOrder();
 
         return;
@@ -82,17 +83,73 @@ private:
 public:
     vector<int> assembly_order;
 
-    ProductWorker(){
-        size_of_assembly_order = 5;
-        wait_time = 0;
-        assembly_order = {0, 0, 0, 0, 0};
+    // randomly fill the load till the size of load order
+    void reloadAssemblyOrder()
+    {
+        // calcuate the size we need to reload
+        int size_to_reload = size_of_assembly_order;
+        for (int order : assembly_order)
+        {
+            size_to_reload -= order;
+        }
+
+        // calcuate the number of type we want to reload
+        int type_to_reload = 0;
+        int type_already_reloaded = 0;
+        vector<bool> types(size_of_assembly_order, false);
+        for (int i = 0; i < assembly_order.size(); i++)
+        {
+            if (assembly_order[i] != 0)
+            {
+                types[i] = true;
+                type_already_reloaded++;
+            }
+        }
+
+        // srand(time(NULL));
+        type_to_reload = type_already_reloaded < 3 ? type_to_reload = (rand() % 2) + 2 : 3;
+
+        // decide what the types are
+        while (type_already_reloaded < type_to_reload)
+        {
+            int type = rand() % size_of_assembly_order;
+
+            if (!types[type])
+            {
+                types[type] = true;
+                type_already_reloaded++;
+            }
+        }
+
+        // reload the load order
+        while (size_to_reload > 0)
+        {
+            int type = rand() % 5;
+
+            if (types[type])
+            {
+                assembly_order[type]++;
+                size_to_reload--;
+            }
+        }
 
         return;
     }
 
-    ProductWorker(int id):ProductWorker()
+    ProductWorker()
+    {
+        size_of_assembly_order = 5;
+        wait_time = 0;
+        assembly_order = vector<int>(size_of_assembly_order, 0);
+        reloadAssemblyOrder();
+
+        return;
+    }
+
+    ProductWorker(int id, int max_wait_time) : ProductWorker()
     {
         this->id = id;
+        this->max_wait_time = max_wait_time;
     }
 };
 
@@ -110,10 +167,6 @@ public:
     }
 };
 
-//move parts from a worker to the buffer 
-void loadBuffer(PartWorker worker, Buffer buffer){
-
-}
 
 class Part
 {
@@ -132,16 +185,35 @@ public:
     }
 };
 
+// move parts from a worker to the buffer
+void loadBuffer(PartWorker worker, Buffer buffer)
+{
+}
+
 int main()
 {
+    srand(time(NULL));
+
     // part attribute initialization
     Part A(500, 200, 600), B(500, 200, 600), C(600, 300, 700), D(600, 300, 700), E(700, 400, 800);
     Buffer buffer;
 
-
     PartWorker w1(1, 200);
+    ProductWorker w2(1, 200);
 
-    for(int i : w1.load_order){
+    cout << "PartWorker: ";
+
+    for (int i : w1.load_order)
+    {
+        cout << i << ", ";
+    }
+
+    cout << endl;
+
+    cout << "ProductWorker: ";
+
+    for (int i : w2.assembly_order)
+    {
         cout << i << ", ";
     }
 
