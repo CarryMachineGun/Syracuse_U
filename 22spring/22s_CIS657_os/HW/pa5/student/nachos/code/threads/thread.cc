@@ -37,6 +37,11 @@ Thread::Thread(char* threadName)
 {
     name = strdup(threadName);        // create a duplicate string so that
                                       // the name is dependent on ephemeral string
+
+    id = (kernel->thread_count++);
+    kernel->thread_list.Append(this);
+    printf("The new thread is: %d\n", id);
+
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;

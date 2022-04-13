@@ -75,9 +75,22 @@ class ProductWorker
 {
 private:
     int id;
+    int size_of_assembly_order;
+    int wait_time;
+    int max_wait_time;
 
 public:
-    ProductWorker(int id)
+    vector<int> assembly_order;
+
+    ProductWorker(){
+        size_of_assembly_order = 5;
+        wait_time = 0;
+        assembly_order = {0, 0, 0, 0, 0};
+
+        return;
+    }
+
+    ProductWorker(int id):ProductWorker()
     {
         this->id = id;
     }

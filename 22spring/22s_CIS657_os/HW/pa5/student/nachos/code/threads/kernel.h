@@ -27,7 +27,6 @@ class SynchDisk;
 
 class Kernel {
   public:
-    int thread_count = 0;
     Kernel(int argc, char **argv);
     				// Interpret command line arguments
     ~Kernel();		        // deallocate the kernel
@@ -46,6 +45,8 @@ class Kernel {
 // they're global variables used everywhere.
 
     Thread *currentThread;	// the thread holding the CPU
+    int thread_count;
+    List<Thread*> thread_list;
     Scheduler *scheduler;	// the ready list
     Interrupt *interrupt;	// interrupt status
     Statistics *stats;		// performance metrics

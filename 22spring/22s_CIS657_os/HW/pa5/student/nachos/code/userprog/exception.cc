@@ -145,34 +145,34 @@ void ExceptionHandler(ExceptionType which)
     case SC_Exec:
       // printf("Exec() system call is called\n");
       {
-      DEBUG(dbgSys, "Write " << kernel->machine->ReadRegister(4) << "\n");
+        DEBUG(dbgSys, "Write " << kernel->machine->ReadRegister(4) << "\n");
 
-      // Retrieve parameters
-      int buffer, c;
-      c = 'a';
-      buffer = 0;
-      char addre[1024];
-      // printf("the buffer after: %d\n", buffer);
-      buffer = (int)kernel->machine->ReadRegister(4);
-      // printf("the buffer after: %d\n", buffer);
+        // Retrieve parameters
+        int buffer, c;
+        c = 'a';
+        buffer = 0;
+        char addre[1024];
+        // printf("the buffer after: %d\n", buffer);
+        buffer = (int)kernel->machine->ReadRegister(4);
+        // printf("the buffer after: %d\n", buffer);
 
-      // the function address
-      for (int i = 0; ((char)c) != '\0'; i++)
-      {
-        kernel->machine->ReadMem(buffer + i, 1, &c);
+        // the function address
+        for (int i = 0; ((char)c) != '\0'; i++)
+        {
+          kernel->machine->ReadMem(buffer + i, 1, &c);
 
-        addre[i] = (char)c;
-        // printf("%c and the number is %d", (char)c, c);
-      }
+          addre[i] = (char)c;
+          // printf("%c and the number is %d", (char)c, c);
+        }
 
-      // printf("the address is: %s\n", addre);
+        // printf("the address is: %s\n", addre);
 
-      // run the program
+        // run the program
 
-      Thread *t = new Thread(addre);
-      // t->id = kernel->(thread_count++);
-      t->Fork((VoidFunctionPtr)([](void *filename)
-                                {
+        Thread *t = new Thread(addre);
+        // t->id = kernel->(thread_count++);
+        t->Fork((VoidFunctionPtr)([](void *filename)
+                                  {
         AddrSpace *space = new AddrSpace;
         ASSERT(space != (AddrSpace *)NULL);
         if (space->Load((char *)filename))
@@ -180,16 +180,64 @@ void ExceptionHandler(ExceptionType which)
           space->Execute(); // run the program
         }
         ASSERTNOTREACHED(); }),
-              (void *)addre);
+                (void *)addre);
 
-      // return a SpaceId (defined in userprog/syscall.h) of this new thread
-      kernel->machine->WriteRegister(2, (SpaceId)(t->id));
+        // return a SpaceId (defined in userprog/syscall.h) of this new thread
+        kernel->machine->WriteRegister(2, (SpaceId)(t->id));
       }
       break;
 
     case SC_Join:
-      printf("Join() system call is called\n");
-      break;
+    {
+      // printf("Join() system call is called\n");
+
+      // put self into the list of the thread it joining
+      int thread_id = (int)kernel->machine->ReadRegister(4);
+
+      // auto p = [](Kernel *kernel, int thread_id)
+      // {
+      //   auto i = ListIterator<Thread *>(kernel->thread_list);
+
+      //   while (!i.IsDone())
+      //   {
+      //     if ((i.Item())->id == thread_id)
+      //     {
+      //       return i.Item();
+      //     }
+
+      //     i.Next();
+      //   }
+
+      //   return nullptr;
+      // };
+
+      // Thread *t = p(kernel, thread_id);
+      Thread *t = nullptr;
+      auto i = ListIterator<Thread *>(&(kernel->thread_list));
+
+      while (!i.IsDone())
+      {
+        if ((i.Item())->id == thread_id)
+        {
+          t = i.Item();
+          break;
+        }
+
+        i.Next();
+      }
+      
+      if (!t)
+        kernel->machine->WriteRegister(2, -1);
+
+      t->join_list.Append(kernel->currentThread->id);
+      // sleep
+
+      kernel->currentThread->Sleep(false);
+
+      // return when wake up
+      kernel->machine->WriteRegister(2, 0);
+    }
+    break;
 
     default:
       cerr << "Unexpected system call " << type << "\n";
