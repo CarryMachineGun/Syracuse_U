@@ -43,7 +43,7 @@
 
 ## Questions
 - when a product worker **A** come in at first and wait in buffer area, can another product worker **B** come in second but having all part he needs available in the buffer area leave with the parts? Even there are some overlapping parts between **B**'s required parts and **A**'s required parts?
-  - For instance: A[2,0,0,1,1], B[1,0,0,1,1] and the buffer_area[1,0,0,1,1]. can **B** leave with buffer_area left with [0,0,0,0,0]?
+  - For instance: A[2,0,0,1,1], B[1,0,0,1,1] and the buffer_area[1,0,0,1,1]. can **B** leave with buffer_area left with [0,0,0,0,0]? can two part worker wait aside buffer at the same time?
 - Recall that it takes a part worker 20, 20, 30, 30, 40 us to move a part of type A, B, C, D, E, respectively. A part worker will then repeat the process to produce a brand-new load order.
   - Is 20, 20, 30, 30, 40 us or 200, 200, 300, 300, 400us?
   - Does part works moving back with parts takes the same time?
@@ -51,3 +51,7 @@
 - Can PartWorkers and ProductWorkers work at the same time(using one lock)?
   - Yes, otherwise the waiting of the two kind of workers is meaningless
 - Doesn't a iteration defined as (Each part work or product worker is said to have completed one iteration when a load order or pickup order is completed, or if timeout event occurs such that an order is aborted)? Why the partworker 8 is still in one iteration after doing two orders? 
+- can two product workers pick up parts at the same time? or two part workers do drop at the same time?
+- How to calculate waiting time?
+- will it takes time to take parts from cart to assembly zone for product worker?
+- Accumulated wait time && current time?

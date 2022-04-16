@@ -44,9 +44,11 @@ class Kernel {
 // These are public for notational convenience; really, 
 // they're global variables used everywhere.
 
-    Thread *currentThread;	// the thread holding the CPU
     int thread_count;
     List<Thread*> thread_list;
+
+
+    Thread *currentThread;	// the thread holding the CPU
     Scheduler *scheduler;	// the ready list
     Interrupt *interrupt;	// interrupt status
     Statistics *stats;		// performance metrics

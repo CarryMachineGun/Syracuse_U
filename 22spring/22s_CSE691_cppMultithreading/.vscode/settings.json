@@ -1,5 +1,11 @@
 {
     "files.associations": {
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "__mutex_base": "cpp",
+        "vector": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "fstream": "cpp",
+        "string": "cpp"
     }
 }

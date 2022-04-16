@@ -86,6 +86,7 @@ class Thread {
   public:
     int id;
     List<int> join_list;
+
     Thread(char* debugName);		// initialize a Thread 
     ~Thread(); 				// deallocate a Thread
 					// NOTE -- thread being deleted

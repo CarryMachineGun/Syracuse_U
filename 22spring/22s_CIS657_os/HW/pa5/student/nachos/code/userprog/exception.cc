@@ -53,7 +53,6 @@ void ExceptionHandler(ExceptionType which)
 {
   int type = kernel->machine->ReadRegister(2);
   int result;
-  int temp;
 
   DEBUG(dbgSys, "Received Exception " << which << " type: " << type << "\n");
 
@@ -152,9 +151,7 @@ void ExceptionHandler(ExceptionType which)
         c = 'a';
         buffer = 0;
         char addre[1024];
-        // printf("the buffer after: %d\n", buffer);
         buffer = (int)kernel->machine->ReadRegister(4);
-        // printf("the buffer after: %d\n", buffer);
 
         // the function address
         for (int i = 0; ((char)c) != '\0'; i++)
@@ -162,25 +159,25 @@ void ExceptionHandler(ExceptionType which)
           kernel->machine->ReadMem(buffer + i, 1, &c);
 
           addre[i] = (char)c;
-          // printf("%c and the number is %d", (char)c, c);
         }
-
-        // printf("the address is: %s\n", addre);
-
         // run the program
 
+        // printf("physcaill address is : %s", addre);
+
         Thread *t = new Thread(addre);
-        // t->id = kernel->(thread_count++);
-        t->Fork((VoidFunctionPtr)([](void *filename)
-                                  {
-        AddrSpace *space = new AddrSpace;
-        ASSERT(space != (AddrSpace *)NULL);
-        if (space->Load((char *)filename))
-        {                   // load the program into the space
-          space->Execute(); // run the program
-        }
-        ASSERTNOTREACHED(); }),
-                (void *)addre);
+
+        auto p = [](void *filename)
+        {
+          AddrSpace *space = new AddrSpace;
+          ASSERT(space != (AddrSpace *)NULL);
+          if (space->Load((char *)filename))
+          {                   // load the program into the space
+            space->Execute(); // run the program
+          }
+          ASSERTNOTREACHED();
+        };
+
+        t->Fork((VoidFunctionPtr)p, (void *)addre);
 
         // return a SpaceId (defined in userprog/syscall.h) of this new thread
         kernel->machine->WriteRegister(2, (SpaceId)(t->id));
@@ -194,24 +191,7 @@ void ExceptionHandler(ExceptionType which)
       // put self into the list of the thread it joining
       int thread_id = (int)kernel->machine->ReadRegister(4);
 
-      // auto p = [](Kernel *kernel, int thread_id)
-      // {
-      //   auto i = ListIterator<Thread *>(kernel->thread_list);
-
-      //   while (!i.IsDone())
-      //   {
-      //     if ((i.Item())->id == thread_id)
-      //     {
-      //       return i.Item();
-      //     }
-
-      //     i.Next();
-      //   }
-
-      //   return nullptr;
-      // };
-
-      // Thread *t = p(kernel, thread_id);
+      // get the thread we want the current thread to join to
       Thread *t = nullptr;
       auto i = ListIterator<Thread *>(&(kernel->thread_list));
 
@@ -225,17 +205,26 @@ void ExceptionHandler(ExceptionType which)
 
         i.Next();
       }
-      
+
+      // if the thread we want to join doesn;t exist return -1
       if (!t)
         kernel->machine->WriteRegister(2, -1);
+      // if exist put the current thread's id into the target thread's join_list
+      else
+      {
+        // put the id into target thread's join_list then sleep
+        if (!(t->join_list.IsInList(kernel->currentThread->id)))
+          t->join_list.Append(kernel->currentThread->id);
 
-      t->join_list.Append(kernel->currentThread->id);
-      // sleep
+        (void)kernel->interrupt->SetLevel(IntOff);
+        kernel->currentThread->Sleep(false);
+        // kernel->currentThread->Finish();
 
-      kernel->currentThread->Sleep(false);
+        // wake up when the target thread's destructure is called
 
-      // return when wake up
-      kernel->machine->WriteRegister(2, 0);
+        // return when wake up
+        kernel->machine->WriteRegister(2, 0);
+      }
     }
     break;
 

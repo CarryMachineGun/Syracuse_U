@@ -1,4 +1,4 @@
-//Producer-Consumer
+// Producer-Consumer
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -7,51 +7,59 @@
 #include <chrono>
 #include <atomic>
 
-
 using namespace std;
 mutex m1, m2;
 condition_variable cv1, cv2;
 vector<int> V;
-atomic<int> c_wait {0}, p_wait {0};
-
+atomic<int> c_wait{0}, p_wait{0};
 
 void Consumer(int id);
 void Producer(int id);
 
-
-int main() {
+int main()
+{
 	vector<thread> C;
 	vector<thread> P;
-	
-	for (int i = 0; i < 2; ++i) C.emplace_back(Consumer, i + 1);
-	for (int i = 0; i < 12; ++i) P.emplace_back(Producer, i + 1);
 
-	for (auto& i : C) i.join();
-	for (auto& i : P) i.join();
+	for (int i = 0; i < 2; ++i)
+		C.emplace_back(Consumer, i + 1);
+	for (int i = 0; i < 12; ++i)
+		P.emplace_back(Producer, i + 1);
+
+	for (auto &i : C)
+		i.join();
+	for (auto &i : P)
+		i.join();
 
 	return 0;
 }
-void Consumer(int id) {
-	unique_lock<mutex> UG1(m1);//for accessing V
-	while (V.size() < 6) cv1.wait(UG1);//a producer needs all 6 elements to process.
-	//do something
-	this_thread::sleep_for(chrono::milliseconds(5));
-	V.clear();
+void Consumer(int id)
+{
+	unique_lock<mutex> UG1(m1); // for accessing V
+	while (V.size() < 6)
+		cv1.wait(UG1); // a producer needs all 6 elements to process.
+	// do something
+	this_thread::sleep_for(chrono::milliseconds(200));
 	{
-		lock_guard<mutex> LG1(m2);
-		cout << "Consumer " << id << " V.size() = " << V.size() << " c_wait = " << c_wait << " p_wait = " << p_wait << endl;
+		// lock_guard<mutex> LG1(m2);
+		for (int i = 0; i < 100; i++)
+			cout << "Consumer " << id << " V.size() = " << V.size() << " c_wait = " << c_wait << " p_wait = " << p_wait << endl;
 	}
-	cv2.notify_all();//OK
+	V.clear();
+	cv2.notify_all(); // OK
 }
-void Producer(int id) {
+void Producer(int id)
+{
 	unique_lock<mutex> UG1(m1);
-	while (V.size() == 6) cv2.wait(UG1);//the maximum capacity of V is 6
-	//do something
+	// cout << "LOL" << endl;
+	while (V.size() == 6)
+		cv2.wait(UG1); // the maximum capacity of V is 6
+	// do something
 	this_thread::sleep_for(chrono::milliseconds(5));
 	V.push_back(id);
 	{
-		lock_guard<mutex> LG1(m2);
-		cout << "Producer " << id << " V.size() = "<< V.size() << " c_wait = " << c_wait << " p_wait = " << p_wait<<endl;
+		// lock_guard<mutex> LG1(m2);
+		cout << "Producer " << id << " V.size() = " << V.size() << " c_wait = " << c_wait << " p_wait = " << p_wait << endl;
 	}
-	cv1.notify_one();
+	cv1.notify_all();
 }

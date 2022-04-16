@@ -28,6 +28,8 @@ Kernel::Kernel(int argc, char **argv)
 {
     thread_count = 1;
     thread_list = List<Thread*>();
+
+
     randomSlice = FALSE; 
     debugUserProg = FALSE;
     consoleIn = NULL;          // default is stdin
