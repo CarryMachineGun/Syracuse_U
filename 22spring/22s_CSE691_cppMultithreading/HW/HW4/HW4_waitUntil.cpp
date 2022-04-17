@@ -138,9 +138,10 @@ public:
     }
 };
 
-void PrintPartWorker(PartWorker &worker, int iteration, system_clock::time_point &ori_start_time, vector<int> &prev_buffer_state, vector<int> &prev_local_state, Buffer &buffer, int status_index, system_clock::duration &dur, system_clock::time_point &print_time, vector<int> &curr_buffer_state)
+void PrintPartWorker(PartWorker &worker, int iteration, system_clock::time_point &ori_start_time, vector<int> &prev_buffer_state, vector<int> &prev_local_state, Buffer &buffer, int status_index, system_clock::duration &dur, system_clock::time_point &print_time)
 {
-    lock_guard<mutex> LG(print_lock);
+    // return;
+    print_lock.lock();
     vector<string> status{"New Load Order", "Wakeup-Notified", " Wakeup-Timeout"};
 
     fout << "Current Time: " << (print_time.time_since_epoch().count() - ori_start_time.time_since_epoch().count()) << "us" << endl;
@@ -150,30 +151,32 @@ void PrintPartWorker(PartWorker &worker, int iteration, system_clock::time_point
     fout << "Accumulated Wait Time: " << duration_cast<microseconds>(dur).count() << "us" << endl;
     fout << string("Buffer State: (" + to_string(prev_buffer_state[0]) + "," + to_string(prev_buffer_state[1]) + "," + to_string(prev_buffer_state[2]) + "," + to_string(prev_buffer_state[3]) + "," + to_string(prev_buffer_state[4]) + ")") << endl;
     fout << string("Load Order: (" + to_string(prev_local_state[0]) + "," + to_string(prev_local_state[1]) + "," + to_string(prev_local_state[2]) + "," + to_string(prev_local_state[3]) + "," + to_string(prev_local_state[4]) + ")") << endl;
-    fout << string("Updated Buffer State: (" + to_string(curr_buffer_state[0]) + "," + to_string(curr_buffer_state[1]) + "," + to_string(curr_buffer_state[2]) + "," + to_string(curr_buffer_state[3]) + "," + to_string(curr_buffer_state[4]) + ")") << endl;
+    fout << string("Updated Buffer State: (" + to_string(buffer.buffer_state[0]) + "," + to_string(buffer.buffer_state[1]) + "," + to_string(buffer.buffer_state[2]) + "," + to_string(buffer.buffer_state[3]) + "," + to_string(buffer.buffer_state[4]) + ")") << endl;
     fout << string("Updated Load Order: (" + to_string(worker.local_state[0]) + "," + to_string(worker.local_state[1]) + "," + to_string(worker.local_state[2]) + "," + to_string(worker.local_state[3]) + "," + to_string(worker.local_state[4]) + ")") << endl;
     fout << endl;
 
+    print_lock.unlock();
 
     return;
 }
 
-void PrintProductWorker(ProductWorker &worker, int iteration, system_clock::time_point &ori_start_time, Buffer &buffer, int status_index, system_clock::duration &dur, vector<int> &prev_buffer_state, vector<int> &pre_pickup_order, vector<int> &prev_local_state, vector<int> &prev_cart_state, vector<int> &pickup_order, vector<int> &local_state, vector<int> &real_cart_state, system_clock::time_point &print_time, bool new_product, vector<int> &curr_buffer_state)
+void PrintProductWorker(ProductWorker &worker, int iteration, system_clock::time_point &ori_start_time, Buffer &buffer, int status_index, system_clock::duration &dur, vector<int> &prev_buffer_state, vector<int> &pre_pickup_order, vector<int> &prev_local_state, vector<int> &prev_cart_state, vector<int> &pickup_order, vector<int> &local_state, vector<int> &real_cart_state, system_clock::time_point &print_time, bool new_product)
 {
-    lock_guard<mutex> LG(print_lock);
+    // if (worker.getId() != 1)
+    //     return;
+    print_lock.lock();
     vector<string> status{"New Pickup Order", "Wakeup-Notified", " Wakeup-Timeout"};
 
     fout << "Current Time: " << (print_time.time_since_epoch().count() - ori_start_time.time_since_epoch().count()) << "us" << endl;
     fout << "Iteration " << iteration << endl;
-    fout << "Product Worker ID: " << worker.getId() << endl;
-    fout << "Status: " << status[status_index] << endl;
-    fout << "Accumulated Wait Time: " << duration_cast<microseconds>(dur).count() << "us" << endl;
+    fout << "Product Worker ID :" << worker.getId() << endl;
+    fout << "Status :" << status[status_index] << endl;
+    fout << "Accumulated Wait Time :" << duration_cast<microseconds>(dur).count() << "us" << endl;
     fout << string("Buffer State: (" + to_string(prev_buffer_state[0]) + "," + to_string(prev_buffer_state[1]) + "," + to_string(prev_buffer_state[2]) + "," + to_string(prev_buffer_state[3]) + "," + to_string(prev_buffer_state[4]) + ")") << endl;
     fout << string("Pickup Order: (" + to_string(pre_pickup_order[0]) + "," + to_string(pre_pickup_order[1]) + "," + to_string(pre_pickup_order[2]) + "," + to_string(pre_pickup_order[3]) + "," + to_string(pre_pickup_order[4]) + ")") << endl;
     fout << string("Local State: (" + to_string(prev_local_state[0]) + "," + to_string(prev_local_state[1]) + "," + to_string(prev_local_state[2]) + "," + to_string(prev_local_state[3]) + "," + to_string(prev_local_state[4]) + ")") << endl;
     fout << string("Cart State: (" + to_string(prev_cart_state[0]) + "," + to_string(prev_cart_state[1]) + "," + to_string(prev_cart_state[2]) + "," + to_string(prev_cart_state[3]) + "," + to_string(prev_cart_state[4]) + ")") << endl;
-    // fout << string("Updated Buffer State: (" + to_string(buffer.buffer_state[0]) + "," + to_string(buffer.buffer_state[1]) + "," + to_string(buffer.buffer_state[2]) + "," + to_string(buffer.buffer_state[3]) + "," + to_string(buffer.buffer_state[4]) + ")") << endl;
-    fout << string("Updated Buffer State: (" + to_string(curr_buffer_state[0]) + "," + to_string(curr_buffer_state[1]) + "," + to_string(curr_buffer_state[2]) + "," + to_string(curr_buffer_state[3]) + "," + to_string(curr_buffer_state[4]) + ")") << endl;
+    fout << string("Updated Buffer State: (" + to_string(buffer.buffer_state[0]) + "," + to_string(buffer.buffer_state[1]) + "," + to_string(buffer.buffer_state[2]) + "," + to_string(buffer.buffer_state[3]) + "," + to_string(buffer.buffer_state[4]) + ")") << endl;
     fout << string("Updated Pickup Order: (" + to_string(pickup_order[0]) + "," + to_string(pickup_order[1]) + "," + to_string(pickup_order[2]) + "," + to_string(pickup_order[3]) + "," + to_string(pickup_order[4]) + ")") << endl;
     fout << string("Updated Local State: (" + to_string(local_state[0]) + "," + to_string(local_state[1]) + "," + to_string(local_state[2]) + "," + to_string(local_state[3]) + "," + to_string(local_state[4]) + ")") << endl;
     fout << string("Updated Cart State: (" + to_string(real_cart_state[0]) + "," + to_string(real_cart_state[1]) + "," + to_string(real_cart_state[2]) + "," + to_string(real_cart_state[3]) + "," + to_string(real_cart_state[4]) + ")") << endl;
@@ -187,6 +190,7 @@ void PrintProductWorker(ProductWorker &worker, int iteration, system_clock::time
     fout << "Total Completed Products: " << total_complete << endl;
     fout << endl;
 
+    print_lock.unlock();
 
     return;
 }
@@ -269,11 +273,10 @@ void PartWorker::partWorkerWorkflow(Buffer &buffer, const vector<Part> &parts, i
         num_of_part_to_drop += part_num;
 
     // try to put into buffer - need a lock here for buffer
-    // system_clock::time_point start_time = system_clock::now();
-    system_clock::duration wait_length = (microseconds)max_wait_time; 
+    system_clock::time_point start_time = system_clock::now();
     system_clock::time_point print_time = system_clock::now();
     system_clock::duration dur((microseconds)0);
-    vector<int> prev_buffer_state, prev_local_state, curr_buffer_state;
+    vector<int> prev_buffer_state, prev_local_state;
     int status_index = 0;
     unique_lock<mutex> UG1(buffer_lock);
     while (true)
@@ -293,12 +296,10 @@ void PartWorker::partWorkerWorkflow(Buffer &buffer, const vector<Part> &parts, i
             num_of_part_to_drop -= num_of_dropped_parts;
         }
 
-        curr_buffer_state = buffer.buffer_state;
-
         // if can drop any, do print
         if (prev_num_of_part_to_drop != num_of_part_to_drop || status_index == 0)
         {
-            PrintPartWorker(*this, iteration, ori_start_time, prev_buffer_state, prev_local_state, buffer, status_index, dur, print_time ,curr_buffer_state);
+            PrintPartWorker(*this, iteration, ori_start_time, prev_buffer_state, prev_local_state, buffer, status_index, dur, print_time);
         }
         status_index = 1;
 
@@ -312,8 +313,7 @@ void PartWorker::partWorkerWorkflow(Buffer &buffer, const vector<Part> &parts, i
         prev_buffer_state = buffer.buffer_state;
         prev_local_state = local_state;
         system_clock::time_point start_wait = system_clock::now();
-        // if (cv1.wait_until(UG1, start_time + max_wait_time) == cv_status::timeout)
-        if (cv1.wait_for(UG1, wait_length) == cv_status::timeout)
+        if (cv1.wait_until(UG1, start_time + max_wait_time) == cv_status::timeout)
         {
             dur += (system_clock::now() - start_wait);
 
@@ -327,13 +327,11 @@ void PartWorker::partWorkerWorkflow(Buffer &buffer, const vector<Part> &parts, i
                     this_thread::sleep_for(microseconds(sleep_time));
             }
 
-            PrintPartWorker(*this, iteration, ori_start_time, prev_buffer_state, prev_local_state, buffer, 2, dur, print_time, curr_buffer_state);
+            PrintPartWorker(*this, iteration, ori_start_time, prev_buffer_state, prev_local_state, buffer, 2, dur, print_time);
             break;
         }
 
-        system_clock::duration atomic_dur = system_clock::now() - start_wait; 
-        dur += atomic_dur; 
-        wait_length -= atomic_dur;  
+        dur += (system_clock::now() - start_wait);
     }
 
     // notify productWorkers the buffer have been refilled
@@ -357,11 +355,10 @@ void ProductWorker::productWorkerWorkflow(Buffer &buffer, const vector<Part> &pa
     }
 
     // try to put into buffer - need a lock here for buffer
-    // system_clock::time_point start_time = system_clock::now();
-    system_clock::duration wait_length = (microseconds)max_wait_time; 
+    system_clock::time_point start_time = system_clock::now();
     system_clock::time_point print_time = system_clock::now();
     system_clock::duration dur(0);
-    vector<int> prev_buffer_state, prev_cart_state, prev_pickup_order, prev_local_state, curr_buffer_state;
+    vector<int> prev_buffer_state, prev_cart_state, prev_pickup_order, prev_local_state;
     int status_index = 0;
 
     unique_lock<mutex> UG2(buffer_lock);
@@ -387,8 +384,6 @@ void ProductWorker::productWorkerWorkflow(Buffer &buffer, const vector<Part> &pa
             pickup_order[i] -= num_of_pickup_parts;
         }
 
-        curr_buffer_state = buffer.buffer_state;
-
         // if the cart_state meet the assembly, we assembly the parts and reset cart_state
         if (num_of_part_to_pickup == 0)
         {
@@ -400,15 +395,27 @@ void ProductWorker::productWorkerWorkflow(Buffer &buffer, const vector<Part> &pa
             if (sleep_time != 0)
                 this_thread::sleep_for(microseconds(sleep_time));
 
-            PrintProductWorker(*this, iteration, ori_start_time, buffer, status_index, dur, prev_buffer_state, prev_pickup_order, prev_local_state, prev_cart_state, pickup_order, local_state, real_cart_state, print_time, true, curr_buffer_state);
+            PrintProductWorker(*this, iteration, ori_start_time, buffer, status_index, dur, prev_buffer_state, prev_pickup_order, prev_local_state, prev_cart_state, pickup_order, local_state, real_cart_state, print_time, true);
             cart_state = vector<int>(part_types, 0);
             real_cart_state = vector<int>(part_types, 0);
             local_state = vector<int>(part_types, 0);
             break;
         }
+        // otherwise, we bring the parts we freshly pickuped back to cart
+        // else if (system_clock::now() - start_time > max_wait_time)
+        // {
+        //     sleep_time = 0;
+        //     for (int i = 0; i < cart_state.size(); i++)
+        //     {
+        //         sleep_time += (cart_state[i] - local_state[i]) * parts[i].moving_time_consumption;
+        //     }
+
+        //     if (sleep_time != 0)
+        //         this_thread::sleep_for(microseconds(sleep_time));
+        // }
 
         if (prev_num_of_part_to_pickup != num_of_part_to_pickup || status_index == 0)
-            PrintProductWorker(*this, iteration, ori_start_time, buffer, status_index, dur, prev_buffer_state, prev_pickup_order, prev_local_state, prev_cart_state, pickup_order, local_state, real_cart_state, print_time, false, curr_buffer_state);
+            PrintProductWorker(*this, iteration, ori_start_time, buffer, status_index, dur, prev_buffer_state, prev_pickup_order, prev_local_state, prev_cart_state, pickup_order, local_state, real_cart_state, print_time, false);
         status_index = 1;
 
         // if can not do any more drop and there are still parts haven't be dropped, wait for notify from productworkers
@@ -417,8 +424,7 @@ void ProductWorker::productWorkerWorkflow(Buffer &buffer, const vector<Part> &pa
         prev_pickup_order = pickup_order;
         prev_local_state = local_state;
         system_clock::time_point start_wait = system_clock::now();
-        // if (cv2.wait_until(UG2, start_time + max_wait_time) == cv_status::timeout)
-        if (cv1.wait_for(UG2, wait_length) == cv_status::timeout)
+        if (cv2.wait_until(UG2, start_time + max_wait_time) == cv_status::timeout)
         {
             dur += (system_clock::now() - start_wait);
             sleep_time = 0;
@@ -429,13 +435,10 @@ void ProductWorker::productWorkerWorkflow(Buffer &buffer, const vector<Part> &pa
 
             if (sleep_time != 0)
                 this_thread::sleep_for(microseconds(sleep_time));
-            PrintProductWorker(*this, iteration, ori_start_time, buffer, 2, dur, prev_buffer_state, prev_pickup_order, prev_local_state, prev_cart_state, pickup_order, local_state, real_cart_state, print_time, false, curr_buffer_state);
+            PrintProductWorker(*this, iteration, ori_start_time, buffer, 2, dur, prev_buffer_state, prev_pickup_order, prev_local_state, prev_cart_state, pickup_order, local_state, real_cart_state, print_time, false);
             break;
         }
-
-        system_clock::duration atomic_dur = system_clock::now() - start_wait; 
-        dur += atomic_dur; 
-        wait_length -= atomic_dur;  
+        dur += (system_clock::now() - start_wait);
     }
 
     cv1.notify_all();
