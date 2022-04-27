@@ -1,3 +1,4 @@
 #ignoire all logs
 *.log
 *.out
+*.pdf
