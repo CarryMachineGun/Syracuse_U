@@ -21,7 +21,6 @@ main()
       Write("File doesn't exist\n", 19, ConsoleOutput);
       Exit(1);
    }
-
   
   for (i = 0; i < 5; i++)
   {

@@ -107,6 +107,25 @@ void ExceptionHandler(ExceptionType which)
        */
     case SC_Read:
       // printf("Read system call made by %s\n", kernel->currentThread->getName());
+      {
+        DEBUG(dbgSys, "Read " << kernel->machine->ReadRegister(4) << "; " << kernel->machine->ReadRegister(5) << "; " << kernel->machine->ReadRegister(6) << "\n");
+
+        // char content[2048];
+        int c;
+        int size, id, buffer;
+        char content[2048];
+
+        buffer = (int)kernel->machine->ReadRegister(4);
+        size = (int)kernel->machine->ReadRegister(5);
+        id = (int)kernel->machine->ReadRegister(6);
+
+        kernel->machine->WriteRegister(2, read(id, content, size));
+
+        for (int i = 0; i < size; i++)
+        {
+          kernel->machine->WriteMem(buffer + i, 1, content[i]);
+        }
+      }
 
       break;
 
@@ -115,11 +134,9 @@ void ExceptionHandler(ExceptionType which)
       // printf("Write system call made by %s\n", kernel->currentThread->getName());
       DEBUG(dbgSys, "Write " << kernel->machine->ReadRegister(4) << "; " << kernel->machine->ReadRegister(5) << "; " << kernel->machine->ReadRegister(6) << "\n");
 
-      // char content[2048];
+      char content[2048];
       int c;
       int buffer, size, id;
-      // bool failure = false;
-      char content[1024];
 
       buffer = (int)kernel->machine->ReadRegister(4);
       size = (int)kernel->machine->ReadRegister(5);
@@ -127,13 +144,11 @@ void ExceptionHandler(ExceptionType which)
 
       for (int i = 0; i < size; i++)
       {
-        // kernel->machine->ReadMem(buffer + i, 1, (int*)&(content[i]));
         kernel->machine->ReadMem(buffer + i, 1, &c);
-        // printf("%c", (char)c);
         content[i] = (char)c;
       }
 
-      kernel->machine->WriteRegister(2, write());
+      kernel->machine->WriteRegister(2, write(id, content, size));
     }
     break;
 
@@ -145,7 +160,6 @@ void ExceptionHandler(ExceptionType which)
         // Retrieve parameters
         int buffer, c;
         c = 'a';
-        buffer = 0;
         char name[1024];
         buffer = (int)kernel->machine->ReadRegister(4);
 
@@ -158,7 +172,7 @@ void ExceptionHandler(ExceptionType which)
         }
 
         // create the file
-        int is_success = open(("./%s", name), O_CREAT | O_WRONLY | O_TRUNC);
+        int is_success = open(name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 
         // returns 1 on success, and -1 on failure, to the user program
         kernel->machine->WriteRegister(2, is_success == -1 ? -1 : 1);
@@ -174,7 +188,6 @@ void ExceptionHandler(ExceptionType which)
         // Retrieve parameters
         int buffer, c;
         c = 'a';
-        buffer = 0;
         char name[1024];
         buffer = (int)kernel->machine->ReadRegister(4);
 
@@ -187,7 +200,8 @@ void ExceptionHandler(ExceptionType which)
         }
 
         // create the file
-        int file_description = open(("./%s", name), O_WRONLY);
+        // int file_description = open(("./%s", name), O_WRONLY);
+        int file_description = open(name, O_RDWR, 0666);
 
         // returns 1 on success, and -1 on failure, to the user program
         kernel->machine->WriteRegister(2, file_description);
@@ -197,7 +211,16 @@ void ExceptionHandler(ExceptionType which)
 
     case SC_Close:
       // printf("Close() system call is called\n");
+      {
 
+        DEBUG(dbgSys, "Close " << kernel->machine->ReadRegister(4) << "\n");
+
+        // Retrieve parameters
+        int id;
+        id = (int)kernel->machine->ReadRegister(4);
+
+        kernel->machine->WriteRegister(2, close(id) == 0 ? 1 : -1);
+      }
       break;
 
       // NOT REQUIRED FOR THIS PA
