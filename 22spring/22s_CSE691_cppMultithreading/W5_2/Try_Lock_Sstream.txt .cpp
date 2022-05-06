@@ -32,7 +32,7 @@ void f1(int id) {
 			//m2.unlock();
 		}
 	}
-	lock_guard<mutex> LG = lock_guard{ m2 };//move assignment
+	lock_guard<mutex> LG{ m2 };//move assignment
 	cout << "Thread[" << id << "]:" << endl;
 	cout << Out.str() << endl;
 	//m2.unlock(); Will cause error in VS.

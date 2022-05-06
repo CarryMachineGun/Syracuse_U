@@ -56,6 +56,7 @@ int main() {
 	{
 		m1.lock();
 		lock_guard<mutex> LG(m1, adopt_lock);//m1 is already locked;  
+		// lock_guard<mutex> LG(m1);//m1 is already locked;  
 		//adopt_lock will prevent running m1.lock() again.  LG is now associated with m1, or is managing m1.
 		//m1.unlock() is no longer needed
 
@@ -82,6 +83,7 @@ int main() {
 
 	m3.lock();
 	unique_lock<mutex> UG3(m3, try_to_lock);//If UG3 does not own m3, then it cannot unlock() m3.unlock() will be needed
+	// unique_lock<mutex> UG3(m3, adopt_lock);//If UG3 does not own m3, then it cannot unlock() m3.unlock() will be needed
 	//if (UG3.owns_lock()) cout << "UG3 owns m3" << endl;
 //	if (!UG3) cout << "UG3 does not own m3" << endl;
 
@@ -101,6 +103,8 @@ int main() {
 	unique_lock<mutex> UG11{ move(UG10) };
 	if (!UG11) cout << "UG11 does not own m8" << endl;
 	m3.unlock();
+	// UG3.unlock();
+	// m3.lock();
 	m8.unlock();
 
 
