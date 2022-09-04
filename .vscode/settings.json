@@ -36,6 +36,18 @@
         "condition_variable": "cpp",
         "__functional_03": "cpp",
         "functional": "cpp",
-        "__mutex_base": "cpp"
+        "__mutex_base": "cpp",
+        "__bit_reference": "cpp",
+        "ios": "cpp",
+        "iterator": "cpp",
+        "__node_handle": "cpp",
+        "future": "cpp",
+        "optional": "cpp",
+        "ostream": "cpp",
+        "shared_mutex": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp",
+        "tuple": "cpp",
+        "variant": "cpp"
     }
 }
