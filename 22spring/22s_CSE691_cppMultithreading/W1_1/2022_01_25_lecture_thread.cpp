@@ -16,6 +16,11 @@ public:
 	void operator()(int k, int& s) {
 		for (int i = 0; i < k; ++i) s += i * i;
 	}
+
+	//try out the functor
+	int operator()(int k){
+		return 100;
+	}
 };
 
 class myFunctionClass {
@@ -53,7 +58,8 @@ int main() {
 	thread T[10];
 	for (int i = 0; i < 10; ++i) {
 
-		T[i] = thread{f1, (i + 1) * 100, ref(s[i])};//start running
+		// T[i] = thread{f1, (i + 1) * 100, ref(s[i])};//start running
+		T[i] = thread(f1, (i + 1) * 100, ref(s[i]));//start running
 	}
 
 	for (auto i : s) cout << i << " ";
@@ -107,6 +113,8 @@ int main() {
 	T7.join();
 
 	cout << s1 << " " << s2 << " " << mf1.value << " " << mf2.value << endl;
+
+	cout << m1(5) << endl;
 
 	return 0;
 }

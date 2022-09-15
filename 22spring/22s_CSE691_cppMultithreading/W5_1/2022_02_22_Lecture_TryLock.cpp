@@ -15,18 +15,20 @@ mutex m1;
 
 void f1(int id) {
 
-	for (int i = 0; i < 50; ++i) {
+	for (int i = 0; i < 500; ++i) {
 		if (m1.try_lock()) {
+
 			Count++;
 			cout << "Thread " << id << " increase Count " << " Count = " << Count << endl;
-			this_thread::sleep_for(100ms);
+			// this_thread::sleep_for(100ms);
 			m1.unlock();
 
 		}
 		else {
 			//Count--;
+			i--;
 			cout << " thread " << id << " fails to acquire the lock" << endl;
-			this_thread::sleep_for(50ms);
+			// this_thread::sleep_for(50ms);
 		}
 	}
 }

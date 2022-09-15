@@ -32,10 +32,10 @@ void f1(thread::id ID) {
 	} while (chrono::system_clock::now() < Time1 + chrono::seconds(3));
 
 
-	while (!Flag) {//this will cause infinite loop.
+	// while (!Flag) {//this will cause infinite loop.
 
-		this_thread::yield();
-	}
+	// 	this_thread::yield();
+	// }
 
 }
 
@@ -63,10 +63,10 @@ int main() {
 
 	thread T4;
 	//T4 = T3;  Error.
-	f1(ID);
 	T1.join();
-	cout << T1.joinable() << endl;//0
+	cout << "A: " << T1.joinable() << endl;//0
 	T2.detach();
 	T3.join();
+	f1(ID);
 	return 0;
 }

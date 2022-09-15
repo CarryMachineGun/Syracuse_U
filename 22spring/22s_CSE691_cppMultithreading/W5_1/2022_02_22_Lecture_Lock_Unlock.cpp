@@ -16,11 +16,11 @@ mutex m1;
 void f1(int id) {
 
 	for (int i = 0; i < 50; ++i) {
-		m1.lock();
+		// m1.lock();
 		Count++;
 		cout << "Thread " << id << " increase Count " << " Count = " << Count << endl;
-		this_thread::sleep_for(100ms);
-		m1.unlock();
+		// this_thread::sleep_for(100ms);
+		// m1.unlock();
 	}
 }
 

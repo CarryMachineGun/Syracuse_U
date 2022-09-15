@@ -47,11 +47,15 @@ int main() {
 		//thread T3{ MatMultiply,ref(A), ref(B), ref(C), n1 / 2 , n1 - 1,  0, n3 / 2 - 1 };
 		//MatMultiply(A, B, C, n1 / 2, n1 - 1, n3 / 2, n3 - 1);
 
-		thread T1{ MatMultiply,ref(A), ref(B), ref(C), 0, n1 / 4 - 1,  0, n3 - 1 };
-		thread T2{ MatMultiply,ref(A), ref(B), ref(C), n1 / 4 , n1/2-1, 0 , n3 - 1 };
-		thread T3{ MatMultiply,ref(A), ref(B), ref(C), n1 / 2 , n1/4*3 - 1,  0, n3 - 1 };
-		MatMultiply(A, B, C, n1 / 4*3, n1 - 1, 0, n3 - 1);
+		// thread T1{ MatMultiply,ref(A), ref(B), ref(C), 0, n1 / 4 - 1,  0, n3 - 1 };
+		// thread T2{ MatMultiply,ref(A), ref(B), ref(C), n1 / 4 , n1/2-1, 0 , n3 - 1 };
+		// thread T3{ MatMultiply,ref(A), ref(B), ref(C), n1 / 2 , n1/4*3 - 1,  0, n3 - 1 };
+		// MatMultiply(A, B, C, n1 / 4*3, n1 - 1, 0, n3 - 1);
 
+		thread T1{ MatMultiply,ref(A), ref(B), ref(C), 0, n1 / 2 - 1,  0, n3 / 2 - 1 };
+		thread T2{ MatMultiply,ref(A), ref(B), ref(C), n1 / 2 , n1 - 1, 0 , n3 / 2 - 1 };
+		thread T3{ MatMultiply,ref(A), ref(B), ref(C), 0 , n1 / 2 - 1,  n3 / 2, n3 - 1 };
+		MatMultiply(A, B, C, n1 / 2, n1 - 1, n3 / 2, n3 - 1);
 
 		T1.join();
 		T2.join();
