@@ -55,6 +55,8 @@ public class Library {
         lib.add(new Book("Holden Karau", "Learning Spark", "O'Reilly", "9781449358624", 2015, BookType.HARDCOVER));
         Book b2 = new Book("Norman Matloff", "The Art of R Programming", "No Starch Press", "9781593273842", 2011, BookType.PAPERBACK);
         Book b3 = new Book("Alan A. A. Donovan", "The Go Programming Language", "Addison Wesley", "9780134190440", 2016, BookType.EBOOK);
+        lib.add(b2);
+        lib.add(b3);
         List<Book> results = lib.search(new Book(null, "Learning Spark", null, null, -1, BookType.ANY));
         for (Book b: results) {
             System.out.println(b.toString());
