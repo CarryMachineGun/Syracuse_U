@@ -4,7 +4,7 @@ package syr.edu.hw6;
 public class Strikethru extends Element {
     public Strikethru(Element element) {
         super(element);
-        markdown_val = "~~*" + markdown_val + "~~";
+        markdown_val = "~~" + markdown_val + "~~";
         return;
     }
 
