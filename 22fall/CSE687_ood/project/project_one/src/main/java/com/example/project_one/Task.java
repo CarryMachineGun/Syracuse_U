@@ -30,6 +30,23 @@ public class Task {
   @ElementCollection
   private List<String> comments = new ArrayList<>();
 
+  Task() {
+    // timestamp = ;
+    // user = b.user;
+    // state = b.state;
+    // description = b.description;
+    // comments = new ArrayList<>(b.comments);
+  }
+
+  Task(Task b) {
+    id = b.id;
+    timestamp = b.timestamp;
+    user = b.user;
+    state = b.state;
+    description = b.description;
+    comments = new ArrayList<>(b.comments);
+  }
+
   public Integer getId() {
     return id;
   }
